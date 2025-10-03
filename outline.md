@@ -17,9 +17,9 @@
       3. Migrate the VM to Azure
    6. Attach a Premium SSD 2 data disk to Linux VM on Azure
    7. Test the application again to ensure migration worked and connections are still good to database.
-2. Exercise 2: Enable replication of Linux VM to App Service Plan
+2. Exercise 2: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
    1. TODO
-3. Exercise 3: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
+3. Exercise 3: Enable replication of Linux VM to App Service Plan
    1. TODO
 4. Exercise 4: SQL Server migration to Azure SQL Database
    1. TODO
