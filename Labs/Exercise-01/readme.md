@@ -78,6 +78,17 @@
 
 1. Assess
 2. Replicate (TODO: Need to assess replication time here - Donovan stated it took a long time)
+
+    TODO: Type of steps to configure MSI on the recovery vault resource and them ensure it is granted 'Contributor' and 'Storage Blob Data Contributor' roles on the target storage account.
+
+        1. Go to your Storage account '/subscriptions/75080732-c8d0-4487-b43a-a06e7a9cdd8b/resourceGroups/rg-AzMigrateLab/providers/Microsoft.Storage/storageAccounts/storazmigexi5zsg2' -> Access Control (IAM).
+        2. Add the below role-assignments (for ARM based storage account) to the Recovery services vault's MSI.
+        a) "Contributor"
+        And,
+        b) "Storage Blob Data Contributor" for Standard storage or "Storage Blob Data Owner" for Premium storage
+        Above permissions need to be added for System Assigned Managed Identity if only system MSI is present. If only user assigned managed identity is present or user assigned identity is present along with system assigned identity, add the above permissions to your storage account for user assigned identity.
+        You can refer to https://aka.ms/asrGrantManagedIdentityToTheVault for more details.
+
 3. Migrate the VM to Azure
 
 ## Task 6: Attach a Premium SSD 2 data disk to Linux VM on Azure
