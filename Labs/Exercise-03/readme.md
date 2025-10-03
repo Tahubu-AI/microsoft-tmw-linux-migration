@@ -1,1 +1,1 @@
-# Exercise 3: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
+# Exercise 3: Enable replication of Linux VM to App Service Plan
