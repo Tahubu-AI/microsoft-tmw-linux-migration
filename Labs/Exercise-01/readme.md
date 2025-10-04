@@ -1,96 +1,44 @@
 # Exercise 1: Migrate a Linux VM to an Azure VM
 
-## Task 1: Test app before migration
+## Task 1: Test the Application before the migration
 
-1. Open Hyper-V Manager from the lab VM desktop or start menu.
-2. Select the `LinuxLabVM-Ubuntu` VM from the Virutal Machines list and connect to the VM.
-3. Open VS Code.
-    1. Use bar icon in top left in Ubuntu VM
-    2. Search for Visual Studio Code
+> [!IMPORTANT]
+> After launching the lab, ensure the the `LinuxVM-Ubuntu` is running in your Hyper-V
 
-    > [!TIP]
-    > File > Auto Save
+1- Login to the Hyper-V machine as the first step of this exercise.  The lab will provide the password in the intructions tab on the right, you can enter it manually or just click on the [T] in the instructions and the password will be typed in for you automatically to login.
+2- Once logged in, double click the desktop icon of `Hyper-V Manager` to start the application
 
-4. Update application code
-    1. In a Terminal (in VS Code), run `git pull origin main`
-    2. In `views.py` (with LinuxApp folder):
-        1. Update connection string with (Line 58) with IP of `SQLPTO2022` (found in `VM_IPs` text file on Hyper-V host).
-        2. Specify that they should use the private IP address of the SQL 2022 box (172.17.195.x)
-5. Start Application locally
-    1. Navigate to `runserver.py`
-    2. Click Run icon (Run Python File)
-6. Open a web browser and navigate to local server address (provided in console) - <http://localhost:5555>
-    1. Navigate to People tab in the application
-    2. Verify the page is populated with a list of people from the `Person.Person` table in the SQL database.
+![Hyper-V Manager](./media/01-Launch-HyperV.png)
 
-    > TODO: Provide a screenshot of what the populated pages should look like
+3- Ensure that Five virtual machines are available and running as you can see in screenshot below.  In this first Exercise, we will only use the `LinuxLabVM-Ubuntu` and the `AzMigrateAppliance-Test` Virtual machines.
 
-## Task 2: Prepare the Hyper-V host
+![Five Virtual Machines running](./media/02-five-VMs-Running.png)
 
-1. Download the [Hyper-V preparation script](https://aka.ms/migrate/hyperv/script) onto the lab VM (TODO: IMPORTANT: Do not download on the Ubuntu VM...)
-   1. TODO: Provide a description of what this script is doing and why it matters...
-   2. Enables WinRM and dependencies for Azure Migrate Hyper-V Host.
+4- Click to highlight the `LinuxLabVM-Ubuntu` in the list and click on  `Connect` on the right sidebar
 
-    > [!IMPORTANT]  
-    > Donovan will work with Oren to see if when can have the script on the Hyper-V host so students do not have to download.
+![Connect](./media/03-Connect.png)
 
-2. Open Powershell as Administrator
+5- As the `Administrator` enter the password provided to you on the `Resources` tab on the right of the lab and press the enter key to login to the Ubuntu machine.
 
-    > Ensure it is not PowerShell ISE as prompts may not show in console properly
+6- Click on Use bar icon in top left in the Ubuntu VM, then search for `Visual Studio Code` and finally click on the Visual Studio Code icon to launch it.
 
-3. Set Network connectivity to Private
-4. Run `Set-NetConnectionProfile -NetworkCategory Private`
-5. Run `Get-NetConnectionProfile` and ensure `NetworkCategory` is set to `Private`
-6. Navigate to and run Hyper-V preparation script
+![VSCode Ubuntu](./media/04-VSCode-Ubuntu.png)
 
-   1. Navigate to location of `MicrosoftAzureMigrate-Hyper-V.ps1`
+7- The Visual Studio Code IDE will open and you should have the `LinuxApp` already open.  Click on the `views.py` file in the explorer.
 
-    > [!NOTE]
-    > We can provide the location should be have the script downloaded already (i.e. `cd C:\Users\Administrator\Desktop\`)
+8- On the desktop of the Hyper-V machine you will find a text file called `VM_IPs` open the file and copy the IP value of the `SQLPTO2022`.  Paste that IP address in the `views.py` file in the connection string line as show in the screenshot below.
 
-7. Accept the prompts
-8. Creating local user credentials
+![VM_IP](./media/05-VM-IP.png)
 
-      ```PowerShell
-      Username: (i.e. MigrateLocal)
-      Password: (i.e. <same-as-machine>)
-      ```
+9- Open the file `runserver.py` in the explorer of Visual Studio code and run it by clicking on the play button in the top right of the editor, then `CTRL-Click` the `http://localhost:xxxx` link in the terminal to launch the LinuxApp in the default browser
 
-9. Reset Network Connection Type
+![run server](./media/06-runserver.png)
 
-   1. In PowerShell session (as administrator)
-   2. Run `Set-NetConnectionProfile -NetworkCategory Public`
-   3. Run `Get-NetConnectionProfile` and ensure `NetworkCategory` is set to `Public`
+10- The application will start in the browser. Navigate to the `People` tab
 
-## Task 3: Create an Azure Migrate project
+![LinuxApp](./media/07-LinuxApp.png)
 
-1. Provision via Azure Cloud Shell
-2. Create project in Azure portal
+11- Ensure data is populated on the people's page.  It should look like the screenshot below
 
-## Task 4: Configure Appliance and Discover VMs
+![People Page](./media/08-PeoplePage.png)
 
-1. Configure appliance with Azure Migrate Applicance Configuration Manager
-   1. Connect to appliance VM in Hyper-V (AzMigrateAppliance)
-2. Start Discovery
-3. Confirm discovery results
-
-## Task 5: Assess, replicate, and migrate Linux Ubuntu VM
-
-1. Assess
-2. Replicate (TODO: Need to assess replication time here - Donovan stated it took a long time)
-
-    TODO: Type of steps to configure MSI on the recovery vault resource and them ensure it is granted 'Contributor' and 'Storage Blob Data Contributor' roles on the target storage account.
-
-        1. Go to your Storage account '/subscriptions/75080732-c8d0-4487-b43a-a06e7a9cdd8b/resourceGroups/rg-AzMigrateLab/providers/Microsoft.Storage/storageAccounts/storazmigexi5zsg2' -> Access Control (IAM).
-        2. Add the below role-assignments (for ARM based storage account) to the Recovery services vault's MSI.
-        a) "Contributor"
-        And,
-        b) "Storage Blob Data Contributor" for Standard storage or "Storage Blob Data Owner" for Premium storage
-        Above permissions need to be added for System Assigned Managed Identity if only system MSI is present. If only user assigned managed identity is present or user assigned identity is present along with system assigned identity, add the above permissions to your storage account for user assigned identity.
-        You can refer to https://aka.ms/asrGrantManagedIdentityToTheVault for more details.
-
-3. Migrate the VM to Azure
-
-## Task 6: Attach a Premium SSD 2 data disk to Linux VM on Azure
-
-## Task 7: Test the application again to ensure migration worked and connections are still good to database.
