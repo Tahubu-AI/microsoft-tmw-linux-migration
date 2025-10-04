@@ -42,3 +42,42 @@
 
 ![People Page](./media/08-PeoplePage.png)
 
+## Task 2: Preparing the Hyper-V Host
+
+1- Back in your Hyper-V host machine, open a browser window and navigate to `https://aka.ms/migrate/hyperv/script` to download the script needed to prepare the HyperV
+
+![HyperV-Download](./media/09-download.png.png)
+
+2- From the search bar at the bottom of the HyperV machine type `Powershell`.  A window will pop with multiple options, make sure to choose the Windows PowerShell app NOT  the ISE one and start it by running as Administrator.
+
+![PS1 admin](./media/10-ps-admin.png)
+
+3- In the terminal, run:
+```powershell
+Set-NetConnectionProfile -NetworkCategory Private
+```
+Then run the following to ensure that the NetworkCategory is set to `Private`
+
+```powershell
+Get-NetConnectionProfile
+```
+
+![Network-Private](./media/11-Network-Private.png)
+
+4- Now head over to where you downloaded the script in step 1 and execute the script in the terminal, accepting ALL the prompts that will show up. There should be 7 prompts where you should agree to all.  At the last step you will be asked to choose a username and password for credentials/ Enter `MigrateLocal` as the username and `Pa$$w0rd` as the password.
+
+![PS1 Execution](./media/12-ps1-execution.png)
+
+5- Now you can reset the Network Connection to public by running the following command in the terminal
+
+```powershell
+Set-NetConnectionProfile -NetworkCategory Public
+```
+Then run the following to ensure that the NetworkCategory is set to `Public`
+
+```powershell
+Get-NetConnectionProfile
+```
+![Network Public](./media/13-Network-Public.png)
+
+
