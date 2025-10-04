@@ -80,4 +80,83 @@ Get-NetConnectionProfile
 ```
 ![Network Public](./media/13-Network-Public.png)
 
+## Task 3: Azure Migrate Project creation
+
+1- On the Hyper V Host Machine, open a browser window and navigate to `https://portal.azure.com`
+ 
+2- Login using the credentials in the lab available on the `Resources` tab on the right of the lab screen.  There you will find the username and password you should use and also a TAP (Temporary Access Password) that we will use later.
+
+> [!IMPORTANT]
+> If prompted for Temporary Access Pass, Select use your password instead.
+
+![Use Password Instead](./media/14-UsePasswordInstead.png)
+
+3- Another Credential screen will show up, this time enter the TAP password you see in the `Resources` Tab
+
+4- Teh Azure portal will load, start a cloud shell by click on the cloudshell icon in the top bar like in the screenshot below
+
+![CloudShell](./media/15-CloudShell.png)
+
+5- The Azure Cloud shell will ask whether you want to start a `Bash` or `Powershell` session, choose `Powershell`
+
+6- The next screen will ask about storage, choose `No storage account required`
+
+7- Select the only subscription you see in the dropdown and click `Apply`
+
+8- You should see a cloudshell similar to the one in the screenshot below
+
+![CloudShell-Apply](./media/16-CloudShell-Apply.png)
+
+9- Run the following in the CloudShell to create the resources needed in Azure.
+
+```powershell
+# Login to Azure
+# Write-Host "Logging in to Azure..."
+# Connect-AzAccount
+
+$location = "centralus"
+$resourceGroupName = "rg-AzMigrateLab"
+$storagePrefix = "storazmig"
+$vnetName = "vnet-AzMigrateLab"
+
+# Create Resource Group
+Write-Host "Creating resource group '$resourceGroupName' in location '$location'..."
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+
+# Generate unique storage account name
+$randomSuffix = -join ((48..57) + (97..122) | Get-Random -Count 8 | % {[char]$_})
+$storageAccountName = "$storagePrefix$randomSuffix"
+
+Write-Host "Creating storage account '$storageAccountName'..."
+New-AzStorageAccount -ResourceGroupName $resourceGroupName `
+   -Name $storageAccountName `
+   -Location $location `
+   -SkuName Standard_GRS `
+   -Kind StorageV2
+
+# Create Virtual Network and Subnet
+Write-Host "Creating virtual network '$vnetName' with subnet 'default'..."
+$subnetConfig = New-AzVirtualNetworkSubnetConfig -Name "default" -AddressPrefix "198.168.4.0/26"
+New-AzVirtualNetwork -Name $vnetName `
+    -ResourceGroupName $resourceGroupName `
+    -Location $location `
+    -AddressPrefix "198.168.4.0/24" `
+    -Subnet $subnetConfig
+```
+
+> [!TIP]
+> You might need to press the ENTER key once during the `New-AzVirtualNetwork` command while running the script.
+
+10- Back in your Azure Portal, search for `Azure Migrate` in the upper search bar and start `Azure Migrate`
+
+![Azure Migrate](./media/17-AzureMigrate.png)
+
+11- In the `Azure Migrate` blade, click on `All projects` and `Create Project`
+
+![AZ Migrate Project](./media/18-AzMigrate_Project.png)
+
+12- In the `Create Project` blade, fill in the resource group, it should be `rg-AzMigrateLab`, Give it a name for the project, make sure the Geograpgy is `United states` and finally in the Advanced section maker sure the connectivity method is `Public Endpoint`
+
+13- Click on `Create` to start the create of the Azure Migrate Project.
+
 
