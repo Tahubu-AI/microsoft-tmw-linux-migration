@@ -21,7 +21,7 @@ After completing this exercise, you will be able to:
 
 ## Introduction
 
-Before initiating a migration, it is critical to confirm that the source and target environments meet the prerequisites required by the Azure Database Migration Service. These checks help avoid runtime errors and ensure that the migration process completes successfully. The key requirements include:
+Before initiating a migration, it is critical to confirm that the source and target environments meet the prerequisites required by the migration service in Azure Database for PostgreSQL. These checks help avoid runtime errors and ensure that the migration process completes successfully. The key requirements include:
 
 1. The source PostgreSQL server version must be greater than 9.5.
 
@@ -37,7 +37,7 @@ In this task, you will verify that each of these prerequisites has been met befo
 
 ## Success criteria
 
-- The source PostgreSQL server has been verified to run version 9.5 or higher, ensuring compatibility with Azure Database Migration Service.
+- The source PostgreSQL server has been verified to run version 9.5 or higher, ensuring compatibility with the migration service in Azure Database for PostgreSQL.
 - Network connectivity between the source and target servers has been confirmed, allowing secure and reliable data transfer.
 - All required extensions and server parameters have been identified and successfully enabled on the target Azure Database for PostgreSQL flexible server.
 
@@ -101,7 +101,7 @@ In this subtask, you will connect to the on-premises PostgreSQL server hosted on
      PostgreSQL 14.19 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit
     ```
 
-This confirms that the source server meets the minimum version requirement for migration using Azure Database Migration Service.
+This confirms that the source server meets the minimum version requirement for migration using the migration service in Azure Database for PostgreSQL.
 
 ### Subtask 2: Ensure connectivity between source and target PostgreSQL servers
 
@@ -136,7 +136,7 @@ In this subtask, you will inspect the `pg_hba.conf` file on the source server to
     host    all             all             0.0.0.0/0               md5
     ```
 
-    This entry allows any host to connect using MD5 password authentication. For production environments, this rule should be scoped to specific IP ranges for security, but for this lab, it ensures that the Azure migration service can reach the source server.
+    This entry allows any host to connect using MD5 password authentication. For production environments, this rule should be scoped to specific IP ranges for security, but for this lab, it ensures that the migration service in Azure Database for PostgreSQL can reach the source server.
 
 ### Subtask 3: Prepare the target Azure Database for PostgreSQL flexible server
 
@@ -233,7 +233,7 @@ In this task, you will execute a validation run using the Azure portal and revie
 
 ## Success criteria
 
-- A validation run has been successfully initiated using the migration service for Azure Database for PostgreSQL.
+- A validation run has been successfully initiated using the migration service in Azure Database for PostgreSQL.
 - The validation results show no blocking issues, confirming that the source database is compatible with Azure Database for PostgreSQL flexible server.
 
 ## Learning resources
@@ -313,7 +313,7 @@ In this task, you will configure and launch the migration and monitor its progre
 ## Learning resources
 
 - [What is the migration serivce in Azure Database for PostgreSQL?](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/overview-migration-service-postgresql)
-- [Perform a migration using the migration service for Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-offline?tabs=portal#perform-the-migration)
+- [Perform a migration using the migration service in Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-offline?tabs=portal#perform-the-migration)
 
 ## Key tasks
 
@@ -387,7 +387,7 @@ In this task, you will connect to the target Azure database and run a simple que
 ## Learning resources
 
 - [What is the migration serivce in Azure Database for PostgreSQL?](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/overview-migration-service-postgresql)
-- [Perform a migration using the migration service for Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-offline?tabs=portal#perform-the-migration)
+- [Perform a migration using the migration service in Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-offline?tabs=portal#perform-the-migration)
 
 ## Key tasks
 
