@@ -1,6 +1,6 @@
 # Exercise 2: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
 
-TODO: Provide introduction to this aspect of the scenario.
+TODO: Complete introduction to this aspect of the scenario.
 
 Contoso Inc. wants to take advantage of the security, performance and scalability of Azure by migrating their [INSERT_NAME] application. To accommodate this, they first need to move the `dvdrental` database used by the application from their on-premises PostgreSQL server to an instance of Azure Database for PostgreSQL - Flexible Server.
 
@@ -202,7 +202,9 @@ Extensions in PostgreSQL are modular packages that add functionality such as new
 
 ## Task 2: Validate the source database
 
-In this task, you use the migration service to validate that the source database is able to be migrated.
+Before initiating a migration to Azure Database for PostgreSQL, it is crucial to validate the readiness of the source database. This validation process executed by the migration services for Azure Database for PostgreSQL analyzes the schema, extensions, and configuration of the source PostgreSQL instance to identify any compatibility issues that could block or disrupt the migration. Common validation checks include unsupported languages, problematic functions, and extension mismatches. Running this step ensures that the migration plan is informed by actual constraints and allows teams to document and address any blockers—such as internal-language functions or unrecognized objects—before proceeding.
+
+In this task, you will execute a validation run and review the results to determine whether the source database meets Azure’s migration requirements.
 
 1. On the Azure Database for PostgreSQL flexible server blade in the Azure portal, select **Migration** from the left menu and select **Create**.
 
@@ -255,7 +257,9 @@ In this task, you use the migration service to validate that the source database
 
 ## Task 3: Migrate the database
 
-In this task, you use the migration service to migrate that the source database to Azure Database for PostgreSQL flexible server.
+Now that the source database has been assessed and its readiness to be migrated has been validated, the next step is to perform the actual migration. This process involves configuring the migration, selecting the source and target servers, and starting the migration. During the migration, the schema and data from the source database are copied to the target server, preserving object definitions and relationships. It is important to monitor the migration progress and verify that all objects are transferred successfully, especially those previously flagged during validation.
+
+In this task, you will launch the migration, track its status, and confirm that the target Azure database reflects the expected structure and content, ensuring a successful and complete transition.
 
 1. On the Azure Database for PostgreSQL flexible server blade in the Azure portal, select **Migration** from the left menu and select **Create**.
 
@@ -298,7 +302,7 @@ In this task, you use the migration service to migrate that the source database 
 
     ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Databases to validate or migrate tab, with the dvdrental database checked.](media/azure-postgresql-migrate-databases-to-validate-and-migrate.png)
 
-7. On the **Summary** tab, review the validation configuration, then select **Start validation**.
+7. On the **Summary** tab, review the validation configuration, then select **Start validation and migration**.
 
     ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](media/azure-postgresql-migrate-summary.png)
 
