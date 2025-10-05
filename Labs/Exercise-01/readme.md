@@ -350,16 +350,12 @@ New-AzVirtualNetwork -Name $vnetName `
 
 28- Choose `Yes` to shutting down the VM and performing a planned migration with no data loss.
 
-29- Click on `Migrate`.  This will take another 25 minutes.  You can monitor the progress by opening the `Jobs` section on the Migration blade and click on `Planned failover`
+29- Click on `Migrate`.  This will take another 2+ hours to complete.  You can monitor the progress by opening the `Jobs` section on the Migration blade and click on `Planned failover`
 
 ![Jobs](./media/55-jobs.png)
 
 ![Planned Failover](./media/56-PlannedFailover.png)
 
-
-## Task 6: Attach a premium SSD v2 Data Disk to Linux VM on Azure
-
-1- 
 
 
 
