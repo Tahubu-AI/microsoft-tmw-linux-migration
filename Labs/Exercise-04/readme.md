@@ -108,13 +108,20 @@ In this task, you will provision a new Azure Database Migration Service using th
 
 ## Introduction
 
-An Integration Runtime (IR) provides the compute infrastructure used by the Azure Database Migration Service to copy data across data stores. A self-hosted integration runtime (SHIR) provides these capabilities between a cloud data store and a data store in a private network, such as an on-premises network or an Azure virtual network.
+An Integration Runtime (IR) provides the compute infrastructure used by the Azure Database Migration Service (DMS) to securely move data between source and target environments. A self-hosted integration runtime (SHIR) is required when the source database resides in a private network, such as an on-premises data center or a VM-hosted SQL Server, because it enables secure connectivity between the local environment and Azure.
+
+> **Note**  
+> When migrating from SQL Server to Azure SQL Database, a SHIR is required because Azure DMS cannot directly access on-premises SQL Server instances over the public internet. The SHIR acts as a secure bridge, running inside the source network and relaying data to Azure through encrypted channels.
 
 ## Description
 
-In this task, you will download and configure the self-hosted IR (SHIR) associated with your Azure Database Migration Service. You will install the SHIR on the Lab VM inside your network to allow the Database Migration Service to connect to your on-premises SQL Server and perform the database migration.
+In this task, you will download and configure the self-hosted integration runtime (SHIR) associated with your Azure Database Migration Service. You will install the SHIR on the Lab VM to allow DMS to connect to the on-premises SQL Server and perform the migration. Once registered, the SHIR will appear in the Azure portal with a status of **Online**, confirming that it is ready to be used in the migration workflow.
 
-TODO: Need note in here that performing a migration from SQL Server to Azure SQL Database requires the use of a SHIR, and perhaps a brief explanation about why.
+## Success criteria
+
+- The self-hosted integration runtime has been successfully installed and registered using the authentication key from Azure DMS.
+- The SHIR is running on the Lab VM, enabling secure connectivity to the on-premises SQL Server instance.
+- The SHIR node appears in the Azure portal with a status of **Online**, confirming that it is ready to facilitate migration.
 
 ## Learning resources
 
@@ -126,7 +133,7 @@ TODO: Need note in here that performing a migration from SQL Server to Azure SQL
 
     ![The View integration runtime button is highlighted in the View integration runtime tile on the Azure Database Migration Service's Overview blade in the Azure portal.](media/azure-dms-view-integration-runtime.png)
 
-2. On the **Integration runtime** blade, select **Configure integration runtime** on the toolbar.
+2. [] On the **Integration runtime** blade, select **Configure integration runtime** on the toolbar.
 
     ![The Configure integration runtime button is highlighted on the Integration runtime blade's toolbar.](media/azure-dms-integration-runtime.png)
 
@@ -146,23 +153,23 @@ TODO: Need note in here that performing a migration from SQL Server to Azure SQL
 
 7. [] Complete the installation by selecting **Next** on each screen of the setup dialog, and then select **Finish** on the final screen. This will launch the **Microsoft Integration Runtime Configuration Manager**.
 
-8. [] On the **Register Integration Runtime (Self-hosted)** dialog of the **Microsoft Integration Runtime Configuration Manager**, you will need the **Authentication key** for the Azure Database Migration Service. Return to the Azure portal and select the copy button next to **key 1** in the **Configure integration runtime** dialog.
+8. [] Return to the Azure portal and copy the **Authentication key** from the **Configure integration runtime** dialog (use **key 1**).
 
     ![The copy button for key 1 value in the Configure integration runtime dialog is highlighted.](media/azure-dms-configure-integration-runtime-copy-key-1.png)
 
-9. [] Return to the **Microsoft Integration Runtime Configuration Manager**, paste the **key 1** value into the Authentication key box on the **Register Integration Runtime (Self-hosted)** form, and select **Register**.
+9. [] Paste the key into the **Authentication key** box in the Configuration Manager and select **Register**.
 
     ![The authentication key box and register button are highlighted in the Microsoft Integration Runtime Configuration Manager's Register Integration Runtime dialog.](media/integration-runtime-register.png)
 
-10. Select **Finish** on the **New Integration Runtime (Self-hosted) Node** dialog.
+10. [] Select **Finish** on the **New Integration Runtime (Self-hosted) Node** dialog.
 
     ![The Finish button on the New Integration Runtime (Self-hosted) Node dialog is highlighted in the Microsoft Integration Runtime Configuration Manager.](media/new-integration-runtime-node.png)
 
-11. On the **Register Integration Runtime (Self-hosted)** form, confirm the integration runtime node has been registered successfully.
+11. [] Confirm that the integration runtime node has been registered successfully.
 
     ![The Register Integration Runtime (Self-hosted) form shows that the Integration Runtime (Self-hosted) node has been registered successfully.](media/integration-runtime-registered-successfully.png)
 
-12. Return to the **Integration runtime** blade of the Azure Database Migration Service in the Azure portal, close the **Configure integration runtime** dialog, select **Refresh** on the toolbar, and confirm the node is present and has a status of **Online**.
+12. [] Return to the **Integration runtime** blade in the Azure portal, close the dialog, select **Refresh**, and confirm the node status is **Online**.
 
     ![The refresh button and integration runtime with a status of online are highlighted on the Integration Runtime blade of the Azure Database Migration Service.](media/azure-dms-integration-runtime-online.png)
 
