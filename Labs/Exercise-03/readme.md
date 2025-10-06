@@ -163,3 +163,31 @@ In this task, you will update the web application's configuration file to connec
 10. [] In the `index.php` file, locate the section that defines the database connection parameters. It should look similar to the following:
 
     ![Screenshot of the index.php file in nano with the database connection parameters highlighted.](media/kudu-nano-index-php.png)
+
+11. [] Update the database connection parameters as follows (please note that you must also update the username):
+
+    ```php
+    $dbHost = "<YOUR_AZURE_POSTGRESQL_SERVER_NAME>.postgres.database.azure.com";
+    $dbPort = "5432";
+    $dbName = "dvdrental";
+    $dbUser = "pgadminuser";
+    $dbPassword = "<Your Password from the Resources tab in the lab instructions>";
+    ```
+
+    When you are done, press `CTRL + X`, then `Y`, then `ENTER` to save and exit the `nano` editor. Your compledted section should look similar to the following:
+
+    ![Screenshot of the updated database connection parameters in the index.php file.](media/kudu-nano-index-php-updated.png)
+
+12. [] In the SSH session, restart the Web App to apply the changes by running the following command:
+
+    ```bash
+    touch restart.txt
+    ```
+
+13. [] Close the Kudu console tab and return to the Azure portal. In the Web App overview, select the link in the **Default domain** within the **Essentials** section of the App Service's overview.
+
+    ![Screenshot of the Web App overview with the URL highlighted.](media/azure-portal-webapp-url.png)
+
+14. [] The web application should load and display a list of actors from the PostgreSQL database. If you see the list of actors, the web application is successfully connected to the PostgreSQL database in Azure Database for PostgreSQL - Flexible Server.
+
+    ![Screenshot of the web application displaying a list of actors.](media/webapp-actors-list.png)
