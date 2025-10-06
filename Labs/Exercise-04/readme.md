@@ -22,13 +22,17 @@ After completing this exercise, you will be able to:
 
 ## Introduction
 
-Azure Database Migration Service is a fully managed service designed to enable seamless migrations from multiple database sources to Azure data platforms with minimal downtime (online migrations).
+Azure Database Migration Service (DMS) is a fully managed service that enables seamless migrations from on-premises or cloud-hosted databases to Azure data platforms. It supports both offline and online migration modes, allowing organizations to choose between minimal downtime or simplified cutover depending on their operational needs. In this lab, you will use DMS to migrate a SQL Server database to Azure SQL Database.
 
 ## Description
 
-In this task, you will provision an instance of the Azure Database Migration Service via the Azure portal to migrate the on-premises SQL Server database to Azure SQL Database.
+In this task, you will provision a new instance of Azure Database Migration Service using the Azure portal. This service will be used to orchestrate the migration of the on-premises SQL Server database to Azure SQL Database. Provisioning the service is a prerequisite for configuring and launching the migration project in later tasks.
 
 ## Success criteria
+
+- A new Azure Database Migration Service instance has been successfully created in the correct resource group and region.
+- The migration scenario has been configured to support SQL Server to Azure SQL Database.
+- The deployment status shows **Succeeded**, and the resource is accessible from the Azure portal.
 
 ## Learning resources
 
@@ -76,17 +80,17 @@ In this task, you will provision a new Azure Database Migration Service using th
     1. [] **Source server type**: `SQL Server`
     2. [] **Target server type**: `Azure SQL Database`
     3. [] **Database Migration Service**: `Database Migration Service`
-    4. [] Choose **Select**.
+    4. [] Choose **Select**
 
     ![The steps above are numbers 1-4 on the Select migration scenario and Database Migration Service page.](media/azure-dms-select-migration-scenario.png)
 
 10. [] On the **Basics** tab of the **Create Data Migration Service** blade, enter the following:
 
-    1. [] **Subscription**: Accept the default subscription.
-    2. [] **Resource group**: Ensure the `RG-Techsummit` resource group is selected.
-    3. [] **Location**: Choose the region you noted for the resource group and the other resources above.
-    4. [] **Migration service name**: Enter `dms-sql-migration-lab`.
-    5. [] Select **Review + create**.
+    1. [] **Subscription**: Accept the default subscription
+    2. [] **Resource group**: Ensure `RG-Techsummit` is selected
+    3. [] **Location**: Choose the region noted earlier
+    4. [] **Migration service name**: `dms-sql-migration-lab`
+    5. [] Select **Review + create**
 
     ![The steps above are numbers 1-5 on the Create Data Migration Service's Basics tab.](media/create-data-migration-service-basics.png)
 
@@ -120,47 +124,47 @@ TODO: Need note in here that performing a migration from SQL Server to Azure SQL
 
 1. [] On the Azure Database Migration Service **Overview** blade you opened at the end of the previous task, select **View integration runtime** in the **View integration runtime** tile in the **Getting started** tab.
 
-    ![](media/azure-dms-view-integration-runtime.png)
+    ![The View integration runtime button is highlighted in the View integration runtime tile on the Azure Database Migration Service's Overview blade in the Azure portal.](media/azure-dms-view-integration-runtime.png)
 
 2. On the **Integration runtime** blade, select **Configure integration runtime** on the toolbar.
 
-    ![](media/azure-dms-integration-runtime.png)
+    ![The Configure integration runtime button is highlighted on the Integration runtime blade's toolbar.](media/azure-dms-integration-runtime.png)
 
 3. [] In the **Configure integration runtime** dialog, select the link to **Download and install the integration runtime**.
 
-    ![](media/azure-dms-configure-integration-runtime-download.png)
+    ![The Download and install the integration runtime link is highlighted in the Configure integration runtime dialog.](media/azure-dms-configure-integration-runtime-download.png)
 
 4. [] On the webpage that opens, select **Download** under the **Microsoft Integration Runtime** header.
 
-    ![](media/download-microsoft-integration-runtime.png)
+    ![The download button is highlighted on the Microsoft Integration Runtime web page.](media/download-microsoft-integration-runtime.png)
 
 5. [] Select the latest version of the integration runtime from the **Choose the download you want** dialog and select **Download**.
 
-    ![](media/integration-runtime-choose-version.png)
+    ![In the Choose the download you want dialog, the latest version of the integration runtime is checked and the Download button is highlighted.](media/integration-runtime-choose-version.png)
 
 6. [] When the download completes, run the MSI to install the integration runtime.
 
-7. [] Complete the installation by selecting **Next** on each screen of the setup dialog, and then select **Finsih** on the final screen.
+7. [] Complete the installation by selecting **Next** on each screen of the setup dialog, and then select **Finish** on the final screen. This will launch the **Microsoft Integration Runtime Configuration Manager**.
 
-8. [] On the **Register Integration Runtime (Self-hosted)** dialog, you will need the **Authentication key** for the Azure Database Migration Service. Return to the Azure portal and select the copy button next to **key 1**.
+8. [] On the **Register Integration Runtime (Self-hosted)** dialog of the **Microsoft Integration Runtime Configuration Manager**, you will need the **Authentication key** for the Azure Database Migration Service. Return to the Azure portal and select the copy button next to **key 1** in the **Configure integration runtime** dialog.
 
-    ![](media/azure-dms-configure-integration-runtime-copy-key-1.png)
+    ![The copy button for key 1 value in the Configure integration runtime dialog is highlighted.](media/azure-dms-configure-integration-runtime-copy-key-1.png)
 
-9.  [] Return to the **Register Integration Runtime (Self-hosted)** dialog, paste the **key 1** value into the Authentication key box, and select **Register**.
+9. [] Return to the **Microsoft Integration Runtime Configuration Manager**, paste the **key 1** value into the Authentication key box on the **Register Integration Runtime (Self-hosted)** form, and select **Register**.
 
-    ![](media/integration-runtime-register.png)
+    ![The authentication key box and register button are highlighted in the Microsoft Integration Runtime Configuration Manager's Register Integration Runtime dialog.](media/integration-runtime-register.png)
 
 10. Select **Finish** on the **New Integration Runtime (Self-hosted) Node** dialog.
 
-    ![](media/new-integration-runtime-node.png)
+    ![The Finish button on the New Integration Runtime (Self-hosted) Node dialog is highlighted in the Microsoft Integration Runtime Configuration Manager.](media/new-integration-runtime-node.png)
 
-11. On the **Re**, confirm the integration runtime node has been registered successfully.
+11. On the **Register Integration Runtime (Self-hosted)** form, confirm the integration runtime node has been registered successfully.
 
-    ![](media/integration-runtime-registered-successfully.png)
+    ![The Register Integration Runtime (Self-hosted) form shows that the Integration Runtime (Self-hosted) node has been registered successfully.](media/integration-runtime-registered-successfully.png)
 
 12. Return to the **Integration runtime** blade of the Azure Database Migration Service in the Azure portal, close the **Configure integration runtime** dialog, select **Refresh** on the toolbar, and confirm the node is present and has a status of **Online**.
 
-    ![](media/azure-dms-integration-runtime-online.png)
+    ![The refresh button and integration runtime with a status of online are highlighted on the Integration Runtime blade of the Azure Database Migration Service.](media/azure-dms-integration-runtime-online.png)
 
 ===
 
