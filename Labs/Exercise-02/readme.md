@@ -10,6 +10,7 @@ After completing this exercise, you will be able to:
 
 - Evaluate the compatibility of an on-premises PostgreSQL database for migration to Azure using built-in validation tools.
 - Perform a full offline migration of a PostgreSQL database to Azure Database for PostgreSQL - Flexible Server using the integrated migration service.
+- Verify the integrity of the migrated schema and data in Azure Database for PostgreSQL.
 
 ## Duration
 
@@ -173,11 +174,17 @@ Extensions in PostgreSQL are modular packages that add functionality such as new
     > SELECT extname, extversion FROM pg_extension;
     > ```
 
-4. [] Next, you will enable the required extension on the target Azure Database for PostgreSQL flexible server.
+4. [] Disconnect from the `dvdrental` database to return to the shell prompt:
 
-5. [] Open a web browser on the Lab VM and navigate to the [Azure portal](https://portal.azure.com/).
+    ```sql
+    \q
+    ```
 
-6. [] Sign in using your lab credentials from the **Resources** tab in the instructions panel.
+5. [] Next, you will enable the required extension on the target Azure Database for PostgreSQL flexible server.
+
+6. [] Open a web browser on the Lab VM and navigate to the [Azure portal](https://portal.azure.com/).
+
+7. [] Sign in using your lab credentials from the **Resources** tab in the instructions panel.
 
     ![Screenshot of the resources tab in the instructions panel, with the username and TAP highlighted.](media/lab-resources-credentials.png)
 
@@ -185,21 +192,21 @@ Extensions in PostgreSQL are modular packages that add functionality such as new
     >
     > ![Screenshot of the login dialog for entering the Temporary Access Pass.](media/azure-portal-login-tap.png)
 
-7. [] Click **Yes** if prompted to stay signed in.
+8. [] Click **Yes** if prompted to stay signed in.
 
-8. [] On the Azure portal home page, select **Resource groups** under **Azure services**.
+9. [] On the Azure portal home page, select **Resource groups** under **Azure services**.
 
     ![Screenshot of the Azure home page with Resource groups highlighted under Azure services.](media/azure-services-resource-groups.png)
 
-9. [] Select the **RG-Techsummit** resource group.
+10. [] Select the **RG-Techsummit** resource group.
 
     ![Screenshot of the Resource groups page in Azure, with the RG-Techsummit resource group highlighted in the list of resource groups.](media/azure-resource-groups-tech-summit.png)
 
-10. [] Select the **Azure Database for PostgreSQL flexible server** resource.
+11. [] Select the **Azure Database for PostgreSQL flexible server** resource.
 
     ![Screenshot of the RG-Techsummit resource group, with the Azure Database for PostgreSQL flexible server resource highlighted in the list of resources.](media/azure-rg-techsummit-postgresql.png)
 
-11. [] To enable the `plpgsql` extension:
+12. [] To enable the `plpgsql` extension:
 
     1. [] Select **Server parameters** under **Settings** in the left menu.
     2. [] Enter `azure.extensions` in the search box.
@@ -217,7 +224,14 @@ Extensions in PostgreSQL are modular packages that add functionality such as new
 > For this lab, no additional parameters need to be configured.
 >
 > It is also important to ensure that high availability and read replicas are disabled on the target server before migration. These features can be enabled after the migration is complete and the database is stable.
+>
 > These features have been disabled in the lab environment.
+
+## Additional context: Online migration and real-world networking
+
+For simplicity, this lab focuses on an offline migration scenario. However, the migration service for Azure Database for PostgreSQL also supports online migrations, which allow continuous data replication from the source to Azure with minimal downtime. This is especially useful for production environments where cutover windows must be tightly controlled. Read the [online migration setup documentation](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-online?tabs=portal) to learn more.
+
+In real-world deployments, network architecture is often more complex than the lab setup. On-premises environments typically connect to Azure through VPN gateways, ExpressRoute, or private endpoints within Azure Virtual Networks (VNets). These configurations ensure secure, low-latency connectivity between source and target environments. You may also need to configure VNet peering, NSG rules, and firewall exceptions to allow replication traffic. For guidance on networking best practices, refer to the [how to set up the network](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/how-to-network-setup-migration-service) documentation for the migration service.
 
 ===
 
@@ -249,7 +263,7 @@ In this task, you will execute a validation run using the Azure portal and revie
 
 2. [] On the **Setup** tab of the **Migrate PostgreSQL to Azure Database for PostgreSQL flexible server** dialog, enter the following values:
 
-    - [] **Migration name**: Enter `dvd-rental-db-validation`
+    - [] **Migration name**: Enter `dvdrental-db-validation`
     - [] **Source server type**: Select **On-premises server**
     - [] **Migration option**: Select **Validate**
     - [] **Migration mode**: Select **Offline**
@@ -288,7 +302,13 @@ In this task, you will execute a validation run using the Azure portal and revie
 
     ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](media/azure-postgresql-validate-summary.png)
 
-8. [] Monitor the progress of the validation on the **Migration** page. Once complete, review the results to confirm that no blocking issues were found.
+8. [] Monitor the progress of the validation on the **Migration** page. Select **Refresh** on the toolbar every couple of minutes to check the validation's progress.
+
+    ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-validation run has a status of Validation in progress.](media/azure-postgresql-validate-monitor.png)
+
+9. When complete, the **Status** will be set to **Succeeded**. You can review the results by selecting the `dvdrental-db-validation` item in the list to confirm that no blocking issues were found.
+
+    ![The Migration dialog is displayed, with the dvdrental-db-validation run showing a status of Succeeded.](media/azure-postgresql-validate-success.png)
 
     > **Note**: If validation fails due to unsupported objects or configuration mismatches, you must resolve those issues before proceeding to migration. Refer to the validation report for details.
 
@@ -317,13 +337,13 @@ In this task, you will configure and launch the migration and monitor its progre
 
 ## Key tasks
 
-1. [] On the Azure Database for PostgreSQL flexible server blade in the Azure portal, select **Migration** from the left menu and select **Create**.
+1. [] Select **Create** again on the toolbar of the Azure Database for PostgreSQL flexible server's Migration blade.
 
-    ![Screenshot of the Azure Database for PostgreSQL flexible server page, with the Migration menu option and Create button highlighted.](media/azure-postgresql-migration-create.png)
+    ![Screenshot of the Azure Database for PostgreSQL flexible server page, with the Migration menu option and Create button highlighted.](media/azure-postgresql-migration-create-migrate.png)
 
 2. [] On the **Setup** tab, enter the following values:
 
-    - [] **Migration name**: `dvd-rental-db-migration`
+    - [] **Migration name**: `dvdrental-db-migration`
     - [] **Source server type**: **On-premises server**
     - [] **Migration option**: **Validate and migrate**
     - [] **Migration mode**: **Offline**
@@ -362,9 +382,13 @@ In this task, you will configure and launch the migration and monitor its progre
 
     ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](media/azure-postgresql-migrate-summary.png)
 
-8. [] Monitor the progress of the migration on the **Migration** page. Once complete, confirm that the status shows **Succeeded** and that no errors were reported.
+8. [] Monitor the progress of the migration on the **Migration** page.
 
-    > TODO: Add screenshots of the completed migration status once available.
+    ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-migration run has a status of In progress.](media/azure-postgresql-migrate-monitor.png)
+
+9. Once complete, confirm that the status shows **Succeeded** and that no errors were reported.
+
+    ![The Migration dialog is displayed, with the dvdrental-db-migration run showing a status of Succeeded.](media/azure-postgresql-migrate-success.png)
 
 ===
 
@@ -372,11 +396,11 @@ In this task, you will configure and launch the migration and monitor its progre
 
 ## Introduction
 
-After the migration completes, it is important to verify that the target Azure Database for PostgreSQL flexible server contains the expected schema and data. This step confirms that the migration was successful and that the application can resume using the new database without issues.
+After the migration finishes, it is important to verify that the target Azure Database for PostgreSQL flexible server contains the expected schema and data. This step confirms that the migration was successful and that the application can resume using the new database without issues.
 
 ## Description
 
-In this task, you will connect to the target Azure database and run a simple query to confirm that the `dvdrental` database was migrated correctly.
+In this task, you will connect to the target Azure database and run few a simple queries to confirm that the `dvdrental` database was migrated successfully.
 
 ## Success criteria
 
@@ -386,23 +410,35 @@ In this task, you will connect to the target Azure database and run a simple que
 
 ## Learning resources
 
-- [What is the migration serivce in Azure Database for PostgreSQL?](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/overview-migration-service-postgresql)
-- [Perform a migration using the migration service in Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-offline?tabs=portal#perform-the-migration)
+- [Check PostgreSQL database migration when completed](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/tutorial-migration-service-iaas-offline?tabs=portal#check-the-migration-when-completed)
 
 ## Key tasks
 
-1. [] Open **Query editor (preview)** from the Azure Database for PostgreSQL flexible server blade in the Azure portal.
+1. [] On the Azure Database for PostgreSQL flexible server blade in the Azure portal, select **Overview** from the left menu.
 
-2. [] Sign in using your lab user credentials.
+2. [] On the **Overview** blade, copy the endpoint value in the **Essentials** pane.
 
-3. [] Select the `dvdrental` database from the dropdown list.
+    ![On the Overview blade of the Azure Database for PostgreSQL flexible server, the endpoint and administrator login values are highlighted in the essentials pane.](media/azure-database-for-postgresql-endpoint.png)
 
-4. [] Run the following query to confirm that the `film` table exists and contains data:
+    > **NOTE**: Within the **Essentials** pane, also note the **Administrator login** value. This is the username that will be used to log in to the server. This differs from the `pgadmin` user you used to connect to the on-premises database.
 
-    ```sql
-    SELECT * FROM film LIMIT 5;
+3. [] Return to the open PuTTY terminal window on your Lab VM, or open a new one by connecting to the private IP address of the `LinuxLabVM-CentOS-7-PostGreSQL` VM and logging in with the `root` user and password.
+
+4. [] At the PuTTY shell prompt, run the following command to connect to your Azure Database for PostgreSQL flexible server, replacing the `<YOUR_AZURE_POSTGRESQL_ENDPOINT>` token with the endpoint for your Azure Database for PostgreSQL flexible server.
+
+    ```bash
+    psql -h pg-techsummit55290035.postgres.database.azure.com -U pgadminuser -d dvdrental
+    psql -h <YOUR_AZURE_POSTGRESQL_ENDPOINT> -U pgadminuser -d dvdrental
     ```
 
-    The query should return five rows from the `film` table, confirming that the data was successfully migrated.
+5. [] When prompted for the password for user `pgadminuser`, enter the **Password** from the **Resources** tab in the lab instructions.
+
+6. [] From the `dvdrental` prompt, execute the following query to confirm that the data and schema were successfully migrated:
+
+    ```sql
+    SELECT * FROM sales_by_film_category;
+    ```
+
+    The query should return 16 rows from the `sales_by_film_category` view, confirming that the database was successfully migrated.
 
     > If the query fails or returns no results, revisit the migration status and validation report to identify any issues.
