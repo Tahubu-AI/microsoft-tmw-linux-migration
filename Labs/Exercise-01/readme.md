@@ -85,7 +85,7 @@ In this task, you will verify that each of these crtical steps have been met bef
 
 ## Introduction
 
-Before initiating a migration, it is critical to download the scripts needed for the Hyper-V Host machine to execute in order to create the necessary resources in Azure and set the Network connectivity category profile.
+Before initiating a migration, it is critical to download the script needed for the Hyper-V Host machine to execute accepting all prompts and set the Network connectivity category profile.
 
 ## Description
 
@@ -141,6 +141,25 @@ Get-NetConnectionProfile
 
 
 # Task 3: Azure Migrate Project creation
+
+## Introduction
+
+In this task, you will start the Azure Migration Project in the Azure Portal and run the script necessary to create all the needed resource in Azure for the migration.
+
+## Description
+
+In this task, you will execute a script a Cloud Shell session in the Azure Portal to generate all the needed resources, then create the Azure Migrate Project
+
+## Success criteria
+
+- You can execute the script successfully in the Cloud shell of the Azure Portal.
+- You can create a new Azure Migrate Project in the Azure Portal.
+
+## Learning resources
+
+- [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/en-us/azure/migrate/prepare-for-migration?view=migrate-classic)
+
+## Key tasks
 
 1- [] On the Hyper V Host Machine, open a browser window and navigate to `https://portal.azure.com`
  
@@ -221,6 +240,28 @@ New-AzVirtualNetwork -Name $vnetName `
 
 
 # Task 4: Configuring the Appliance and discover the Virtual Machine
+
+## Introduction
+
+In this task, you will configure the Appliance and Discover the Virtual Machine
+
+## Description
+
+In this task, you will access the Azure Migrate Project you created and generate a project key to allow you to set up an Appliance to get ready for replication and migration of your Linux VM.
+
+## Success criteria
+
+- You can start the discovery in the Azure Migrate Project and generate a project Key.
+- You can connect to the Azure Migrate VM already running in the Hyper-V Manager for the lab
+- Verify the Azure Migrate Project Key Successfully
+- Verify the authentication against the Appliance and confirm successful registration 
+- Verify successful management of credentials and discovery sources
+
+## Learning resources
+
+- [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/en-us/azure/migrate/prepare-for-migration?view=migrate-classic)
+
+## Key tasks
 
 1- [] In the Azure portal, make sure you are in the `Azure Migrate` blade and you can see your project that you just created
 
@@ -320,6 +361,27 @@ New-AzVirtualNetwork -Name $vnetName `
 
 
 # Task 5: Assess, replicate and migrate Linux Ubuntu VM
+
+## Introduction
+
+In this task, you will assess, replicate and migrate your Linux VM to Azure.
+
+## Description
+
+In this task, you will create the assessment of the Linux VM server in the Azure Migrate Project, download the necessary software on the Hyper-V machine to establish the replication provider with a registration key, start the replication process and finally migrate the Linux VM to zure.
+
+## Success criteria
+
+- You can create the assessment successfully in the Azure Portal.
+- You can download the AzureSiteRecoveryProvider application and the registration key.
+- You can successfully start the replication process.
+- You can successfully start the migration process.
+
+## Learning resources
+
+- [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/en-us/azure/migrate/prepare-for-migration?view=migrate-classic)
+
+## Key tasks
 
 1- [] From the Azure portal, on the Azure Migrate Project blade, open the `Decide and Plan` section and click on `Assessments` and create a new assessment by clicking on `Create assessment`
 
