@@ -139,3 +139,17 @@ In this task, you will update the web application's configuration file to connec
 6. [] In the Web App overview, expand the **Development Tools** section, then select **Advanced Tools** from the left-hand menu, then select **Go** to open the Kudu console in a new tab.
 
     ![Screenshot of the Web App overview with Advanced Tools selected.](media/azure-portal-webapp-advanced-tools.png)
+
+7. [] In the Kudu console, select the **Debug console** menu, then select **SSH** to open a remote SSH session to the App Service.
+
+    ![Screenshot of the Kudu console with the Debug console menu and SSH option selected.](media/kudu-console-ssh.png)
+
+    This will open a terminal window where you can run commands in the context of the App Service.
+
+    ![Screenshot of the Kudu SSH terminal window.](media/kudu-ssh-terminal.png)
+
+8. [] In the SSH session, navigate to the `/home/site/wwwroot` directory where the web application files are located:
+
+    ```bash
+    cd /home/site/wwwroot
+    ```
