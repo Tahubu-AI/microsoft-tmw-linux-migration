@@ -148,8 +148,18 @@ In this task, you will update the web application's configuration file to connec
 
     ![Screenshot of the Kudu SSH terminal window.](media/kudu-ssh-terminal.png)
 
-8. [] In the SSH session, navigate to the `/home/site/wwwroot` directory where the web application files are located:
+8. [] In the SSH session, navigate to the `/home/site/wwwroot` directory where the web application files are located (you automatically start in the `/home` directory):
 
     ```bash
-    cd /home/site/wwwroot
+    cd site/wwwroot
     ```
+
+9. [] Run the following command to open the `index.php` file in the `nano` text editor:
+
+    ```bash
+    nano index.php
+    ```
+
+10. [] In the `index.php` file, locate the section that defines the database connection parameters. It should look similar to the following:
+
+    ![Screenshot of the index.php file in nano with the database connection parameters highlighted.](media/kudu-nano-index-php.png)
