@@ -426,8 +426,7 @@ In this task, you will configure discovery credentials and sources, then initiat
 
 ## Key tasks
 
-1. [ ] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and continue with Section 2: **Manage credentials and discovery sources**.
-    Select **Add credentials** under **Step 1: Provide Hyper-V host credentials for discovery of Hyper-V VMs**.
+1. [ ] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and continue with Section 2: **Manage credentials and discovery sources**. Select **Add credentials** under **Step 1: Provide Hyper-V host credentials for discovery of Hyper-V VMs**.
 
     ![The Add credentials button is highlighted in the Manage credentials and discovery sources section.](./media/30-Add-Credentials.png)
 
@@ -448,8 +447,7 @@ In this task, you will configure discovery credentials and sources, then initiat
 
     ![Add single item is highlighted on the Add discovery source dialog.](media/add-discovery-source-single-item.png)
 
-5. [ ] To complete the form, you’ll need the IP address of your Lab VM (which acts as the Hyper-V host).  
-    On the Lab VM, open **Command Prompt** (`cmd.exe`) and run:
+5. [ ] To complete the form, you’ll need the IP address of your Lab VM (which acts as the Hyper-V host). On the Lab VM, open **Command Prompt** (`cmd.exe`) and run:
 
     ```bash
     ipconfig
@@ -472,29 +470,27 @@ In this task, you will configure discovery credentials and sources, then initiat
 
     > **Note**: This step can take up to 15 minutes to complete.
 
-10. [ ] When discovery finishes, return to the Azure portal.  
-    Expand **Explore Inventory** → **All Inventory** and confirm that your VM appears in the list.
+10. [ ] When discovery finishes, return to the Azure portal. Expand **Explore Inventory** → **All Inventory** and confirm that your VM appears in the list.
 
     ![The discovered VMs are highlighted on the All inventory blade in the Azure portal.](./media/38-validation.png)
 
 ===
 
-# Task 6: Assess, replicate and migrate Linux Ubuntu VM
+# Task 6: Assess and Replicate the Linux Ubuntu VM
 
 ## Introduction
 
-In this task, you will assess, replicate and migrate your Linux VM to Azure.
+With discovery complete, Contoso’s migration team is ready to assess, replicate, and migrate its Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You’ll begin by creating an assessment to validate sizing and compatibility, and then configure replication using the Azure Site Recovery provider.
 
 ## Description
 
-In this task, you will create the assessment of the Linux VM server in the Azure Migrate Project, download the necessary software on the Hyper-V machine to establish the replication provider with a registration key, start the replication process and finally migrate the Linux VM to zure.
+In this task, you create an assessment for the Linux VM in your Azure Migrate project and configure replication using the Azure Site Recovery provider and registration key.
 
-## Success criteria
+## Success Criteria
 
-- You can create the assessment successfully in the Azure Portal.
-- You can download the AzureSiteRecoveryProvider application and the registration key.
-- You can successfully start the replication process.
-- You can successfully start the migration process.
+- You created the assessment successfully in the Azure portal  
+- You downloaded the Azure Site Recovery provider and registration key  
+- You completed the replication process successfully  
 
 ## Learning resources
 
@@ -502,99 +498,168 @@ In this task, you will create the assessment of the Linux VM server in the Azure
 
 ## Key tasks
 
-1. [ ] From the Azure portal, on the Azure Migrate Project blade, open the `Decide and Plan` section and select `Assessments` and create a new assessment by clicking on `Create assessment`
+1. [ ] On the Azure Migrate Project blade in the Azure portal, expand the **Decide and Plan** section in the left menu, select **Assessments**, and create a new assessment by selecting **Create assessment**.
 
-    ![Assessment](./media/39-Assessments.png)
+    ![The assessments blade is displayed with Create Assessment highlighted.](./media/39-Assessments.png)
 
-2. [ ] Give the assessment a name and create a `Workload`
+2. [ ] Give the assessment a name, such as `LabAssessment`, and select **Add workloads**.
 
-3. [ ] Choose the `LinuxLabVM-Ubuntu` and select **Add**.
+    ![On the Create assessment Basic's tab, the assessment name and Add workloads button are highlighted.](media/create-assessment-basics.png)
 
-    ![Workload](./media/40-Workload.png)
+3. [ ] On the **Select workloads** page, check the box next to the `LinuxLabVM-Ubuntu` VM and select **Add**.
 
-4. [ ] Select Next and ensure the Default target location is `Central US` and that the Sizing criteria is `Performance-based`
+    ![On the Select workloads page, the box next to LinuxLabVM-Ubuntu is checked and the checkbox and Add button are highlighted.](./media/40-Workload.png)
 
-5. [ ] Select **Review + Create assessment**, then select **Create**.
+4. [ ] Select **Next** and verify that **Sizing criteria** is set to `Performance-based`.
 
-![Assessment Ready](./media/41-AssessmentReady.png)
+5. [ ] Select **Review + Create assessment**, then select **Create** on the review tab.
 
-6. [ ] Back in the blade, expand the `Execute` section and click on Migrations, then click on `Discover more`
+6. [ ] On the **Assessments** blade, select **Refresh** after recieving the notification that the assessment was created.
 
-![Discover More](./media/42-Migration-dicover.png)
+    ![The newly created assessment is displayed on the Assessments blade.](./media/41-AssessmentReady.png)
 
-7. [ ] For the `Where to you want to migrate to?` choose `Azure VM`, for the `Are your machines virtualized?` choose `Yes, with Hyper-V` anf the `Target region` choose `Central US`
+7. [ ] Expand **Execute** in the left menu, select **Migrations**, and on the Migration blade, select **Discover more**.
 
-![Virtualization](./media/43-CreateResources.png)
+    ![The Discover more button is highlighted on the Migrations blade.](./media/42-Migration-dicover.png)
 
-8. [ ] Download the Hyper-V replication provider software using the hyperlink in step 1 in the screenshot below, then download the registration key in step 2 in the screenshot.
+8. [ ] On the **Discover** blade:
 
-![downloads](./media/44-Download.png)
+   - **Where to you want to migrate to?**: Choose `Azure VM`
+   - **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
+   - **Target region**: Accept the default value already selected
+   - Check the box for **Confirm that the target region for migration is "[YOUR_SELECTED_REGION]"
+   - Select **Create resources**
 
-> [!IMPORTANT]
-> Remember you need to be on the Hyper-V host machine when you download the software and the key above.
+    ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
 
-9. [ ] Run the `AzureSiteRecoveryProvider.exe` that you just downloaded
+9. [ ] When the deployment completes, under **1. Prepare Hyper-V host servers**:
 
-10. [ ] Select `On (recommended)` and click `Next`. Install at default location and click `Install`. Do NOT click `Finish`
+   1. Select the **Download** link to download the Hyper-V replication provider software installer.
+   2. Select the **Download** button to download the registration key in step 2 in the screenshot.
 
-11. [ ] After the installation is complete, click on `Register`
+    ![The Download link and button are highlighted and numbers 1 and 2 under Prepaer Hyper-V host servers.](./media/44-Download.png)
 
-12. [ ] Browse to the registration key file you downloaded and click Next
+    > **IMPORTANT**: You must be on the Lab VM when you download the software and the key above so that your Hyper-V host is configured correctly.
 
-![Key File](./media/45-Keyfile.png)
+10. [ ] Run the `AzureSiteRecoveryProvider.exe` that you just downloaded.
 
-13. [ ] Select `Connect directly to Azure Site Recovery without a proxy server` and click Next
+11. [ ] Select **On (recommended)** and **Next**.
 
-14. [ ] After about 60 seconds the configuration will complete and then you can click `Finish`
+12. [ ] Install into the default location and select **Install**.
 
-15. [ ] Close the blade and revisit the `Dicover more` page on the migrations blade, you should see that you have ONE connected registration
+    > **IMPORTANT**: Do NOT click **Finish** yet.
 
-![Connected Registration](./media/46-connected-registration.png)
+13. [ ] After the installation is complete, select **Register**.
 
-16. [ ] Click on `Finalize registration`. This step takes around 3 minutes.
+14. [ ] Browse to the registration key file you downloaded and select **Next**.
 
-17. [ ] Now it is time to start the replication, head back to the Migration Project blade and expend `Execute`, `Migrations` and this time click the `Replicate` button
+    ![Screenshot of the downloaded registration key file.](./media/45-Keyfile.png)
 
-![Replicate](./media/47-Replicate.png)
+15. [ ] Select **Connect directly to Azure Site Recovery without a proxy server** and select **Next**.
 
-18. [ ] In the `Specify Intent` page, Choose `server or virtual machines (vm)` on what to migrate. `Azure VM` to where to migrate, and `Yes, with Hyper-V` for whether your machines are virtualized, then click continue.
+16. [ ] After about 60 seconds the configuration will complete.
 
-![Specify Intent](./media/48-SpecifyIntent.png)
+17. [ ] Select **Finish**.
 
-19. [ ] Choose `Standard or trusted launch Virtual Machine` for the security type, `Yes, apply migration settings from an Azure Migrate assessment` for rthe import settings dropdown, pick your assessment you created earlier in the `Select Assessment` dropdown and finally check the box next to your `LinuxLabVM-Ubuntu` and click next.
+18. [ ] Close the blade and return to the **Dicover more** page on the Migrations blade.
 
-![ReplicateVM](./media/49-ReplicateVM.png)
+    > You should see that you have one connected registration.
 
-20. [ ] In the replicate blade, pick your resourcegroup from the dropdown, for the cache storage account pick the storage account in the dropdown that was created for you, pick the Virtual network and click next.
+    ![The connected registrations are highlighted on the Discover more page.](./media/46-connected-registration.png)
 
-![error](./media/50-ErrorIAM.png)
+19. [ ] Select **Finalize registration**.
 
-21. [ ] That error is because the storage account does not have the proper access priviledge to the Recovery Service vault. To fix this issue, first open the Recovery Service Vault resouce in another browers page and under `Settings | Identity` turn ON the status on the `System assigned` and save.
+    > This step may take up to 3 minutes.
 
-![System Assigned](./media/51-IAM-RecoveryVault.png)
+20. [ ] Return to the Migration Project blade, expand **Execute** in the left menu, select **Migrations**, and select the **Replicate** button.
 
-22. [ ] Then we need to assign the `Contributor` and `Storage Blob Data Contributor` to the the storage account, like we did before, but this time to the managed identity of the `Recovery Services Vault`
+    ![The Replicate button is highlighted on the Migrations blade.](./media/47-Replicate.png)
 
-23. [ ] Now, no errors show show up in the `Replicate` blade and you should move to the next step. (You will need to redo the replicate steps after the IAM has been fixed).
+21. [ ] On the **Specify intent** page:
 
-24. [ ] In the compute blade, chnge the `OS Type` dropdown to `Linux`. Pick any availability, no other value should be changed. Click Next.
+    - **What do you want to migration?**: Choose `Servers or virtual machines (VM)`
+    - **Where do you want to migrate to?**: Select `Azure VM`
+    - **Are your machines virtualized?**: Select `Yes, with Hyper-V`
+    - Select **Continue**
 
-![OSType](./media/52-OSType.png)
+    ![The Specify intent page is populated as specified above.](./media/48-SpecifyIntent.png)
 
-25. [ ] For Disks blade and the others just click Next till the end to start the replication.
+22. [ ] On the **Replicate** Virtual machines tab:
 
-26. [ ] This step will take some time, around 25 muinutes. You can check on the progress by opening the `Replication Summary` and clicking on `Jobs` to monitor the completion. 
+    - **Target VM security type**: Choose `Standard or Trusted Launch Virtual machines`
+    - **Import migration settings from an assessment**: Select `Yes, apply migration settings from an Azure Migrate assessment`
+    - **Select assessment**: Select the `LabAssessment` you created earlier
+    - Check the box next to `LinuxLabVM-Ubuntu`
+    - Select **Next**
 
-![Replication Summary](./media/54-ReplicationSummary.png)
+    ![The Replicate Virutal machines tab is populated with the values specified above and the steps are numbered 1-4.](./media/49-ReplicateVM.png)
 
-27. [ ] The replication is complete when you see the replication status for the LinuxLabVM-Ubuntu set to `Protected`. Now you can start the migrations from the ellipsis button on the right of the screen.
+23. [ ] On the **Target settings** tab:
 
-![Protected Item](./media/53-ProtectedItem.png)
+    - **Resource group**: Select rg-AzMigrateLab`
+    - **Replication storage account**: Select the storage account that was created for you
+    - **Virtual network**: Choose `vnet-AzMigrateLab`
+    - Select **Next**
 
-28. [ ] Choose `Yes` to shutting down the VM and performing a planned migration with no data loss.
+    ![The settings above are entered into the Target settings tab. An error message is highlighted.](./media/50-ErrorIAM.png)
 
-29. [ ] Click on `Migrate`. This will take another 2+ hours to complete. You can monitor the progress by opening the `Jobs` section on the Migration blade and click on `Planned failover`
+    > **NOTE**: You may see an error that the Azure Migrate service cannot access the replication storage account. This error is because the storage account does not have the proper access priviledge to the Recovery Service vault. To resove this issue, first open the Recovery Service Vault resouce in another browser page and under `Settings | Identity` turn ON the status on the `System assigned` and select **Save**.
+    >
+    > ![Screenshot of the steps to turn on the System Assigned identity for the recovery services vault.](./media/51-IAM-RecoveryVault.png)
+    >
+    > Next, you need to assign the `Contributor` and `Storage Blob Data Contributor` RBAC roles to the the `Recovery Services Vault` identity on the the storage account.
+    >
+    > The above steps should remove the error on the `Replicate` blade's Target settings tab and enable you to move to the next step. (You will need to redo the replicate steps after the IAM has been fixed).
 
-![Jobs](./media/55-jobs.png)
+24. [ ] On the **Compute** tab:
 
-![Planned Failover](./media/56-PlannedFailover.png)
+    - Select `Linux` in the **OS Type** drop down.
+    - Select any availability
+    - Accept the default values for all other values
+    - Select **Next**
+
+    ![Screenshot of the Compute tab, with the OS Type and its value of Linux highlighted.](./media/52-OSType.png)
+
+25. [ ] Accept the default values on the remaining tabs, then select **Start** on the**Review + start replication** tab.
+
+    > **NOTE**: The replication step can take 25 muinutes or more. You can monitor the progress by opening the **Replications Summary** and selecting **Jobs** in the left menu under **Migration**.
+    >
+    > ![The Replications Summary button on the Migrations blade is highlighted.](./media/54-ReplicationSummary.png)
+
+===
+
+# Task 7: Migrate the Linux Ubuntu VM
+
+## Introduction
+
+With the Linux Ubuntu VM replicated, you are ready to migrate the Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You will perform a planned migration to Azure Virtual Machines.
+
+## Description
+
+In this task, you perform a planned migration of the Linux VM to Azure.
+
+## Success Criteria
+
+- You initiated the migration process successfully
+
+## Learning resources
+
+- [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic)
+
+## Key tasks
+
+1. [ ] The replication is complete when you see the replication status for the `LinuxLabVM-Ubuntu` set to **Protected**.
+
+2. [ ] Start the migration by selecting the ellipsis to the right of the `LinuxLabVM-Ubuntu` item and then selecting **Migrate** from the context menu.
+
+    ![The ellipsis for the LinuxLabVM-Ubuntu is highlighted and Migrate is highlighted in the context menu.](./media/53-ProtectedItem.png)
+
+3. [ ] Select **Yes** to shutting down the VM and performing a planned migration with no data loss.
+
+4. [ ] Select **Migrate**.
+
+    > **IMPORTANT**: The migration can take over two hours to complete. You can monitor the progress by opening the **Jobs** section on the Migration blade and selecting **Planned failover**.
+
+    ![The Jobs page is displayed with the active and completed jobs shown in a list.](./media/55-jobs.png)
+
+    ![Screenshot of the Planned failover job details.](./media/56-PlannedFailover.png)
