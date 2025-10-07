@@ -62,7 +62,7 @@ In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and tes
 
     > Passwords are provided in the **lab instructions** tab. You can enter it manually, or select the **[T]** icon in the instructions to auto-type the password.
 
-5. [ ] Click the **Show Applications** button at the top left of the Ubuntu VM window, enter `"visual studio"` into the search box, and select **Visual Studio Code** from the search results.
+5. [ ] Select the **Show Applications** button at the top left of the Ubuntu VM window, enter `"visual studio"` into the search box, and select **Visual Studio Code** from the search results.
 
     ![The Ubuntu desktop is displayed, with the Show Applications button highlighted. "Visual studio" is entered in the search box and Visual Studio Code is highlighted in the search results. The steps are numbers 1 - 3 to specify the order of operations.](./media/04-VSCode-Ubuntu.png)
 
@@ -84,11 +84,11 @@ In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and tes
 
 10. [ ] Save the `views.py` file.
 
-11. [ ] Open `runserver.py` from the VS Code Explorer and run it by clicking the **Run Python File** button in the top right corner of the file tab.
+11. [ ] Open `runserver.py` from the VS Code Explorer and run it by selecting the **Run Python File** button in the top right corner of the file tab.
 
     ![In VS Code, the runserver.py file is selected and highlighted in Explorer. The Run Python File button is highlighted.](./media/vs-code-run-python-file-runserver-py.png)
 
-12. [ ] In the **Terminal** panel of VS Code, click the **Running on** link (`http://localhost:5555`) to launch the application in your default browser.
+12. [ ] In the **Terminal** panel of VS Code, select the **Running on** link (`http://localhost:5555`) to launch the application in your default browser.
 
     ![In the Terminal panel in VS Code, the Running on link is highlighted.](./media/06-runserver.png)
 
@@ -232,7 +232,7 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
     >
     > ![The Use your password instead link in highlighted on the TAP entry screen.](./media/14-UsePasswordInstead.png)
 
-3. [ ] Click **Yes** if prompted to stay signed in.
+3. [ ] Select **Yes** if prompted to stay signed in.
 
 4. [ ] In the Azure portal, start a Cloud Shell session by selecting the Cloud Shell icon in the top bar.
 
@@ -312,11 +312,11 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
     - **Project name**: `Linux-VM-Migration`  
     - **Geography**: `United States`  
     - Expand **Advanced** and verify **Connectivity method** is set to `Public Endpoint`  
-    - Click **Create**
+    - Select **Create**
 
     ![The Create Project form is filled out with the information above and the steps are numbers 1-6.](media/azure-migrate-create-project.png)
 
-13. [ ] After project creation completes, click **Refresh** on the **All projects** blade to view your new project.
+13. [ ] After project creation completes, select **Refresh** on the **All projects** blade to view your new project.
 
     > Keep this blade open for the next task.
 
@@ -405,20 +405,20 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 
 ===
 
-# Task 5: Discover virtual machines on the Hyper-V host
+# Task 5: Discover virtual machines on the Hyper-V Host
 
 ## Introduction
 
-TODO: Create intro about registering an Azure Migrate appliance that will be used to discover and assess virtual machines on a Hyper-V host.
+Once the Azure Migrate appliance has been registered, it can begin discovering virtual machines hosted on your Hyper-V environment. This discovery process collects metadata about VM configurations, operating systems, and resource usage, which helps Contoso’s IT team assess readiness and plan migration strategies.
 
 ## Description
 
-In this task, you will use the Azure Migrate Project you created and generate a project key to allow you to set up an Appliance to get ready for replication and migration of your Linux VM.
+In this task, you will configure discovery credentials and sources, then initiate the discovery process. You will use the Azure Migrate Appliance Configuration Manager to provide credentials and host details for your Hyper-V environment. Once configured, the appliance will begin discovering virtual machines and report results to your Azure Migrate project.
 
 ## Success criteria
 
-- You have started a discovery in the Azure Migrate Project.
-- You have reviewed the discovery results in the Azure portal.
+- You have started a discovery in the Azure Migrate project  
+- You have reviewed the discovery results in the Azure portal  
 
 ## Learning resources
 
@@ -426,28 +426,30 @@ In this task, you will use the Azure Migrate Project you created and generate a 
 
 ## Key tasks
 
-1. [ ] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and continue with Section 2, **Manage credentials and discovery sources**, by selecting **Add credentials** under **Step 1: Provide Hyper-V host credentials for discovery of Hyper-V VMs​**.
+1. [ ] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and continue with Section 2: **Manage credentials and discovery sources**.
+    Select **Add credentials** under **Step 1: Provide Hyper-V host credentials for discovery of Hyper-V VMs**.
 
-    ![Add Credentials](./media/30-Add-Credentials.png)
+    ![The Add credentials button is highlighted in the Manage credentials and discovery sources section.](./media/30-Add-Credentials.png)
 
-2. [ ] In the Add credentials popup, enter the following:
+2. [ ] In the **Add credentials** popup, enter the following:
 
-   - **Friendly name**: `Lab Credentials`
-   - **Username**: `MigrateLocal`
-   - **Password**: `Pa$$w0rd`
-   - Select **Save**
+    - **Friendly name**: `Lab Credentials`  
+    - **Username**: `MigrateLocal`  
+    - **Password**: `Pa$$w0rd`  
+    - Select **Save**
 
-    ![Credentials](./media/31-add-creds.png)
+    ![The Add Credentials dialog with the above settings is displayed.](./media/31-add-creds.png)
 
-3. [ ] For **Step 2: Provide Hyper-V host/cluster details**, and select **Add discovery source**.
+3. [ ] Under **Step 2: Provide Hyper-V host/cluster details**, select **Add discovery source**.
 
-    ![add discovery source](./media/32-Add-Discover-source.png)
+    ![The Add discovery source button is highlighted.](./media/32-Add-Discover-source.png)
 
-4. [ ] In the **Add discovery source** dialog, select `Add single item`.
+4. [ ] In the **Add discovery source** dialog, select **Add single item**.
 
-    ![](media/add-discovery-source-single-item.png)
+    ![Add single item is highlighted on the Add discovery source dialog.](media/add-discovery-source-single-item.png)
 
-5. [ ] To fill out the **Add discovery source** form, you need the IP address of your Lab VM, which is acting as the Hyper-V Host machine. On the Lab VM, open a command prompt (`cmd.exe`) and run the following command:
+5. [ ] To complete the form, you’ll need the IP address of your Lab VM (which acts as the Hyper-V host).  
+    On the Lab VM, open **Command Prompt** (`cmd.exe`) and run:
 
     ```bash
     ipconfig
@@ -455,26 +457,29 @@ In this task, you will use the Azure Migrate Project you created and generate a 
 
 6. [ ] Copy the `IPv4 Address` from the output.
 
-7. [ ] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and on the **Add discovery source** dialog:
+7. [ ] Return to the **Appliance Configuration Manager** and complete the **Add discovery source** form:
 
-    - **Discovery source**: Leave `Hyper-V Host/Cluster` selected.
-    - **IP Address/FQDN**: Paste the IP address of your Lab VM.
-    - **Map credentials**: Select `LabCredentials`.
-    - Select **Save**.
+    - **Discovery source**: Leave `Hyper-V Host/Cluster` selected  
+    - **IP Address/FQDN**: Paste the IP address of your Lab VM  
+    - **Map credentials**: Select `Lab Credentials`  
+    - Select **Save**
 
-    ![IP Address](./media/34-IPAddress.png)
+    ![The values above are entered into the Add discovery source dialog.](./media/34-IPAddress.png)
 
-8. [ ] After validation finishes successfully, toggle off the `Guest discovery is enabled by default` under **Step 3: Provide server credentials to perform guest discovery of installed software, dependencies, and workloads**.
+8. [ ] After validation completes, toggle off **Guest discovery is enabled by default** under **Step 3: Provide server credentials to perform guest discovery of installed software, dependencies, and workloads**.
 
 9. [ ] Scroll down and select the **Start Discovery** button.
 
-    > **NOTE**: This is step can take up to 15 minutes.
+    > **Note**: This step can take up to 15 minutes to complete.
 
-10. [ ] When the discovery has completed, confirm the discovery results in the Azure Portal by expanding `Explore Inventory`, `All Inventory`, you should see your new VM listed.
+10. [ ] When discovery finishes, return to the Azure portal.  
+    Expand **Explore Inventory** → **All Inventory** and confirm that your VM appears in the list.
 
-    ![validation](./media/38-validation.png)
+    ![The discovered VMs are highlighted on the All inventory blade in the Azure portal.](./media/38-validation.png)
 
-# Task 5: Assess, replicate and migrate Linux Ubuntu VM
+===
+
+# Task 6: Assess, replicate and migrate Linux Ubuntu VM
 
 ## Introduction
 
@@ -497,19 +502,19 @@ In this task, you will create the assessment of the Linux VM server in the Azure
 
 ## Key tasks
 
-1. [ ] From the Azure portal, on the Azure Migrate Project blade, open the `Decide and Plan` section and click on `Assessments` and create a new assessment by clicking on `Create assessment`
+1. [ ] From the Azure portal, on the Azure Migrate Project blade, open the `Decide and Plan` section and select `Assessments` and create a new assessment by clicking on `Create assessment`
 
-![Assessment](./media/39-Assessments.png)
+    ![Assessment](./media/39-Assessments.png)
 
 2. [ ] Give the assessment a name and create a `Workload`
 
-3. [ ] Choose the `LinuxLabVM-Ubuntu` and click `Add`
+3. [ ] Choose the `LinuxLabVM-Ubuntu` and select **Add**.
 
-![Workload](./media/40-Workload.png)
+    ![Workload](./media/40-Workload.png)
 
-4. [ ] Click on Next and ensure the Default target location is `Central US` and that the Sizing criteria is `Performance-based`
+4. [ ] Select Next and ensure the Default target location is `Central US` and that the Sizing criteria is `Performance-based`
 
-5. [ ] Click on `Review + Create assessment` then `Create`
+5. [ ] Select **Review + Create assessment**, then select **Create**.
 
 ![Assessment Ready](./media/41-AssessmentReady.png)
 
