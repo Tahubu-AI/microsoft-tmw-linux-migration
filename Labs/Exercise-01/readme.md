@@ -322,89 +322,86 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
 
 ===
 
-# Task 4: Register an Azure Migrate Applicance
+# Task 4: Register an Azure Migrate appliance
 
 ## Introduction
 
-TODO: Create intro about registering an Azure Migrate appliance that will be used to discover and assess virtual machines on a Hyper-V host.
+To begin discovery and assessment of on-premises virtual machines, Azure Migrate requires an appliance to be registered and connected to your Azure Migrate project. The appliance collects metadata about your Hyper-V environment and securely transmits it to Azure for analysis. You will use the Azure Migrate Appliance Configuration Manager to register your appliance with the Azure Migrate project created earlier. This step enables discovery of virtual machines hosted on your Hyper-V environment.
 
 ## Description
 
-In this task, you will register your Azure Migrate appliance using the Azure Migrate Appliance Configuration Manager.
+In this task, you will register the pre-provisioned Azure Migrate appliance using the Appliance Configuration Manager.
 
 ## Success criteria
 
-- Your Azure Migrate project key has been verified.
-- You have successfully logged with your lab user credentials.
-- Your appliance has be successful registered.
+- Your Azure Migrate project key has been verified  
+- You have successfully logged in with your lab user credentials  
+- Your appliance has been successfully registered  
 
 ## Learning resources
 
-- [Azure Migrate appliance](https://learn.microsoft.com/azure/migrate/migrate-appliance?view=migrate-classic)
-- [Appliance requirements](https://learn.microsoft.com/azure/migrate/migrate-appliance?view=migrate-classic)
+- [Azure Migrate appliance](https://learn.microsoft.com/azure/migrate/migrate-appliance?view=migrate-classic)  
+- [Appliance requirements](https://learn.microsoft.com/azure/migrate/migrate-appliance?view=migrate-classic)  
 - [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic)
 
 ## Key tasks
 
-1. [ ] Return to the the Azure Migrate **All project** blade in the Azure portal and select the **Linux-VM-Migration** project.
+1. [ ] Return to the Azure Migrate **All projects** blade in the Azure portal and select the **Linux-VM-Migration** project.
 
     ![The Azure Migration All project blade is displayed with the newly created project highlighted.](./media/20-labazmigrate.png)
 
-2. [ ] Select the `Start Discovery` button at the bottom of the **Overview** page, then select `Using Appliance` --> `For Azure` in the context menu.
+2. [ ] On the **Overview** page, select **Start Discovery**, then choose `Using Appliance` → `For Azure`.
 
-    ![Start Discovery](./media/21-StartDiscovery.png)
+    ![On the Project blade, Start Discovery--> Using Appliance--> For Azure is highlighted.](./media/21-StartDiscovery.png)
 
 3. [ ] On the **Discovery** blade:
+    - **Are your servers virtualized?** → `Yes, with Hyper-V`  
+    - **Name your appliance** → `LabAppliance`  
+    - Select **Generate Key**
 
-   - **Are your servers virutalized?**: Choose `Yes, with Hyper-V`.
-   - **Name your appliance**: Enter `LabAppliance` and select `Generate Key`.
+    ![The Discover blade in the Azure portal is displayed, with the settings above highlighted.](./media/22-Discover-steps.png)
 
-    ![Discovery blade](./media/22-Discover-steps.png)
+    > **IMPORTANT**: Do not download the Azure Migrate appliance VHD or ZIP file.
 
-    > [!IMPORTANT]
-    > DO NOT download the Azure Migrate appliance VHD or ZIP file.
+4. [ ] After a minute or two, a **Project key** field will appear on the Discover screen.
 
-4. [ ] After a minute or two, a Project key field will appear on the **Discover** screen.
+    ![The Project Key section of the Discover screen is highlighted.](./media/23-ProjectKey.png)
 
-    ![Project Key](./media/23-ProjectKey.png)
-
-5. [ ] Copy the project key, then open the file named `project_key.txt` on the desktop of the Lab VM and paste the key value into that file.
+5. [ ] Copy the project key, then open the `project_key.txt` file on the desktop of the Lab VM and paste the key into the file.
 
 6. [ ] Save the updated `project_key.txt` file.
 
 7. [ ] On the Lab VM, open **Hyper-V Manager** and connect to the `AzMigrateAppliance-Test` VM.
 
-    ![Migrate VM](./media/24-MigrateVM-Connect.png)
+    ![In Hyper-V Manager, the AzMigrateAppliance-Test VM is highlighted in the Virtual Machines list and the Connect action is highlighted in the Actions panel.](./media/24-MigrateVM-Connect.png)
 
-8. [ ] Log in to the VM using the credentials in the lab instructions.
+8. [ ] Log in to the VM using the credentials provided in the lab instructions.
 
 9. [ ] On the `AzMigrateAppliance-Test` VM desktop, open the **Azure Migrate Appliance Configuration Manager**.
 
-    ![Appliance Config](./media/25-ApplianceConfigManager.png)
+    ![Screenshot of the Azure Migrate Appliance Configuration Manager, with the desktop shortcut highlighted.](./media/25-ApplianceConfigManager.png)
 
-10. [ ] Under **Verification of Azure Migrate project key**, paste the project key you saved to the `project_key.txt` file on the desktop of the Lab VM, select **Verify**, and ensure you receive the **Azure Migrate project key has been verified** message.
+10. [ ] Under **Verification of Azure Migrate project key**, paste the key from `project_key.txt`, select **Verify**, and confirm the message:  
+    > **Azure Migrate project key has been verified**
 
-    ![Key Verify](./media/26-KeyVerify.png)
+    ![The Verify button for the Azure Migrate project key is highlighted.](./media/26-KeyVerify.png)
 
-11. [ ] After project key verification, scroll to the **Azure user login and appliance registration status** section and select **Login**.
+11. [ ] Scroll to the **Azure user login and appliance registration status** section and select **Login**.
 
-    ![Login](./media/27-Login.png)
+    ![In the Azure user login and appliance registration status section, the Login button is highlighted.](./media/27-Login.png)
 
-12. [ ] Select **Copy code & Login** in the pop-up window.
+12. [ ] In the pop-up window, select **Copy code & Login**.
 
-    ![Device-Code](./media/28-DeviceCode.png)
+    ![The Continue with Azure login dialog is displayed with the Device Code.](./media/28-DeviceCode.png)
 
-13. [ ] Enter the code in the next window and then sign in with the Azure credentials from the `Resources` tab in the lab instructions.
+13. [ ] Enter the code in the next window and sign in using the Azure credentials from the **Resources** tab in the lab instructions.
 
-14. [ ] Close the sign in window and return to the **ApplianceConfigurationManager** browser tab.
+14. [ ] Close the sign-in window and return to the **Appliance Configuration Manager** browser tab.
 
-    > **NOTE**: It can take up to 10 minutes for the application registration process to complete.
+    > **Note**: It may take up to 10 minutes for the appliance registration to complete.  
+    > You may see an error about Azure artifacts for MySQL discovery not being deployed. This can be safely ignored.
     >
-    > Once logged in, you may see an error that required Azure artifacts for discovery of MySQL Server instances and databases could not be deployed. You can safely ignore this error.
-    >
-    > ![MySQL error](./media/29-ErrorMySQL.png)
-
-TODO: Adding break here, so users can go on to a different task, if need be, while waiting for the appliance to be registered completely.
+    > ![The MySQL error mentioned above is highlighted.](./media/29-ErrorMySQL.png)
 
 ===
 
@@ -416,17 +413,12 @@ TODO: Create intro about registering an Azure Migrate appliance that will be use
 
 ## Description
 
-In this task, you will register your Azure Migrate appliance using the Azure Migrate Appliance Configuration Manager. start a Discover process and register your Azure Migrate Appliance VM, hosted in Hyper-V, with the Appliance Configuration Manager.
-
 In this task, you will use the Azure Migrate Project you created and generate a project key to allow you to set up an Appliance to get ready for replication and migration of your Linux VM.
 
 ## Success criteria
 
-- You can start the discovery in the Azure Migrate Project and generate a project Key.
-- You can connect to the Azure Migrate VM already running in the Hyper-V Manager for the lab
-- Verify the Azure Migrate Project Key Successfully
-- Verify the authentication against the Appliance and confirm successful registration
-- Verify successful management of credentials and discovery sources
+- You have started a discovery in the Azure Migrate Project.
+- You have reviewed the discovery results in the Azure portal.
 
 ## Learning resources
 
