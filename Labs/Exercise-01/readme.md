@@ -197,20 +197,20 @@ In this task, you will run the Azure Migrate preparation script using PowerShell
 
 ===
 
-# Task 3: Azure Migrate Project creation
+# Task 3: Provision Azure Migrate and create a new project
 
 ## Introduction
 
-In this task, you will start the Azure Migration Project in the Azure Portal and run the script necessary to create all the needed resource in Azure for the migration.
+In this task, you will run a PowerShell script in the Azure Cloud Shell to provision a new instance of Azure Migration and create a new Azure Migrate Project in the Azure Portal.
 
 ## Description
 
-In this task, you will execute a script a Cloud Shell session in the Azure Portal to generate all the needed resources, then create the Azure Migrate Project
+In this task, you will execute a script a Cloud Shell session in the Azure Portal to generate all the needed resources, then create a new Azure Migrate Project.
 
 ## Success criteria
 
-- You can execute the script successfully in the Cloud shell of the Azure Portal.
-- You can create a new Azure Migrate Project in the Azure Portal.
+- You have executed the script in Azure Cloud shell and provisioned an Azure Migrate service.
+- You have created a new Azure Migrate Project in the Azure Portal.
 
 ## Learning resources
 
@@ -218,83 +218,104 @@ In this task, you will execute a script a Cloud Shell session in the Azure Porta
 
 ## Key tasks
 
-1. [ ] On the Hyper V Host Machine, open a browser window and navigate to `https://portal.azure.com`
- 
-2. [ ] Login using the credentials in the lab available on the `Resources` tab on the right of the lab screen. There you will find the username and password you should use and also a TAP (Temporary Access Password) that we will use later.
+1. [ ] Open a web browser on the Lab VM and navigate to the [Azure portal](https://portal.azure.com/).
 
-> [!IMPORTANT]
-> If prompted for Temporary Access Pass, Select use your password instead.
+2. [ ] Sign in using your lab credentials from the **Resources** tab in the instructions panel.
 
-![Use Password Instead](./media/14-UsePasswordInstead.png)
+    ![Screenshot of the resources tab in the instructions panel, with the username and TAP highlighted.](media/lab-resources-credentials.png)
 
-3. [ ] Another Credential screen will show up, this time enter the TAP password you see in the `Resources` Tab
+    > **IMPORTANT**: You may be prompted to use a Temporary Access Pass (TAP) for login. This value is listed on the **Resources** tab.
+    >
+    > ![Screenshot of the login dialog for entering the Temporary Access Pass.](media/azure-portal-login-tap.png)
+    >
+    > If using the Temporary Access Pass does not work, choose the option to **Use your password instead** and login using the password provided.
+    >
+    > ![Use Password Instead](./media/14-UsePasswordInstead.png)
 
-4. [ ] The Azure portal will load, start a cloud shell by click on the cloudshell icon in the top bar like in the screenshot below
+3. [ ] Click **Yes** if prompted to stay signed in.
 
-![CloudShell](./media/15-CloudShell.png)
+4. [ ] In the Azure portal, start a Cloud Shell by selecting the Cloud Shell icon in the top bar.
+
+    ![The Azure Cloud Shell icon is highlighted on the top bar in the Azure portal](./media/15-CloudShell.png)
 
 5. [ ] The Azure Cloud shell will ask whether you want to start a `Bash` or `Powershell` session, choose `Powershell`
 
-6. [ ] The next screen will ask about storage, choose `No storage account required`
+6. [ ] In the Cloud Shell getting started dialog, select `No storage account required` and choose the only subscription available in the Subscription dropdown, then select `Apply`.
 
-7. [ ] Select the only subscription you see in the dropdown and click `Apply`
+    ![The Getting started dialog in the Cloud Shell is displayed, with no storage account required, the subscription, and the Apply button all highlighted.](media/azure-cloud-shell-getting-started.png)
 
-8. [ ] You should see a cloudshell similar to the one in the screenshot below
+7. [ ] At the Cloud Shell prompt, run the following create the resources needed in Azure.
 
-![CloudShell-Apply](./media/16-CloudShell-Apply.png)
+    > [!TIP]
+    > You may need to press the `ENTER` key during the `New-AzVirtualNetwork` command to complete running the script.
 
-9. [ ] Run the following in the CloudShell to create the resources needed in Azure.
+    ```powershell
+    # Login to Azure
+    # Write-Host "Logging in to Azure..."
+    # Connect-AzAccount
+    
+    $location = "centralus"
+    $resourceGroupName = "rg-AzMigrateLab"
+    $storagePrefix = "storazmig"
+    $vnetName = "vnet-AzMigrateLab"
+    
+    # Create Resource Group
+    Write-Host "Creating resource group '$resourceGroupName' in location '$location'..."
+    New-AzResourceGroup -Name $resourceGroupName -Location $location
+    
+    # Generate unique storage account name
+    $randomSuffix = -join ((48..57) + (97..122) | Get-Random -Count 8 | % {[char]$_})
+    $storageAccountName = "$storagePrefix$randomSuffix"
+    
+    Write-Host "Creating storage account '$storageAccountName'..."
+    New-AzStorageAccount -ResourceGroupName $resourceGroupName `
+       -Name $storageAccountName `
+       -Location $location `
+       -SkuName Standard_GRS `
+       -Kind StorageV2
+    
+    # Create Virtual Network and Subnet
+    Write-Host "Creating virtual network '$vnetName' with subnet 'default'..."
+    $subnetConfig = New-AzVirtualNetworkSubnetConfig -Name "default" -AddressPrefix "198.168.4.0/26"
+    New-AzVirtualNetwork -Name $vnetName `
+        -ResourceGroupName $resourceGroupName `
+        -Location $location `
+        -AddressPrefix "198.168.4.0/24" `
+        -Subnet $subnetConfig
+    ```
 
-```powershell
-# Login to Azure
-# Write-Host "Logging in to Azure..."
-# Connect-AzAccount
+8. [ ] When the script finishes running, you should see output like the following:
 
-$location = "centralus"
-$resourceGroupName = "rg-AzMigrateLab"
-$storagePrefix = "storazmig"
-$vnetName = "vnet-AzMigrateLab"
+    ```powershell
+    ResourceGroupName Name              Location  ProvisioningState EnableDdosProtection DefaultPublicNatGateway
+    ----------------- ----              --------  ----------------- -------------------- -----------------------
+    rg-AzMigrateLab   vnet-AzMigrateLab centralus Succeeded         False
+    ```
 
-# Create Resource Group
-Write-Host "Creating resource group '$resourceGroupName' in location '$location'..."
-New-AzResourceGroup -Name $resourceGroupName -Location $location
+9. [ ] Close the Cloud Shell pane in the Azure portal.
 
-# Generate unique storage account name
-$randomSuffix = -join ((48..57) + (97..122) | Get-Random -Count 8 | % {[char]$_})
-$storageAccountName = "$storagePrefix$randomSuffix"
+10. [ ] In the Azure portal, search for "Azure Migrate" in the search bar and select **Azure Migrate** under **Services** in the search results.
 
-Write-Host "Creating storage account '$storageAccountName'..."
-New-AzStorageAccount -ResourceGroupName $resourceGroupName `
-   -Name $storageAccountName `
-   -Location $location `
-   -SkuName Standard_GRS `
-   -Kind StorageV2
+    ![Azure Migrate is entered into the Azure search bar and highlighted under Services in the search results.](./media/17-AzureMigrate.png)
 
-# Create Virtual Network and Subnet
-Write-Host "Creating virtual network '$vnetName' with subnet 'default'..."
-$subnetConfig = New-AzVirtualNetworkSubnetConfig -Name "default" -AddressPrefix "198.168.4.0/26"
-New-AzVirtualNetwork -Name $vnetName `
-    -ResourceGroupName $resourceGroupName `
-    -Location $location `
-    -AddressPrefix "198.168.4.0/24" `
-    -Subnet $subnetConfig
-```
+11. [ ] On the **Azure Migrate** blade, select **All projects** in the left menu and then select **Create Project** in the toolbar.
 
-> [!TIP]
-> You might need to press the ENTER key once during the `New-AzVirtualNetwork` command while running the script.
+    ![On the Azure Migrate blade, All projects is selected and highlighted in the left menu and the Create project button is highlighted on the toolbar.](./media/18-AzMigrate_Project.png)
 
-10. [ ] Back in your Azure Portal, search for `Azure Migrate` in the upper search bar and start `Azure Migrate`
+12. [ ] On the Azure Migrate **Create Project** blade, enter the following:
 
-![Azure Migrate](./media/17-AzureMigrate.png)
+    - **Subscription**: Accept the default value.
+    - **Resource group**: Choose `rg-AzMigrateLab`
+    - **Project**: Enter `Linux-VM-Migration`
+    - **Geograpgy**: Choose `United states`.
+    - Expand **Advanced** and verify the Connectivity method is set to `Public Endpoint`.
+    - Select **Create**.
 
-11. [ ] In the `Azure Migrate` blade, click on `All projects` and `Create Project`
+    ![The settings specified above are entered into the Create project form and the steps are numbered 1-6.](media/azure-migrate-create-project.png)
 
-![AZ Migrate Project](./media/18-AzMigrate_Project.png)
+13. [ ] When project creation has finished, select **Refresh** on the **All project** blade to see your new project in the list. Keep this blade open for the next task.
 
-12. [ ] In the `Create Project` blade, fill in the resource group, it should be `rg-AzMigrateLab`, Give it a name for the project, make sure the Geograpgy is `United states` and finally in the Advanced section maker sure the connectivity method is `Public Endpoint`
-
-13. [ ] Click on `Create` to start the create of the Azure Migrate Project.
-
+===
 
 # Task 4: Configuring the Appliance and discover the Virtual Machine
 
