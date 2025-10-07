@@ -104,43 +104,45 @@ In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and tes
 
 ===
 
-# Task 2: Preparing the Hyper-V Host
+# Task 2: Prepare the Hyper-V Host
 
 ## Introduction
 
-Before initiating a migration, it is critical to download the script needed for the Hyper-V Host machine to execute accepting all prompts and set the Network connectivity category profile.
+Azure Migrate requires some preparation of the Hyper-V host before beginning a migration. For this lab, those preparation steps have been consolidated into a PowerShell script that enables required services and sets permissions. Running this script ensures the host is ready to support VM replication and migration.
 
 ## Description
 
-In this task, you will download a script on the Hyper-V Host machine and run it from Powershell to set up the profile for the Network Connectivity Category.
+In this task, you will run the Azure Migrate preparation script using PowerShell on the Hyper-V host (your Lab VM).
 
-## Success criteria
+## Success Criteria
 
-- You can download the Hyper-V migrate script.
-- You can set the Network Connectivity Category successfully.
-- You can Execute the script on the Hyper-V Host machine successfully in Powershell.
+- You have downloaded the Azure Migrate Hyper-V preparation script  
+- You have executed the `MicrosoftAzureMigrate-Hyper-V.ps1` script on the Hyper-V host without errors  
+- You have reset the network connectivity category to **Public**
 
-## Learning resources
+## Learning Resources
 
 - [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/en-us/azure/migrate/prepare-for-migration?view=migrate-classic)
 
-## Key tasks
+## Key Tasks
 
-1. [ ] In the Search Bar on the Lab VM, search for "powershell".
+1. [ ] On the Lab VM, open the **Search Bar** and enter `"powershell"`.
 
     ![The Windows Search Bar is highlighted on the Task Bar with powershell entered into the search box.](media/lab-vm-search-bar-powershell.png)
 
-2. [ ] In the search results window, select **Windows PowerShell** under **Apps** and select **Run as administrator**. **CRITICAL**: DO NOT select Windows PowerShell ISE.
+2. [ ] In the search results, select **Windows PowerShell** under **Apps** and select **Run as administrator**.
+
+    > **Important**: Do not select **Windows PowerShell ISE**.
 
     ![In the Windows Search window, PowerShell is highlighted and selected under Apps and Run as administrator is highlighted.](./media/10-ps-admin.png)
 
-3. [ ] In the Windows PowerShell terminal, run the following command to set the `NetworkCategory` of the `NetConnectionProfile` to `Private`:
+3. [ ] In the PowerShell terminal, set the network category to **Private** by running:
 
     ```powershell
     Set-NetConnectionProfile -NetworkCategory Private
     ```
 
-4. You can verify the `NetworkCategory` was set to `Private` by executing the following command:
+4. [ ] Verify the change by running:
 
     ```powershell
     Get-NetConnectionProfile
@@ -148,45 +150,44 @@ In this task, you will download a script on the Hyper-V Host machine and run it 
 
     ![In the PowerShell terminal, the NetworkCategory setting of Private is highlighted.](./media/11-Network-Private.png)
 
-5. On your Lab VM, open a browser window and navigate to `https://aka.ms/migrate/hyperv/script` to download the `MicrosoftAzureMigrate-Hyper-V.ps1` script needed to prepare the Hyper-V host.
+5. [ ] Open a browser on the Lab VM and navigate to `https://aka.ms/migrate/hyperv/script` to download the `MicrosoftAzureMigrate-Hyper-V.ps1` script.
 
     ![Screenshot of the script download URL entered into the address bar in Microsoft Edge.](./media/09-download.png)
 
-    > **NOTE**
-    > Your Lab VM also serves as the Hyper-V host for this workshop.
+    > **Note**: Your Lab VM also serves as the Hyper-V host for this workshop.
 
-6. [ ] Return to the PowerShell terminal and change directories to the **Downloads** folder by entering the following command:
+6. [ ] Return to PowerShell and change to the **Downloads** directory:
 
-    ```bash
+    ```powershell
     cd Downloads
     ```
 
-7. [ ] Execute the script you downloaded in the PowerShell terminal by entering `.\` followed by the name of the file at the prompt:
+7. [ ] Execute the downloaded script:
 
-    ```bash
+    ```powershell
     .\MicrosoftAzureMigrate-Hyper-V.ps1
     ```
 
-8. [ ] Respond to the seven prompts from the script as follows:
+8. [ ] Respond to the script prompts as follows:
 
-    - **Do you want to run software from this untrusted publisher?**: `[A] Always run`
-    - **WinRM is a mandatory requirement for Azure Migrate. Proceed with enabling Remote Management? [Y/N(Exit)]**: `Y`
-    - **Make these changes [y/n]?**: `y`
-    - **PowerShell Remoting is a mandatory requirement for Azure Migrate. Proceed with enabling PowerShell Remoting? [Y/N (Exit)]**: `Y`
-    - **Configure firewall to open these ports? [Y/N(Exit)]**: `Y`
-    - **Do you use SMB share(s) to store the VHDs? [Y/N]**: `Y`
-    - **Do you want to create non-administrator local user for Azure Migrate and Hyper-V Host communication? [Y/N]**: `Y`
-    - At the Windows PowerShell credential request, provide the following credentials:
-      - **User name**: `MigrateLocal`
+    - **Do you want to run software from this untrusted publisher?** → `[A] Always run`  
+    - **Enable Remote Management (WinRM)?** → `Y`  
+    - **Make these changes?** → `y`  
+    - **Enable PowerShell Remoting?** → `Y`  
+    - **Configure firewall to open required ports?** → `Y`  
+    - **Use SMB share(s) to store VHDs?** → `Y`  
+    - **Create non-administrator local user for Azure Migrate?** → `Y`  
+    - When prompted for credentials:
+      - **Username**: `MigrateLocal`  
       - **Password**: `Pa$$w0rd`
 
-9. [ ] Reset the NetworkCategory to Public by running the following command:
+9. [ ] After the script completes, reset the network category to **Public**:
 
     ```powershell
     Set-NetConnectionProfile -NetworkCategory Public
     ```
 
-10. Confirm that the NetworkCategory was reset to `Public` by running the following:
+10. [ ] Confirm the reset by running:
 
     ```powershell
     Get-NetConnectionProfile
