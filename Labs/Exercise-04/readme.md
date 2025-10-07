@@ -126,6 +126,7 @@ In this task, you will download and configure the self-hosted integration runtim
 ## Learning resources
 
 - [Recommendations for using a self-hosted integration runtime for database migrations](https://learn.microsoft.com/azure/dms/migration-using-azure-data-studio?tabs=azure-sql-mi#recommendations-for-using-a-self-hosted-integration-runtime-for-database-migrations)
+- [Create a new instance of Database Migration Service](https://learn.microsoft.com/data-migration/sql-server/database/database-migration-service?toc=%2Fazure%2Fdms%2Ftoc.json&tabs=portal#create-a-new-instance-of-database-migration-service)
 
 ## Key tasks
 
@@ -173,13 +174,14 @@ In this task, you will download and configure the self-hosted integration runtim
 
     ![The refresh button and integration runtime with a status of online are highlighted on the Integration Runtime blade of the Azure Database Migration Service.](media/azure-dms-integration-runtime-online.png)
 
+13. TODO: Include steps here to get IP address of SHIR (running on Lab VM) and add that to the SQL Server firewall, since it doesn't allow Azure services as configured in the environment.
 ===
 
-# Task 1: Verify migration readiness
+# Task 3: Verify migration readiness
 
 ## Introduction
 
-TODO: Determine if there are any actual steps that must be completed before migration. 
+TODO: Determine if there are any actual steps that must be completed before migration.
 
 ## Description
 
@@ -194,7 +196,6 @@ In this task, you will confirm the version of the source SQL Server to ensure it
 
 ## Key tasks
 
-
 Using SQL Query
 •	Login to SQL Server and run the query
 SELECT @@version
@@ -204,24 +205,63 @@ Proper networking setup is essential to ensure successful connectivity between t
 Check for SQL specific information
 Check and export any SQL specific information like (Db Counts, Table Counts, SQL Logins..etc..)
 
-## Additional context: Online migration and real-world networking
-
-While this lab demonstrates an offline migration of SQL Server to Azure SQL Database, the Azure Database Migration Service also supports online migrations for SQL Server workloads. Online migration enables continuous replication from the source SQL Server to Azure, allowing for minimal downtime during cutover. This is particularly valuable for production systems that require high availability or operate under strict service-level agreements. Online migrations offer greater flexibility for enterprise scenarios. For more details, see Online migration for SQL Server.
-
-In real-world environments, networking is often more complex than the lab setup. On-premises SQL Server instances typically connect to Azure through VPN gateways, ExpressRoute circuits, or private endpoints within Azure Virtual Networks (VNets). These configurations ensure secure, high-throughput connectivity between source and target environments. You may also need to configure VNet peering, NSG rules, and firewall exceptions to allow migration traffic. For guidance on networking best practices, refer to Azure SQL Database connectivity architecture.
-
 ===
 
+# Task 4: Prepare the source server for migration
+
+## Add db_owner role to source user
+
+Because we want to migrate both the database schema and the data it contains, we need to ensure the user account being used for the migration has the `db_owner` role. If only data is being copied, this account needs only `db_datareader`.
+
+TODO: Add steps for logging into the SQLPTO2022 VM, opening SSMS, and running the below query to create a migration user. Log into SSMS with Windows Auth for the SQLPTO\Administrator account.
+
+TODO: Explain that a SQL Auth user is being created to use because it is simpler than trying to use Windows auth? Mabye out of scope for this lab.
+
+```sql
+USE master;
+CREATE LOGIN migrationuser WITH PASSWORD = 'P@$$w0rd1';
+
+USE AdventureWorksPTO;
+CREATE USER migrationuser FOR LOGIN migrationuser;
+ALTER ROLE db_owner ADD MEMBER migrationuser;
+```
+
+Verify with
+
+```sql
+SELECT name, type_desc
+FROM sys.database_principals
+WHERE name = 'migrationuser';
+```
+
+You should see `migrationuser` listed as a `SQL_USER`.
+
+===
 
 # Task 4: Create a migration project
 
 ## Introduction
 
+
+
+### Additional context: Online migration and real-world networking
+
+While this lab demonstrates an offline migration of SQL Server to Azure SQL Database, it's important to note that online migrations are not currently supported for this specific target platform. Offline migration involves a one-time data and schema transfer, followed by a cutover that typically incurs downtime. This approach is suitable for development, testing, and smaller production workloads where brief downtime is acceptable.
+
+For enterprise scenarios requiring minimal downtime, online migration is supported when targeting Azure SQL Managed Instance or SQL Server on Azure VMs, but not Azure SQL Database. Organizations with high availability requirements should plan for coordinated cutover windows, pre-migration validation, and post-migration testing to minimize disruption.
+
+In real-world environments, networking is often more complex than the lab setup. On-premises SQL Server instances typically connect to Azure through VPN gateways, ExpressRoute circuits, or private endpoints within Azure Virtual Networks (VNets). These configurations ensure secure, high-throughput connectivity between source and target environments. You may also need to configure VNet peering, NSG rules, and firewall exceptions to allow migration traffic. For guidance on networking best practices, refer to [Azure SQL Database connectivity architecture](https://learn.microsoft.com/azure/azure-sql/database/connectivity-architecture?view=azuresql).
+
 ## Description
+
+In this task, you will create a new migration project in the Azure Database Migration Service
 
 ## Success criteria
 
 ## Learning resources
+
+- [Migrate SQL Server to Azure SQL Database (offline)](https://learn.microsoft.com/data-migration/sql-server/database/database-migration-service?toc=%2Fazure%2Fdms%2Ftoc.json&tabs=portal)
+- [Azure Database Migration Service supported scenarios](https://learn.microsoft.com/azure/dms/resource-scenario-status)
 
 ## Key tasks
 
@@ -229,17 +269,51 @@ In real-world environments, networking is often more complex than the lab setup.
 
     ![](media/azure-dms-new-migration.png)
 
+
+**Connect to source SQL Server**
+
+SQL Credentials:
+Use private IP of SQL VM (can use private because the connection happens from the SHIR.)
+SQL Auth
+Use private IP address of SQLPTO2022 VM
+Username: migrationuser XXX SQLPTO\Administrator
+Password: P@$$w0rd1
+Encrypt connection & Trust server certificate -- Uncheck both of these!
+
+**Select databases for migration**
+
+Select AdventureWorksPTO
+
+**Connect to target Azure SQL Database**
+
+Subscription and resource group: Keep defaults
+Target Azure SQL Database Server: Keey default of the existing Azure SQL Server in the target Azure subscription.
+Target server name: Keep default
+Authentication type: SQL Authentication
+User name: sqladminuser
+Password: !7*sdlkqafh&%$
+
+**Map source and target databases**
+
+Select `mySampleDB` as the Target database.
+
+On the **Select database tables to migrate** tab of the Azure SQL Database Offline Migration Wizard, expand the list of AdventureWorksPTO tables adn review the tables selected for migration.
+
 ===
 
-# Task 5: Run the migration
+# Task 5: Monitor the migration
 
 ## Introduction
 
 ## Description
 
+In this task, you monitor the migration from the Azure portal.
+
 ## Success criteria
 
 ## Learning resources
+
+- [Monitor database migration progress in the Azure portal](https://learn.microsoft.com/azure/dms/migration-using-azure-data-studio?tabs=azure-sql-mi#monitor-database-migration-progress-in-the-azure-portal)
 
 ## Key tasks
 
@@ -247,11 +321,23 @@ In real-world environments, networking is often more complex than the lab setup.
 
 TODO: Determine timing to see if a "Monitor the migration" task makes sense, or if it should just be part of the "Run the migration task." If it does make sense, rename "Run the migration" to "Start the migration."
 
+TODO: Point out possible schema migration errors: 
+
+    - Deployed failure: Cannot use a CONTAINS or FREETEXT predicate on table or indexed view 'HumanResources.JobCandidate' because it is not full-text indexed. Object element: [dbo].[uspSearchCandidateResumes].
+    - Note this is ok and we will move on. 
+    - TODO: This might be something that would be pointed out by doing an Assessment in Azure Migrate first? So, we could correct it before starting the migration?
+
 ===
 
-# Task 6: Validate the migration
+# Task 6: Post-migration (TODO: Rename to Post-migration and combine with the next task?)
 
 ## Introduction
+
+TODO: Rewrite this intro to focus only on verifying completeness and data accuracy. The lab doesn't provide enough time to go through all recommended post-migration
+
+After you have successfully completed the migration stage, go through the following post-migration tasks to ensure that everything is functioning smoothly and efficiently.
+
+The post-migration phase is crucial for reconciling any data accuracy issues and verifying completeness, as well as addressing performance issues with the workload.
 
 ## Description
 
@@ -259,8 +345,17 @@ TODO: Determine timing to see if a "Monitor the migration" task makes sense, or 
 
 ## Learning resources
 
+- [SQL server post-migration steps](https://learn.microsoft.com/data-migration/sql-server/database/guide?toc=%2Fazure%2Fazure-sql%2Ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json&view=azuresql#post-migration)
+
 ## Key tasks
 
+1. [] Update statistics? - Run a full scan after the migration is complete.
+
+2. [] TODO: Preform tests: Add steps to use the Query Editor in the Azure portal to log in as `sqladminuser` and look at tables and run a few queries.
+
+3. Enable advanced features
+   1. Defender (already enabled?)
+   2. Enable threat detection in Defender.
 ===
 
 # Task 7: Enable Defender for Cloud for Databases
@@ -289,3 +384,5 @@ In this task, you will enable Defender for Cloud for Databases on your newly mig
 
 1. Enable Defender
 2. Run a vulnerability assessment?
+
+
