@@ -47,33 +47,33 @@ In this task, you will provision a new Azure Database Migration Service using th
 
 2. [] Sign in using your lab credentials from the **Resources** tab in the instructions panel.
 
-    ![Screenshot of the resources tab in the instructions panel, with the username and TAP highlighted.](media/lab-resources-credentials.png)
+    ![Screenshot of the resources tab in the instructions panel, with the username and TAP highlighted.](./media/lab-resources-credentials.png)
 
     > **IMPORTANT**: You will be prompted to use a Temporary Access Pass (TAP) for login. This value is also listed on the **Resources** tab.
     >
-    > ![Screenshot of the login dialog for entering the Temporary Access Pass.](media/azure-portal-login-tap.png)
+    > ![Screenshot of the login dialog for entering the Temporary Access Pass.](./media/azure-portal-login-tap.png)
 
 3. [] Click **Yes** if prompted to stay signed in.
 
 4. [] On the Azure portal home page, select **Resource groups** under **Azure services**.
 
-    ![Screenshot of the Azure home page with Resource groups highlighted under Azure services.](media/azure-services-resource-groups.png)
+    ![Screenshot of the Azure home page with Resource groups highlighted under Azure services.](./media/azure-services-resource-groups.png)
 
 5. [] Select the **RG-Techsummit** resource group.
 
-    ![Screenshot of the Resource groups page in Azure, with the RG-Techsummit resource group highlighted in the list of resource groups.](media/azure-resource-groups-tech-summit.png)
+    ![Screenshot of the Resource groups page in Azure, with the RG-Techsummit resource group highlighted in the list of resource groups.](./media/azure-resource-groups-tech-summit.png)
 
 6. [] On the **RG-Techsummit** blade, note the **Location** of the resource group and its resources, then select **Create** in the toolbar.
 
-    ![The Create button is highlighted on the toolbar of the RG-Techsummit resource group blade.](media/azure-rg-techsummit-create.png)
+    ![The Create button is highlighted on the toolbar of the RG-Techsummit resource group blade.](./media/azure-rg-techsummit-create.png)
 
 7. [] On the **Marketplace** blade, search for "database migration," and select the **Azure Database Migration Service** from the search results.
 
-    ![Screenshot of the Azure marketplace, with database migration highlighted in the search bar and the Azure Database Migration Service tile highlighted in the search results.](media/azure-marketplace-database-migration-service.png)
+    ![Screenshot of the Azure marketplace, with database migration highlighted in the search bar and the Azure Database Migration Service tile highlighted in the search results.](./media/azure-marketplace-database-migration-service.png)
 
 8. [] On the **Azure Database Migration Service** blade, select **Create**.
 
-    ![The Create button is highlighted on the Azure Database Migration Service page.](media/azure-database-migration-service-create.png)
+    ![The Create button is highlighted on the Azure Database Migration Service page.](./media/azure-database-migration-service-create.png)
 
 9. [] On the **Select migration scenario and Database Migration Service** page, use the following settings:
 
@@ -82,7 +82,7 @@ In this task, you will provision a new Azure Database Migration Service using th
     3. [] **Database Migration Service**: `Database Migration Service`
     4. [] Choose **Select**
 
-    ![The steps above are numbers 1-4 on the Select migration scenario and Database Migration Service page.](media/azure-dms-select-migration-scenario.png)
+    ![The steps above are numbers 1-4 on the Select migration scenario and Database Migration Service page.](./media/azure-dms-select-migration-scenario.png)
 
 10. [] On the **Basics** tab of the **Create Data Migration Service** blade, enter the following:
 
@@ -92,15 +92,15 @@ In this task, you will provision a new Azure Database Migration Service using th
     4. [] **Migration service name**: `dms-sql-migration-lab`
     5. [] Select **Review + create**
 
-    ![The steps above are numbers 1-5 on the Create Data Migration Service's Basics tab.](media/create-data-migration-service-basics.png)
+    ![The steps above are numbers 1-5 on the Create Data Migration Service's Basics tab.](./media/create-data-migration-service-basics.png)
 
 11. [] On the **Review + create** tab, select **Create** to provision the Database Migration Service.
 
-    ![The Create button is highlighted on the Create Data Migration Service's Review + create tab.](media/create-data-migration-service-review.png)
+    ![The Create button is highlighted on the Create Data Migration Service's Review + create tab.](./media/create-data-migration-service-review.png)
 
 12. [] Monitor the deployment progress and select **Go to resource** when the deployment is complete.
 
-    ![Screenshot of the DMS deployment page, with the Go to resource button highlighted.](media/azure-dms-deployment.png)
+    ![Screenshot of the DMS deployment page, with the Go to resource button highlighted.](./media/azure-dms-deployment.png)
 
 ===
 
@@ -132,23 +132,23 @@ In this task, you will download and configure the self-hosted integration runtim
 
 1. [] On the Azure Database Migration Service **Overview** blade you opened at the end of the previous task, select **View integration runtime** in the **View integration runtime** tile in the **Getting started** tab.
 
-    ![The View integration runtime button is highlighted in the View integration runtime tile on the Azure Database Migration Service's Overview blade in the Azure portal.](media/azure-dms-view-integration-runtime.png)
+    ![The View integration runtime button is highlighted in the View integration runtime tile on the Azure Database Migration Service's Overview blade in the Azure portal.](./media/azure-dms-view-integration-runtime.png)
 
 2. [] On the **Integration runtime** blade, select **Configure integration runtime** on the toolbar.
 
-    ![The Configure integration runtime button is highlighted on the Integration runtime blade's toolbar.](media/azure-dms-integration-runtime.png)
+    ![The Configure integration runtime button is highlighted on the Integration runtime blade's toolbar.](./media/azure-dms-integration-runtime.png)
 
 3. [] In the **Configure integration runtime** dialog, select the link to **Download and install the integration runtime**.
 
-    ![The Download and install the integration runtime link is highlighted in the Configure integration runtime dialog.](media/azure-dms-configure-integration-runtime-download.png)
+    ![The Download and install the integration runtime link is highlighted in the Configure integration runtime dialog.](./media/azure-dms-configure-integration-runtime-download.png)
 
 4. [] On the webpage that opens, select **Download** under the **Microsoft Integration Runtime** header.
 
-    ![The download button is highlighted on the Microsoft Integration Runtime web page.](media/download-microsoft-integration-runtime.png)
+    ![The download button is highlighted on the Microsoft Integration Runtime web page.](./media/download-microsoft-integration-runtime.png)
 
 5. [] Select the latest version of the integration runtime from the **Choose the download you want** dialog and select **Download**.
 
-    ![In the Choose the download you want dialog, the latest version of the integration runtime is checked and the Download button is highlighted.](media/integration-runtime-choose-version.png)
+    ![In the Choose the download you want dialog, the latest version of the integration runtime is checked and the Download button is highlighted.](./media/integration-runtime-choose-version.png)
 
 6. [] When the download completes, run the MSI to install the integration runtime.
 
@@ -156,23 +156,23 @@ In this task, you will download and configure the self-hosted integration runtim
 
 8. [] Return to the Azure portal and copy the **Authentication key** from the **Configure integration runtime** dialog (use **key 1**).
 
-    ![The copy button for key 1 value in the Configure integration runtime dialog is highlighted.](media/azure-dms-configure-integration-runtime-copy-key-1.png)
+    ![The copy button for key 1 value in the Configure integration runtime dialog is highlighted.](./media/azure-dms-configure-integration-runtime-copy-key-1.png)
 
 9. [] Paste the key into the **Authentication key** box in the Configuration Manager and select **Register**.
 
-    ![The authentication key box and register button are highlighted in the Microsoft Integration Runtime Configuration Manager's Register Integration Runtime dialog.](media/integration-runtime-register.png)
+    ![The authentication key box and register button are highlighted in the Microsoft Integration Runtime Configuration Manager's Register Integration Runtime dialog.](./media/integration-runtime-register.png)
 
 10. [] Select **Finish** on the **New Integration Runtime (Self-hosted) Node** dialog.
 
-    ![The Finish button on the New Integration Runtime (Self-hosted) Node dialog is highlighted in the Microsoft Integration Runtime Configuration Manager.](media/new-integration-runtime-node.png)
+    ![The Finish button on the New Integration Runtime (Self-hosted) Node dialog is highlighted in the Microsoft Integration Runtime Configuration Manager.](./media/new-integration-runtime-node.png)
 
 11. [] Confirm that the integration runtime node has been registered successfully.
 
-    ![The Register Integration Runtime (Self-hosted) form shows that the Integration Runtime (Self-hosted) node has been registered successfully.](media/integration-runtime-registered-successfully.png)
+    ![The Register Integration Runtime (Self-hosted) form shows that the Integration Runtime (Self-hosted) node has been registered successfully.](./media/integration-runtime-registered-successfully.png)
 
 12. [] Return to the **Integration runtime** blade in the Azure portal, close the dialog, select **Refresh**, and confirm the node status is **Online**.
 
-    ![The refresh button and integration runtime with a status of online are highlighted on the Integration Runtime blade of the Azure Database Migration Service.](media/azure-dms-integration-runtime-online.png)
+    ![The refresh button and integration runtime with a status of online are highlighted on the Integration Runtime blade of the Azure Database Migration Service.](./media/azure-dms-integration-runtime-online.png)
 
 13. TODO: Include steps here to get IP address of SHIR (running on Lab VM) and add that to the SQL Server firewall, since it doesn't allow Azure services as configured in the environment.
 ===
@@ -267,7 +267,7 @@ In this task, you will create a new migration project in the Azure Database Migr
 
 1. [] Return to the Azure Database Migration Service blade in the Azure portal, select the **Overview** item from the left menu, then select **New Migration**.
 
-    ![](media/azure-dms-new-migration.png)
+    ![](./media/azure-dms-new-migration.png)
 
 
 **Connect to source SQL Server**

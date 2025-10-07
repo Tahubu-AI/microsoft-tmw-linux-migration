@@ -56,15 +56,15 @@ In this subtask, you will connect to the on-premises PostgreSQL server hosted on
 
 1. [] Locate the IP address of the `LinuxLabVM-CentOS-7-PostGreSQL` VM by opening the `VM_IPs.txt` file on the Lab VM's desktop.
 
-    ![The Lab VM's desktop is displayed with the VM_IPs text file highlight and its contents displayed in the open file.](media/lab-vm-desktop-vm-ips.png)
+    ![The Lab VM's desktop is displayed with the VM_IPs text file highlight and its contents displayed in the open file.](./media/lab-vm-desktop-vm-ips.png)
 
 2. [] From the `VM_IPs.txt` file, copy the **private IP** address of the `LinuxLabVM-CentOS-7-PostGreSQL` VM.
 
-    ![The contents of the VM_IPs.txt file are displayed, with the private IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](media/vm-ips-txt-postgresql-private.png)
+    ![The contents of the VM_IPs.txt file are displayed, with the private IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](./media/vm-ips-txt-postgresql-private.png)
 
 3. [] Open **PuTTY** from the Lab VM's desktop or Start menu. Paste the private IP address into the **Host Name (or IP address)** field in the PuTTY Configuration dialog, then select **Open**.
 
-    ![The PuTTY Configuration dialog is displayed, with the private IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted in the Host Name (or IP address) box and the Open button highlighted.](media/lab-vm-putty-postgres-private-ip.png)
+    ![The PuTTY Configuration dialog is displayed, with the private IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted in the Host Name (or IP address) box and the Open button highlighted.](./media/lab-vm-putty-postgres-private-ip.png)
 
 4. [] In the PuTTY console, log in using the following credentials:
 
@@ -186,25 +186,25 @@ Extensions in PostgreSQL are modular packages that add functionality such as new
 
 7. [] Sign in using your lab credentials from the **Resources** tab in the instructions panel.
 
-    ![Screenshot of the resources tab in the instructions panel, with the username and TAP highlighted.](media/lab-resources-credentials.png)
+    ![Screenshot of the resources tab in the instructions panel, with the username and TAP highlighted.](./media/lab-resources-credentials.png)
 
     > **IMPORTANT**: You will be prompted to use a Temporary Access Pass (TAP) for login. This value is also listed on the **Resources** tab.
     >
-    > ![Screenshot of the login dialog for entering the Temporary Access Pass.](media/azure-portal-login-tap.png)
+    > ![Screenshot of the login dialog for entering the Temporary Access Pass.](./media/azure-portal-login-tap.png)
 
 8. [] Click **Yes** if prompted to stay signed in.
 
 9. [] On the Azure portal home page, select **Resource groups** under **Azure services**.
 
-    ![Screenshot of the Azure home page with Resource groups highlighted under Azure services.](media/azure-services-resource-groups.png)
+    ![Screenshot of the Azure home page with Resource groups highlighted under Azure services.](./media/azure-services-resource-groups.png)
 
 10. [] Select the **RG-Techsummit** resource group.
 
-    ![Screenshot of the Resource groups page in Azure, with the RG-Techsummit resource group highlighted in the list of resource groups.](media/azure-resource-groups-tech-summit.png)
+    ![Screenshot of the Resource groups page in Azure, with the RG-Techsummit resource group highlighted in the list of resource groups.](./media/azure-resource-groups-tech-summit.png)
 
 11. [] Select the **Azure Database for PostgreSQL flexible server** resource.
 
-    ![Screenshot of the RG-Techsummit resource group, with the Azure Database for PostgreSQL flexible server resource highlighted in the list of resources.](media/azure-rg-techsummit-postgresql.png)
+    ![Screenshot of the RG-Techsummit resource group, with the Azure Database for PostgreSQL flexible server resource highlighted in the list of resources.](./media/azure-rg-techsummit-postgresql.png)
 
 12. [] To enable the `plpgsql` extension:
 
@@ -213,7 +213,7 @@ Extensions in PostgreSQL are modular packages that add functionality such as new
     3. [] Locate and check the box next to **PLPGSQL** in the extensions list.
     4. [] Select **Save** on the toolbar.
 
-    ![Screenshot of the azure.extensions list on the Azure Database for PostgreSQL flexible server's server parameters page with the steps above numbered and highlighted.](media/azure-database-for-postgresql-server-parameters-azure-extensions.png)
+    ![Screenshot of the azure.extensions list on the Azure Database for PostgreSQL flexible server's server parameters page with the steps above numbered and highlighted.](./media/azure-database-for-postgresql-server-parameters-azure-extensions.png)
 
 > Server parameters are not automatically migrated and must be manually configured. To view the source server’s parameters, run:
 >
@@ -259,7 +259,7 @@ In this task, you will execute a validation run using the Azure portal and revie
 
 1. [] On the Azure Database for PostgreSQL flexible server blade in the Azure portal, select **Migration** from the left menu and select **Create**.
 
-    ![Screenshot of the Azure Database for PostgreSQL flexible server page, with the Migration menu option and Create button highlighted.](media/azure-postgresql-migration-create.png)
+    ![Screenshot of the Azure Database for PostgreSQL flexible server page, with the Migration menu option and Create button highlighted.](./media/azure-postgresql-migration-create.png)
 
 2. [] On the **Setup** tab of the **Migrate PostgreSQL to Azure Database for PostgreSQL flexible server** dialog, enter the following values:
 
@@ -269,17 +269,17 @@ In this task, you will execute a validation run using the Azure portal and revie
     - [] **Migration mode**: Select **Offline**
     - [] Select **Next: Runtime server >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Setup tab, with the specified values entered into the form.](media/azure-postgresql-validate-setup.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Setup tab, with the specified values entered into the form.](./media/azure-postgresql-validate-setup.png)
 
 3. [] On the **Runtime server** tab, leave **Use runtime server** set to **No**, then select **Next: Source server >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Runtime server tab, with No selected for Use runtime server.](media/azure-postgresql-validate-runtime-server.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Runtime server tab, with No selected for Use runtime server.](./media/azure-postgresql-validate-runtime-server.png)
 
 4. [] On the **Source server** tab, enter the following values:
 
     - **Server name**: Enter the public IP address of the `LinuxLabVM-CentOS-7-PostGreSQL` VM (from `VM_IPs.txt`)
 
-        ![Screenshot of the contents of the VM_IPs.txt file, with the public IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](media/vm-ips-txt-postgresql-public.png)
+        ![Screenshot of the contents of the VM_IPs.txt file, with the public IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](./media/vm-ips-txt-postgresql-public.png)
 
     - [] **Port**: `5432`
     - [] **Administrator login**: `pgadmin`
@@ -288,27 +288,27 @@ In this task, you will execute a validation run using the Azure portal and revie
     - [] Select **Connect to source** and confirm that you receive the **Connection successful** message
     - [] Select **Next: Target server >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Source server tab, with the specified values entered into the form.](media/azure-postgresql-validate-source-server.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Source server tab, with the specified values entered into the form.](./media/azure-postgresql-validate-source-server.png)
 
 5. [] On the **Target server** tab, enter the **Password** for your lab user account (found on the **Resources** tab of the lab instructions panel), then select **Next: Databases >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Target server tab, with the specified password entered into the form.](media/azure-postgresql-validate-target-server.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Target server tab, with the specified password entered into the form.](./media/azure-postgresql-validate-target-server.png)
 
 6. [] On the **Databases to validate and migrate** tab, select the `dvdrental` database and choose **Next: Summary >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Databases to validate or migrate tab, with the dvdrental database checked.](media/azure-postgresql-validate-databases-to-validate-and-migrate.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Databases to validate or migrate tab, with the dvdrental database checked.](./media/azure-postgresql-validate-databases-to-validate-and-migrate.png)
 
 7. [] On the **Summary** tab, review the configuration and select **Start validation**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](media/azure-postgresql-validate-summary.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](./media/azure-postgresql-validate-summary.png)
 
 8. [] Monitor the progress of the validation on the **Migration** page. Select **Refresh** on the toolbar every couple of minutes to check the validation's progress.
 
-    ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-validation run has a status of Validation in progress.](media/azure-postgresql-validate-monitor.png)
+    ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-validation run has a status of Validation in progress.](./media/azure-postgresql-validate-monitor.png)
 
 9. When complete, the **Status** will be set to **Succeeded**. You can review the results by selecting the `dvdrental-db-validation` item in the list to confirm that no blocking issues were found.
 
-    ![The Migration dialog is displayed, with the dvdrental-db-validation run showing a status of Succeeded.](media/azure-postgresql-validate-success.png)
+    ![The Migration dialog is displayed, with the dvdrental-db-validation run showing a status of Succeeded.](./media/azure-postgresql-validate-success.png)
 
     > **Note**: If validation fails due to unsupported objects or configuration mismatches, you must resolve those issues before proceeding to migration. Refer to the validation report for details.
 
@@ -339,7 +339,7 @@ In this task, you will configure and launch the migration and monitor its progre
 
 1. [] Select **Create** again on the toolbar of the Azure Database for PostgreSQL flexible server's Migration blade.
 
-    ![Screenshot of the Azure Database for PostgreSQL flexible server page, with the Migration menu option and Create button highlighted.](media/azure-postgresql-migration-create-migrate.png)
+    ![Screenshot of the Azure Database for PostgreSQL flexible server page, with the Migration menu option and Create button highlighted.](./media/azure-postgresql-migration-create-migrate.png)
 
 2. [] On the **Setup** tab, enter the following values:
 
@@ -349,17 +349,17 @@ In this task, you will configure and launch the migration and monitor its progre
     - [] **Migration mode**: **Offline**
     - [] Select **Next: Runtime server >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Setup tab, with the specified values entered into the form.](media/azure-postgresql-migrate-setup.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Setup tab, with the specified values entered into the form.](./media/azure-postgresql-migrate-setup.png)
 
 3. [] On the **Runtime server** tab, leave **Use runtime server** set to **No**, then select **Next: Source server >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Runtime server tab, with No selected for Use runtime server.](media/azure-postgresql-migrate-runtime-server.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Runtime server tab, with No selected for Use runtime server.](./media/azure-postgresql-migrate-runtime-server.png)
 
 4. [] On the **Source server** tab, enter the following values:
 
     - **Server name**: Public IP address of the `LinuxLabVM-CentOS-7-PostGreSQL` VM
 
-        ![Screenshot of the contents of the VM_IPs.txt file, with the public IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](media/vm-ips-txt-postgresql-public.png)
+        ![Screenshot of the contents of the VM_IPs.txt file, with the public IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](./media/vm-ips-txt-postgresql-public.png)
 
     - [] **Port**: `5432`
     - [] **Administrator login**: `pgadmin`
@@ -368,27 +368,27 @@ In this task, you will configure and launch the migration and monitor its progre
     - [] Select **Connect to source** and confirm the connection
     - [] Select **Next: Target server >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Source server tab, with the specified values entered into the form.](media/azure-postgresql-migrate-source-server.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Source server tab, with the specified values entered into the form.](./media/azure-postgresql-migrate-source-server.png)
 
 5. [] On the **Target server** tab, enter your lab user password and select **Next: Databases >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Target server tab, with the specified password entered into the form.](media/azure-postgresql-migrate-target-server.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Target server tab, with the specified password entered into the form.](./media/azure-postgresql-migrate-target-server.png)
 
 6. [] On the **Databases to validate and migrate** tab, select `dvdrental` and choose **Next: Summary >**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Databases to validate or migrate tab, with the dvdrental database checked.](media/azure-postgresql-migrate-databases-to-validate-and-migrate.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Databases to validate or migrate tab, with the dvdrental database checked.](./media/azure-postgresql-migrate-databases-to-validate-and-migrate.png)
 
 7. [] On the **Summary** tab, review the configuration and select **Start validation and migration**
 
-    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](media/azure-postgresql-migrate-summary.png)
+    ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Summary tab.](./media/azure-postgresql-migrate-summary.png)
 
 8. [] Monitor the progress of the migration on the **Migration** page.
 
-    ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-migration run has a status of In progress.](media/azure-postgresql-migrate-monitor.png)
+    ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-migration run has a status of In progress.](./media/azure-postgresql-migrate-monitor.png)
 
 9. Once complete, confirm that the status shows **Succeeded** and that no errors were reported.
 
-    ![The Migration dialog is displayed, with the dvdrental-db-migration run showing a status of Succeeded.](media/azure-postgresql-migrate-success.png)
+    ![The Migration dialog is displayed, with the dvdrental-db-migration run showing a status of Succeeded.](./media/azure-postgresql-migrate-success.png)
 
 ===
 
@@ -418,7 +418,7 @@ In this task, you will connect to the target Azure database and run few a simple
 
 2. [] On the **Overview** blade, copy the endpoint value in the **Essentials** pane.
 
-    ![On the Overview blade of the Azure Database for PostgreSQL flexible server, the endpoint and administrator login values are highlighted in the essentials pane.](media/azure-database-for-postgresql-endpoint.png)
+    ![On the Overview blade of the Azure Database for PostgreSQL flexible server, the endpoint and administrator login values are highlighted in the essentials pane.](./media/azure-database-for-postgresql-endpoint.png)
 
     > **NOTE**: Within the **Essentials** pane, also note the **Administrator login** value. This is the username that will be used to log in to the server. This differs from the `pgadmin` user you used to connect to the on-premises database.
 
