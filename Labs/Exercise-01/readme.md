@@ -18,20 +18,20 @@ After completing this exercise, you will be able to:
 
 ===
 
-# Task 1: Test the Application before the migration
+# Task 1: Test the application before migration
 
 ## Introduction
 
-Before initiating a migration, it is critical to confirm that the source LinuxVM is working in the Hyper-V environment by connecting to it and making sure the application running on the VM is connecting and working correctly to the SQL database.
+Before initiating a migration, it is critical to confirm that the source Linux VM is functioning properly in the Hyper-V environment. This includes verifying that the personnel management application is running and successfully connecting to the SQL Server database.
 
 ## Description
 
-In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and quickly test the personnel management application.
+In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and test the personnel management application to ensure it is operational prior to migration.
 
 ## Success criteria
 
-- You can connect to the Linux VM in the Hyper-V manager
-- You can run the server application from Visual Studio Code
+- You can connect to the Linux VM in Hyper-V Manager.
+- You can run the server application from Visual Studio Code.
 - You can confirm that data is returned successfully in the web app accessing the SQL database.
 
 ## Learning resources
@@ -40,61 +40,67 @@ In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and qui
 
 ## Key tasks
 
-1. [] Launch **Hyper-V Manager** from the desktop of your Lab VM.
+1. [ ] Launch **Hyper-V Manager** from the desktop of your Lab VM.
 
-    ![Hyper-V Manager](./media/01-Launch-HyperV.png)
+    ![Screenshot of the Lab VM desktop with Hyper-V Manager highlighted and the Hyper-V Manager application open.](./media/01-Launch-HyperV.png)
 
-2. [] Verfiy that all five virtual machines are available and running within **Virtual Machines** panel of Hyper-V Manager
+2. [ ] Confirm that all five virtual machines are listed and show a status of **Running** in the **Virtual Machines** panel of Hyper-V Manager.
 
-    ![Five Virtual Machines running](./media/02-five-VMs-Running.png)
+    ![In Hyper-V Manager, the five virtual vachines with a running status are highlighted.](./media/02-five-VMs-Running.png)
 
     > For this exercise, you will use the `LinuxLabVM-Ubuntu` and `AzMigrateAppliance-Test` virtual machines.
 
-3. [] Select the `LinuxLabVM-Ubuntu` in the list and select `Connect` in the right menu.
+3. [ ] Select the `LinuxLabVM-Ubuntu` in the list and choose **Connect** in the right-hand menu.
 
-    ![Connect](./media/03-Connect.png)
+    ![In Hyper-V Manager, the LinuxLabVM-Ubuntu VM is highlighted in the Virtual Machines list and the Connect action is highlighted in the Actions panel.](./media/03-Connect.png)
 
-4. [] At the Ubuntu login screen:
+4. [ ] At the Ubuntu login screen:
 
-   - Select the `administrator` account.
-   - Enter the password provided on the Resource tab of the lab instructions.
-   - Press the enter key to login to the Ubuntu machine.
+   - Select the `administrator` account  
+   - Enter the password provided on the **Resource** tab of the lab instructions  
+   - Press **Enter** to log in to the Ubuntu machine  
 
-    > Passwords are provided in the lab intructions tab. You can enter it manually them or select the [T] in the instructions and the password will be typed in for you automatically to login.
+    > Passwords are provided in the **lab instructions** tab. You can enter it manually, or select the **[T]** icon in the instructions to auto-type the password.
 
-5. [] Select the **Show Applications** button at the top left of the Ubuntu VM window, enter "visual studio" into the search box, and select Visual Studio Code from the search results.
+5. [ ] Click the **Show Applications** button at the top left of the Ubuntu VM window, enter `"visual studio"` into the search box, and select **Visual Studio Code** from the search results.
 
-    ![VSCode Ubuntu](./media/04-VSCode-Ubuntu.png)
+    ![The Ubuntu desktop is displayed, with the Show Applications button highlighted. "Visual studio" is entered in the search box and Visual Studio Code is highlighted in the search results. The steps are numbers 1 - 3 to specify the order of operations.](./media/04-VSCode-Ubuntu.png)
 
-    > Visual Studio Code should open to the `techsummit-LinuxApp` workspace.
+    > Visual Studio Code will open to the `techsummit-LinuxApp` workspace.
 
-6. [] From the **Explorer** in VS Code, open the `views.py` file.
+6. [ ] From the **Explorer** in VS Code, open the `views.py` file. In this file, you need to update the IP address in the `connect_str` variable on line 58 to point to the `SQLPTO2022` VM in your environment.
 
-7. [] In the `views.py` file, you need to update the IP address in the `connect_str` variable on line 58 to point to the `SQLPTO2022` VM in your environment. Locate the IP address of the `SQLPTO2022` VM by opening the `VM_IPs.txt` file on the Lab VM's desktop.
+7. [ ] Locate the IP address of the `SQLPTO2022` VM by opening the `VM_IPs.txt` file on the Lab VM's desktop.
 
     ![The Lab VM's desktop is displayed with the VM_IPs text file highlight and its contents displayed in the open file.](./media/lab-vm-desktop-vm-ips.png)
 
-8. [] In the `VM_IPs.txt` file, copy the **private IP** address of the `SQLPTO2022` VM.
+8. [ ] In the `VM_IPs.txt` file, copy the **private IP** address of the `SQLPTO2022` VM.
 
-    ![The contents of the VM_IPs.txt file are displayed, with the private IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](./media/vm-ips-txt-sql-private.png)
+    ![The contents of the VM_IPs.txt file are displayed, with the private IP address of the SQLPTO2022 VM highlighted with a red box.](./media/vm-ips-txt-sql-private.png)
 
-9. [] On **line 58** of the `views.py` file, update the `connect_str` variable by pasting the `SQLPTO2022` IP address into the value of the `SERVER` component of the connection string.
+9. [ ] In the `views.py` file, go to **line 58** and replace the existing IP address in the `SERVER` field of the `connect_str` variable with the private IP of the `SQLPTO2022` VM.
 
-    ![VM_IP](./media/05-VM-IP.png)
+    ![In VS Code, the views.py file is selected and highlighted in Explorer. Line 58 of views.py is highlighted and the SERVER component of the connection string is highlighted along with the pasted IP address.](./media/05-VM-IP.png)
 
-10. [] Save `views.py`.
+10. [ ] Save the `views.py` file.
 
-11. [] Open `runserver.py` from the VS Code Explorer and run it by selecting the **Run Python File** button in the top right corner of the file tab.
+11. [ ] Open `runserver.py` from the VS Code Explorer and run it by clicking the **Run Python File** button in the top right corner of the file tab.
 
-    ![In Visual Studio Code, the runserver.py file is highlighted in the Explorer and the Run Python File button is highlighted at the top right corder of the runserver.py file tab.](./media/vs-code-run-python-file-runserver-py.png)
+    ![In VS Code, the runserver.py file is selected and highlighted in Explorer. The Run Python File button is highlighted.](./media/vs-code-run-python-file-runserver-py.png)
 
-12. In the **Terminal** panel of VS Code, open the **Running on** link (`http://localhost:5555`) to launch the application in a browser.
+12. [ ] In the **Terminal** panel of VS Code, click the **Running on** link (`http://localhost:5555`) to launch the application in your default browser.
 
-    ![In the VS Code Terminal, the running on link is highlighted.](./media/06-runserver.png)
+    ![In the Terminal panel in VS Code, the Running on link is highlighted.](./media/06-runserver.png)
 
-13. [] In the web app, select the `People` tab and ensure you see a list of people from the `Person.Person` table.
+13. [ ] In the web app, select the **People** tab and verify that a list of people from the `Person.Person` table is displayed.
 
     ![In the AdventureWorksPTO application, the People tab is selected and highlighted and the list of people from the Person.Person table is highlighted on the page.](./media/08-PeoplePage.png)
+
+    > If no data appears, double-check the IP address in `views.py` and ensure the `SQLPTO2022` VM is running and accessible.
+
+14. [ ] Close the personnel management web app browser.
+
+15. [ ] Close the `LinuxLabVM-Ubunut` VM window.
 
 ===
 
@@ -120,15 +126,15 @@ In this task, you will download a script on the Hyper-V Host machine and run it 
 
 ## Key tasks
 
-1. [] Back in your Hyper-V host machine, open a browser window and navigate to `https://aka.ms/migrate/hyperv/script` to download the script needed to prepare the HyperV
+1. [ ] Back in your Hyper-V host machine, open a browser window and navigate to `https://aka.ms/migrate/hyperv/script` to download the script needed to prepare the HyperV
 
     ![HyperV-Download](./media/09-download.png)
 
-2. [] From the search bar at the bottom of the HyperV machine type `Powershell`. A window will pop with multiple options, make sure to choose the Windows PowerShell app NOT  the ISE one and start it by running as Administrator.
+2. [ ] From the search bar at the bottom of the HyperV machine type `Powershell`. A window will pop with multiple options, make sure to choose the Windows PowerShell app NOT  the ISE one and start it by running as Administrator.
 
     ![PS1 admin](./media/10-ps-admin.png)
 
-3. [] In the terminal, run:
+3. [ ] In the terminal, run:
 
     ```powershell
     Set-NetConnectionProfile -NetworkCategory Private
@@ -142,11 +148,11 @@ In this task, you will download a script on the Hyper-V Host machine and run it 
 
     ![Network-Private](./media/11-Network-Private.png)
 
-5. [] Now head over to where you downloaded the script in step 1 and execute the script in the terminal, accepting ALL the prompts that will show up. There should be 7 prompts where you should agree to all. At the last step you will be asked to choose a username and password for credentials/ Enter `MigrateLocal` as the username and `Pa$$w0rd` as the password.
+5. [ ] Now head over to where you downloaded the script in step 1 and execute the script in the terminal, accepting ALL the prompts that will show up. There should be 7 prompts where you should agree to all. At the last step you will be asked to choose a username and password for credentials/ Enter `MigrateLocal` as the username and `Pa$$w0rd` as the password.
 
     ![PS1 Execution](./media/12-ps1-execution.png)
 
-6. [] Now you can reset the Network Connection to public by running the following command in the terminal
+6. [ ] Now you can reset the Network Connection to public by running the following command in the terminal
 
     ```powershell
     Set-NetConnectionProfile -NetworkCategory Public
@@ -183,32 +189,32 @@ In this task, you will execute a script a Cloud Shell session in the Azure Porta
 
 ## Key tasks
 
-1. [] On the Hyper V Host Machine, open a browser window and navigate to `https://portal.azure.com`
+1. [ ] On the Hyper V Host Machine, open a browser window and navigate to `https://portal.azure.com`
  
-2. [] Login using the credentials in the lab available on the `Resources` tab on the right of the lab screen. There you will find the username and password you should use and also a TAP (Temporary Access Password) that we will use later.
+2. [ ] Login using the credentials in the lab available on the `Resources` tab on the right of the lab screen. There you will find the username and password you should use and also a TAP (Temporary Access Password) that we will use later.
 
 > [!IMPORTANT]
 > If prompted for Temporary Access Pass, Select use your password instead.
 
 ![Use Password Instead](./media/14-UsePasswordInstead.png)
 
-3. [] Another Credential screen will show up, this time enter the TAP password you see in the `Resources` Tab
+3. [ ] Another Credential screen will show up, this time enter the TAP password you see in the `Resources` Tab
 
-4. [] The Azure portal will load, start a cloud shell by click on the cloudshell icon in the top bar like in the screenshot below
+4. [ ] The Azure portal will load, start a cloud shell by click on the cloudshell icon in the top bar like in the screenshot below
 
 ![CloudShell](./media/15-CloudShell.png)
 
-5. [] The Azure Cloud shell will ask whether you want to start a `Bash` or `Powershell` session, choose `Powershell`
+5. [ ] The Azure Cloud shell will ask whether you want to start a `Bash` or `Powershell` session, choose `Powershell`
 
-6. [] The next screen will ask about storage, choose `No storage account required`
+6. [ ] The next screen will ask about storage, choose `No storage account required`
 
-7. [] Select the only subscription you see in the dropdown and click `Apply`
+7. [ ] Select the only subscription you see in the dropdown and click `Apply`
 
-8. [] You should see a cloudshell similar to the one in the screenshot below
+8. [ ] You should see a cloudshell similar to the one in the screenshot below
 
 ![CloudShell-Apply](./media/16-CloudShell-Apply.png)
 
-9. [] Run the following in the CloudShell to create the resources needed in Azure.
+9. [ ] Run the following in the CloudShell to create the resources needed in Azure.
 
 ```powershell
 # Login to Azure
@@ -248,17 +254,17 @@ New-AzVirtualNetwork -Name $vnetName `
 > [!TIP]
 > You might need to press the ENTER key once during the `New-AzVirtualNetwork` command while running the script.
 
-10. [] Back in your Azure Portal, search for `Azure Migrate` in the upper search bar and start `Azure Migrate`
+10. [ ] Back in your Azure Portal, search for `Azure Migrate` in the upper search bar and start `Azure Migrate`
 
 ![Azure Migrate](./media/17-AzureMigrate.png)
 
-11. [] In the `Azure Migrate` blade, click on `All projects` and `Create Project`
+11. [ ] In the `Azure Migrate` blade, click on `All projects` and `Create Project`
 
 ![AZ Migrate Project](./media/18-AzMigrate_Project.png)
 
-12. [] In the `Create Project` blade, fill in the resource group, it should be `rg-AzMigrateLab`, Give it a name for the project, make sure the Geograpgy is `United states` and finally in the Advanced section maker sure the connectivity method is `Public Endpoint`
+12. [ ] In the `Create Project` blade, fill in the resource group, it should be `rg-AzMigrateLab`, Give it a name for the project, make sure the Geograpgy is `United states` and finally in the Advanced section maker sure the connectivity method is `Public Endpoint`
 
-13. [] Click on `Create` to start the create of the Azure Migrate Project.
+13. [ ] Click on `Create` to start the create of the Azure Migrate Project.
 
 
 # Task 4: Configuring the Appliance and discover the Virtual Machine
@@ -285,99 +291,99 @@ In this task, you will access the Azure Migrate Project you created and generate
 
 ## Key tasks
 
-1. [] In the Azure portal, make sure you are in the `Azure Migrate` blade and you can see your project that you just created
+1. [ ] In the Azure portal, make sure you are in the `Azure Migrate` blade and you can see your project that you just created
 
 ![LanAZMigrate](./media/20-labazmigrate.png)
 
-2. [] Select the project that you created earlier
+2. [ ] Select the project that you created earlier
 
-3. [] Click on the `Start Discovery` button at the bottom of the overview page choosing `Using Appliance` for `Azure`
+3. [ ] Click on the `Start Discovery` button at the bottom of the overview page choosing `Using Appliance` for `Azure`
 
 ![Start Discovery](./media/21-StartDiscovery.png)
 
-4. [] In the discovery blade, choose `Yes, with Hyper-V` for the server virtualized option, then give your appliance a name, for example `LabAppliance` and ckicl on `Generate Key`. 
+4. [ ] In the discovery blade, choose `Yes, with Hyper-V` for the server virtualized option, then give your appliance a name, for example `LabAppliance` and ckicl on `Generate Key`. 
 
 ![Discovery blade](./media/22-Discover-steps.png)
 
 > [!IMPORTANT]
 > Do NOT download the VHD
 
-5. [] After a minute or so, you should see your Project key, where you should download and place on the desktop of your HyperV host machine in a file called `project_key`
+5. [ ] After a minute or so, you should see your Project key, where you should download and place on the desktop of your HyperV host machine in a file called `project_key`
 
 ![Project Key](./media/23-ProjectKey.png)
 
-6. [] Back in your Hyper-V Manager, we will now connect to a different VM. Connect to the `AzMigrateAppliance-Test` Virtual Machine
+6. [ ] Back in your Hyper-V Manager, we will now connect to a different VM. Connect to the `AzMigrateAppliance-Test` Virtual Machine
 
 ![Migrate VM](./media/24-MigrateVM-Connect.png)
 
-7. [] Login to the VM using the credentials in the lab on the right sidebar
+7. [ ] Login to the VM using the credentials in the lab on the right sidebar
 
-8. [] On the desktop, find the icon for `Azure Migrate Appliance Configuration Manager` and launch it
+8. [ ] On the desktop, find the icon for `Azure Migrate Appliance Configuration Manager` and launch it
 
 ![Appliance Config](./media/25-ApplianceConfigManager.png)
 
-9. [] Paste the Project Key we saved on the desktop of the Hyper-V machine earlier, in the `Verification of Azure Migrate project Key` section and click on `Verify`
+9. [ ] Paste the Project Key we saved on the desktop of the Hyper-V machine earlier, in the `Verification of Azure Migrate project Key` section and click on `Verify`
 
 ![Key Verify](./media/26-KeyVerify.png)
 
-10. [] The verification should be successfull within seconds.
+10. [ ] The verification should be successfull within seconds.
 
-11. [] After the verification, click on the `Login` button below it in the section `Azure user login and appliance registration status`
+11. [ ] After the verification, click on the `Login` button below it in the section `Azure user login and appliance registration status`
 
 ![Login](./media/27-Login.png)
 
-12. [] A window will pop up with a device code, copy the code to the clipboard and login
+12. [ ] A window will pop up with a device code, copy the code to the clipboard and login
 
 ![Device-Code](./media/28-DeviceCode.png)
 
-13. [] Enter the code in the next window and then enter your credentials for Azure from the `Resources` tab in the lab again. This time use the `TAP` not the password to login.
+13. [ ] Enter the code in the next window and then enter your credentials for Azure from the `Resources` tab in the lab again. This time use the `TAP` not the password to login.
 
-14. [] You will see that you are logged in but you might get a `MYSQL` error, you can ignore it.
+14. [ ] You will see that you are logged in but you might get a `MYSQL` error, you can ignore it.
 
 ![MySQL error](./media/29-ErrorMySQL.png)
 
-15. [] Continue with section 2 `Manage credentials and discovery sources` and click on `Add credentials`
+15. [ ] Continue with section 2 `Manage credentials and discovery sources` and click on `Add credentials`
 
 ![Add Credentials](./media/30-Add-Credentials.png)
 
-16. [] In the Add credentials popup, create a `Friendly name` to your liking and enter the username and password we created earlier. Username: `MigrateLocal` and whatever password your chose at the time. Click save.
+16. [ ] In the Add credentials popup, create a `Friendly name` to your liking and enter the username and password we created earlier. Username: `MigrateLocal` and whatever password your chose at the time. Click save.
 
 ![Credentials](./media/31-entering%20credentials.png)
 
-17. [] Now we move to step 2 for `Provide Hyper-V host/cluster details` and click on `Add discovery source`
+17. [ ] Now we move to step 2 for `Provide Hyper-V host/cluster details` and click on `Add discovery source`
 
 ![add discovery source](./media/32-Add-Discover-source.png)
 
-18. [] For this step, you will need to run command line on the Hyper-V Host machine and execute `ipconfig` to grab the IP address of the machine. Then come back to the Add discovery source popup and choose `Add single item`
+18. [ ] For this step, you will need to run command line on the Hyper-V Host machine and execute `ipconfig` to grab the IP address of the machine. Then come back to the Add discovery source popup and choose `Add single item`
 
 ![single item](./media/33-signleitem.png)
 
-19. [] Type in the IP Address / FQDN you received from you `ipconfig` execution on the Hyper-V Host machine and then choose the `Map credentials` you created earlier from the dropdown.
+19. [ ] Type in the IP Address / FQDN you received from you `ipconfig` execution on the Hyper-V Host machine and then choose the `Map credentials` you created earlier from the dropdown.
 
 ![IP Address](./media/34-IPAddress.png)
 
-20. [] You will probably receive an error for the validation step and that is due to missing IAM access control privileges between the resources of storage and the vaults
+20. [ ] You will probably receive an error for the validation step and that is due to missing IAM access control privileges between the resources of storage and the vaults
 
 ![Error](./media/35-Error.png)
 
-21. [] Head back to the Azure portal and open the blade for the storage account associated with your Resource Group that was created for you
+21. [ ] Head back to the Azure portal and open the blade for the storage account associated with your Resource Group that was created for you
 
-22. [] In the `Access Control (IAM) blade` of the storage account, Add the following role assignments:
+22. [ ] In the `Access Control (IAM) blade` of the storage account, Add the following role assignments:
 
     - `Storage Blob Data Contibutor`, job function role should be assigned access to `Data replication vault Managed Identity` 
     - `Contributor`, priviledged administrator role should be assigned access to `Data replication vault Managed Identity` 
 
 ![Role Assignement](./media/36-roleAssignements.png)
 
-23. [] Back on the Application Manager, run the `re-validate` again and this time it should succeed.
+23. [ ] Back on the Application Manager, run the `re-validate` again and this time it should succeed.
 
 ![ReValidate](./media/37-revalidate.png)
 
-24. [] In step 3 in the Configuration manager toggle off the `Guest discovery is enabled by default`
+24. [ ] In step 3 in the Configuration manager toggle off the `Guest discovery is enabled by default`
 
-25. [] Click on `Start Discovery` button. This is step can take up to 15 minutes.
+25. [ ] Click on `Start Discovery` button. This is step can take up to 15 minutes.
 
-26. [] Confirm the discovery of the Virtual Machine in the Azure Portal by expanding `Explore Inventory`, `All Inventory`, you should see your new VM listed.
+26. [ ] Confirm the discovery of the Virtual Machine in the Azure Portal by expanding `Explore Inventory`, `All Inventory`, you should see your new VM listed.
 
 ![validation](./media/38-validation.png)
 
@@ -405,98 +411,98 @@ In this task, you will create the assessment of the Linux VM server in the Azure
 
 ## Key tasks
 
-1. [] From the Azure portal, on the Azure Migrate Project blade, open the `Decide and Plan` section and click on `Assessments` and create a new assessment by clicking on `Create assessment`
+1. [ ] From the Azure portal, on the Azure Migrate Project blade, open the `Decide and Plan` section and click on `Assessments` and create a new assessment by clicking on `Create assessment`
 
 ![Assessment](./media/39-Assessments.png)
 
-2. [] Give the assessment a name and create a `Workload`
+2. [ ] Give the assessment a name and create a `Workload`
 
-3. [] Choose the `LinuxLabVM-Ubuntu` and click `Add`
+3. [ ] Choose the `LinuxLabVM-Ubuntu` and click `Add`
 
 ![Workload](./media/40-Workload.png)
 
-4. [] Click on Next and ensure the Default target location is `Central US` and that the Sizing criteria is `Performance-based`
+4. [ ] Click on Next and ensure the Default target location is `Central US` and that the Sizing criteria is `Performance-based`
 
-5. [] Click on `Review + Create assessment` then `Create`
+5. [ ] Click on `Review + Create assessment` then `Create`
 
 ![Assessment Ready](./media/41-AssessmentReady.png)
 
-6. [] Back in the blade, expand the `Execute` section and click on Migrations, then click on `Discover more`
+6. [ ] Back in the blade, expand the `Execute` section and click on Migrations, then click on `Discover more`
 
 ![Discover More](./media/42-Migration-dicover.png)
 
-7. [] For the `Where to you want to migrate to?` choose `Azure VM`, for the `Are your machines virtualized?` choose `Yes, with Hyper-V` anf the `Target region` choose `Central US`
+7. [ ] For the `Where to you want to migrate to?` choose `Azure VM`, for the `Are your machines virtualized?` choose `Yes, with Hyper-V` anf the `Target region` choose `Central US`
 
 ![Virtualization](./media/43-CreateResources.png)
 
-8. [] Download the Hyper-V replication provider software using the hyperlink in step 1 in the screenshot below, then download the registration key in step 2 in the screenshot.
+8. [ ] Download the Hyper-V replication provider software using the hyperlink in step 1 in the screenshot below, then download the registration key in step 2 in the screenshot.
 
 ![downloads](./media/44-Download.png)
 
 > [!IMPORTANT]
 > Remember you need to be on the Hyper-V host machine when you download the software and the key above.
 
-9. [] Run the `AzureSiteRecoveryProvider.exe` that you just downloaded
+9. [ ] Run the `AzureSiteRecoveryProvider.exe` that you just downloaded
 
-10. [] Select `On (recommended)` and click `Next`. Install at default location and click `Install`. Do NOT click `Finish`
+10. [ ] Select `On (recommended)` and click `Next`. Install at default location and click `Install`. Do NOT click `Finish`
 
-11. [] After the installation is complete, click on `Register`
+11. [ ] After the installation is complete, click on `Register`
 
-12. [] Browse to the registration key file you downloaded and click Next
+12. [ ] Browse to the registration key file you downloaded and click Next
 
 ![Key File](./media/45-Keyfile.png)
 
-13. [] Select `Connect directly to Azure Site Recovery without a proxy server` and click Next
+13. [ ] Select `Connect directly to Azure Site Recovery without a proxy server` and click Next
 
-14. [] After about 60 seconds the configuration will complete and then you can click `Finish`
+14. [ ] After about 60 seconds the configuration will complete and then you can click `Finish`
 
-15. [] Close the blade and revisit the `Dicover more` page on the migrations blade, you should see that you have ONE connected registration
+15. [ ] Close the blade and revisit the `Dicover more` page on the migrations blade, you should see that you have ONE connected registration
 
 ![Connected Registration](./media/46-connected-registration.png)
 
-16. [] Click on `Finalize registration`. This step takes around 3 minutes.
+16. [ ] Click on `Finalize registration`. This step takes around 3 minutes.
 
-17. [] Now it is time to start the replication, head back to the Migration Project blade and expend `Execute`, `Migrations` and this time click the `Replicate` button
+17. [ ] Now it is time to start the replication, head back to the Migration Project blade and expend `Execute`, `Migrations` and this time click the `Replicate` button
 
 ![Replicate](./media/47-Replicate.png)
 
-18. [] In the `Specify Intent` page, Choose `server or virtual machines (vm)` on what to migrate. `Azure VM` to where to migrate, and `Yes, with Hyper-V` for whether your machines are virtualized, then click continue.
+18. [ ] In the `Specify Intent` page, Choose `server or virtual machines (vm)` on what to migrate. `Azure VM` to where to migrate, and `Yes, with Hyper-V` for whether your machines are virtualized, then click continue.
 
 ![Specify Intent](./media/48-SpecifyIntent.png)
 
-19. [] Choose `Standard or trusted launch Virtual Machine` for the security type, `Yes, apply migration settings from an Azure Migrate assessment` for rthe import settings dropdown, pick your assessment you created earlier in the `Select Assessment` dropdown and finally check the box next to your `LinuxLabVM-Ubuntu` and click next.
+19. [ ] Choose `Standard or trusted launch Virtual Machine` for the security type, `Yes, apply migration settings from an Azure Migrate assessment` for rthe import settings dropdown, pick your assessment you created earlier in the `Select Assessment` dropdown and finally check the box next to your `LinuxLabVM-Ubuntu` and click next.
 
 ![ReplicateVM](./media/49-ReplicateVM.png)
 
-20. [] In the replicate blade, pick your resourcegroup from the dropdown, for the cache storage account pick the storage account in the dropdown that was created for you, pick the Virtual network and click next.
+20. [ ] In the replicate blade, pick your resourcegroup from the dropdown, for the cache storage account pick the storage account in the dropdown that was created for you, pick the Virtual network and click next.
 
 ![error](./media/50-ErrorIAM.png)
 
-21. [] That error is because the storage account does not have the proper access priviledge to the Recovery Service vault. To fix this issue, first open the Recovery Service Vault resouce in another browers page and under `Settings | Identity` turn ON the status on the `System assigned` and save.
+21. [ ] That error is because the storage account does not have the proper access priviledge to the Recovery Service vault. To fix this issue, first open the Recovery Service Vault resouce in another browers page and under `Settings | Identity` turn ON the status on the `System assigned` and save.
 
 ![System Assigned](./media/51-IAM-RecoveryVault.png)
 
-22. [] Then we need to assign the `Contributor` and `Storage Blob Data Contributor` to the the storage account, like we did before, but this time to the managed identity of the `Recovery Services Vault`
+22. [ ] Then we need to assign the `Contributor` and `Storage Blob Data Contributor` to the the storage account, like we did before, but this time to the managed identity of the `Recovery Services Vault`
 
-23. [] Now, no errors show show up in the `Replicate` blade and you should move to the next step. (You will need to redo the replicate steps after the IAM has been fixed).
+23. [ ] Now, no errors show show up in the `Replicate` blade and you should move to the next step. (You will need to redo the replicate steps after the IAM has been fixed).
 
-24. [] In the compute blade, chnge the `OS Type` dropdown to `Linux`. Pick any availability, no other value should be changed. Click Next.
+24. [ ] In the compute blade, chnge the `OS Type` dropdown to `Linux`. Pick any availability, no other value should be changed. Click Next.
 
 ![OSType](./media/52-OSType.png)
 
-25. [] For Disks blade and the others just click Next till the end to start the replication.
+25. [ ] For Disks blade and the others just click Next till the end to start the replication.
 
-26. [] This step will take some time, around 25 muinutes. You can check on the progress by opening the `Replication Summary` and clicking on `Jobs` to monitor the completion. 
+26. [ ] This step will take some time, around 25 muinutes. You can check on the progress by opening the `Replication Summary` and clicking on `Jobs` to monitor the completion. 
 
 ![Replication Summary](./media/54-ReplicationSummary.png)
 
-27. [] The replication is complete when you see the replication status for the LinuxLabVM-Ubuntu set to `Protected`. Now you can start the migrations from the ellipsis button on the right of the screen.
+27. [ ] The replication is complete when you see the replication status for the LinuxLabVM-Ubuntu set to `Protected`. Now you can start the migrations from the ellipsis button on the right of the screen.
 
 ![Protected Item](./media/53-ProtectedItem.png)
 
-28. [] Choose `Yes` to shutting down the VM and performing a planned migration with no data loss.
+28. [ ] Choose `Yes` to shutting down the VM and performing a planned migration with no data loss.
 
-29. [] Click on `Migrate`. This will take another 2+ hours to complete. You can monitor the progress by opening the `Jobs` section on the Migration blade and click on `Planned failover`
+29. [ ] Click on `Migrate`. This will take another 2+ hours to complete. You can monitor the progress by opening the `Jobs` section on the Migration blade and click on `Planned failover`
 
 ![Jobs](./media/55-jobs.png)
 
