@@ -486,7 +486,7 @@ With discovery complete, Contoso’s migration team is ready to assess, replicat
 
 In this task, you create an assessment for the Linux VM in your Azure Migrate project and configure replication using the Azure Site Recovery provider and registration key.
 
-## Success Criteria
+## Success criteria
 
 - You created the assessment successfully in the Azure portal  
 - You downloaded the Azure Site Recovery provider and registration key  
@@ -514,7 +514,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 5. [ ] Select **Review + Create assessment**, then select **Create** on the review tab.
 
-6. [ ] On the **Assessments** blade, select **Refresh** after recieving the notification that the assessment was created.
+6. [ ] On the **Assessments** blade, select **Refresh** after receiving the notification that the assessment was created.
 
     ![The newly created assessment is displayed on the Assessments blade.](./media/41-AssessmentReady.png)
 
@@ -527,7 +527,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
    - **Where to you want to migrate to?**: Choose `Azure VM`
    - **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
    - **Target region**: Accept the default value already selected
-   - Check the box for **Confirm that the target region for migration is "[YOUR_SELECTED_REGION]"
+   - Check the box for **Confirm that the target region for migration is "[YOUR_SELECTED_REGION]"**
    - Select **Create resources**
 
     ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
@@ -547,7 +547,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 12. [ ] Install into the default location and select **Install**.
 
-    > **IMPORTANT**: Do NOT click **Finish** yet.
+    > **IMPORTANT**: Do NOT select **Finish** yet.
 
 13. [ ] After the installation is complete, select **Register**.
 
@@ -561,7 +561,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 17. [ ] Select **Finish**.
 
-18. [ ] Close the blade and return to the **Dicover more** page on the Migrations blade.
+18. [ ] Close the blade and return to the **Discover more** page on the Migrations blade.
 
     > You should see that you have one connected registration.
 
@@ -577,7 +577,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 21. [ ] On the **Specify intent** page:
 
-    - **What do you want to migration?**: Choose `Servers or virtual machines (VM)`
+    - **What do you want to migrate?**: Choose `Servers or virtual machines (VM)`
     - **Where do you want to migrate to?**: Select `Azure VM`
     - **Are your machines virtualized?**: Select `Yes, with Hyper-V`
     - Select **Continue**
@@ -596,33 +596,33 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 23. [ ] On the **Target settings** tab:
 
-    - **Resource group**: Select rg-AzMigrateLab`
+    - **Resource group**: Select `rg-AzMigrateLab`
     - **Replication storage account**: Select the storage account that was created for you
     - **Virtual network**: Choose `vnet-AzMigrateLab`
     - Select **Next**
 
     ![The settings above are entered into the Target settings tab. An error message is highlighted.](./media/50-ErrorIAM.png)
 
-    > **NOTE**: You may see an error that the Azure Migrate service cannot access the replication storage account. This error is because the storage account does not have the proper access priviledge to the Recovery Service vault. To resove this issue, first open the Recovery Service Vault resouce in another browser page and under `Settings | Identity` turn ON the status on the `System assigned` and select **Save**.
+    > **NOTE**: You may see an error that the Azure Migrate service cannot access the replication storage account. This error is because the storage account does not have the proper access privilege to the Recovery Service vault. To resolve this issue, first open the Recovery Service Vault resource in another browser page and under `Settings | Identity` turn ON the status on the `System assigned` and select **Save**.
     >
     > ![Screenshot of the steps to turn on the System Assigned identity for the recovery services vault.](./media/51-IAM-RecoveryVault.png)
     >
-    > Next, you need to assign the `Contributor` and `Storage Blob Data Contributor` RBAC roles to the the `Recovery Services Vault` identity on the the storage account.
+    > Next, you need to assign the `Contributor` and `Storage Blob Data Contributor` RBAC roles to the `Recovery Services Vault` identity on the storage account.
     >
     > The above steps should remove the error on the `Replicate` blade's Target settings tab and enable you to move to the next step. (You will need to redo the replicate steps after the IAM has been fixed).
 
 24. [ ] On the **Compute** tab:
 
-    - Select `Linux` in the **OS Type** drop down.
+    - Select `Linux` in the **OS Type** drop down
     - Select any availability
-    - Accept the default values for all other values
+    - Accept the default values for all other fields
     - Select **Next**
 
     ![Screenshot of the Compute tab, with the OS Type and its value of Linux highlighted.](./media/52-OSType.png)
 
-25. [ ] Accept the default values on the remaining tabs, then select **Start** on the**Review + start replication** tab.
+25. [ ] Accept the default values on the remaining tabs, then select **Start** on the **Review + start replication** tab.
 
-    > **NOTE**: The replication step can take 25 muinutes or more. You can monitor the progress by opening the **Replications Summary** and selecting **Jobs** in the left menu under **Migration**.
+    > **NOTE**: The replication step can take 25 minutes or more. You can monitor the progress by opening the **Replications Summary** and selecting **Jobs** in the left menu under **Migration**.
     >
     > ![The Replications Summary button on the Migrations blade is highlighted.](./media/54-ReplicationSummary.png)
 
@@ -636,9 +636,9 @@ With the Linux Ubuntu VM replicated, you are ready to migrate the Linux-based pe
 
 ## Description
 
-In this task, you perform a planned migration of the Linux VM to Azure.
+In this task, you initiate a planned migration of the Linux VM to Azure using the Azure Migrate portal.
 
-## Success Criteria
+## Success criteria
 
 - You initiated the migration process successfully
 
