@@ -480,10 +480,10 @@ In this task, you review the Microsoft Defender for Open-Source Relational Datab
 
 2. On the **Microsoft Defender for Cloud** blade, select **Check for alerts on this resource in Microsoft Defender for Cloud**.
 
-    ![](media/azure-postgresql-defender.png)
+    ![The Microsft Defender for Cloud blade for the Azure Database for PostgreSQL flexible server is diplayed, with the Check for alerts on this resource in Microsoft Defender for Cloud link highlighted.](media/azure-postgresql-defender.png)
 
 3. Review the **Security alerts** page for your PostgreSQL resource.
 
     > The security alerts page displays any detected threats or suspicious activity, such as brute-force login attempts, SQL injection patterns, or anomalous access behavior. You can view alert severity, affected resources, and recommended actions. This page helps you quickly assess and respond to potential risks in your PostgreSQL environment.
 
-    ![](media/azure-postgresql-defender-security-alerts.png)
+    ![The Security Alerts blade is displayed, filtered for alerts on the Azure Database for PostgreSQL flexible server resource.](media/azure-postgresql-defender-security-alerts.png)
