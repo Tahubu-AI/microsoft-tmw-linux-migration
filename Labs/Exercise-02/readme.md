@@ -386,7 +386,11 @@ In this task, you will configure and launch the migration and monitor its progre
 
     ![The Migration dialog is displayed, with the Refresh button highlighted. The dvdrental-db-migration run has a status of In progress.](./media/azure-postgresql-migrate-monitor.png)
 
-9. Once complete, confirm that the status shows **Succeeded** and that no errors were reported.
+9. [] Select `dvdrental-db-migation` in the list to view the validation and migration details while monitoring.
+
+    ![The details page for the dvdrental-db-migation validate and migrate run as displayed.](media/azure-postgresql-migate-monitor-details.png)
+
+10. Once complete, confirm that the status shows **Succeeded** and that no errors were reported.
 
     ![The Migration dialog is displayed, with the dvdrental-db-migration run showing a status of Succeeded.](./media/azure-postgresql-migrate-success.png)
 
@@ -442,3 +446,26 @@ In this task, you will connect to the target Azure database and run few a simple
     The query should return 16 rows from the `sales_by_film_category` view, confirming that the database was successfully migrated.
 
     > If the query fails or returns no results, revisit the migration status and validation report to identify any issues.
+
+===
+
+# Task 5: Post-migration updates
+
+## Introduction
+
+TODO: Write a short introduction about enabling Azure-only features to improve preformance and security, such as Defender for Open-Source Relational Databases (PostgreSQL), enabling high-availability, and other features that become usable once the database is running in Azure. Talk about the features of Defender for Databases, such as advanced threat detection.
+
+## Description
+
+In this task, you will improve the security of your Azure Database for PostgreSQL flexible server database by enabling Microsoft Defender for Open-Source Relational Databases.
+
+## Success criteria
+
+
+
+## Learning resources
+
+- [What is Microsoft Defender for Cloud?](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-cloud-introduction)
+- [Overview of Microsoft Defender for Open-Source Relational Databases](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-databases-introduction)
+
+## Key tasks

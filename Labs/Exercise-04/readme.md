@@ -122,6 +122,7 @@ In this task, you will download and configure the self-hosted integration runtim
 - The self-hosted integration runtime has been successfully installed and registered using the authentication key from Azure DMS.
 - The SHIR is running on the Lab VM, enabling secure connectivity to the on-premises SQL Server instance.
 - The SHIR node appears in the Azure portal with a status of **Online**, confirming that it is ready to facilitate migration.
+- The IP address of the SHIR has been added to the firewall of the Azure SQL database.
 
 ## Learning resources
 
@@ -152,7 +153,7 @@ In this task, you will download and configure the self-hosted integration runtim
 
 6. [] When the download completes, run the MSI to install the integration runtime.
 
-7. [] Complete the installation by selecting **Next** on each screen of the setup dialog, and then select **Finish** on the final screen. This will launch the **Microsoft Integration Runtime Configuration Manager**.
+7. [] Complete the installation, accepting the license agreement and default values on each screen. On the final screen, select **Finish**, which will launch the **Microsoft Integration Runtime Configuration Manager**.
 
 8. [] Return to the Azure portal and copy the **Authentication key** from the **Configure integration runtime** dialog (use **key 1**).
 
@@ -170,24 +171,57 @@ In this task, you will download and configure the self-hosted integration runtim
 
     ![The Register Integration Runtime (Self-hosted) form shows that the Integration Runtime (Self-hosted) node has been registered successfully.](./media/integration-runtime-registered-successfully.png)
 
-12. [] Return to the **Integration runtime** blade in the Azure portal, close the dialog, select **Refresh**, and confirm the node status is **Online**.
+12. [] Select **Close** to exit the Microsoft Integration Runtime Configuration Manager.
+
+13. [] Return to the **Integration runtime** blade in the Azure portal, select **Ok** to close the **Configuration integration runtime** dialog, then select **Refresh** on the **Integration runtime** page and confirm the node status appears as **Online**.
 
     ![The refresh button and integration runtime with a status of online are highlighted on the Integration Runtime blade of the Azure Database Migration Service.](./media/azure-dms-integration-runtime-online.png)
 
-13. TODO: Include steps here to get IP address of SHIR (running on Lab VM) and add that to the SQL Server firewall, since it doesn't allow Azure services as configured in the environment.
+14. [] Before leaving the **Integration runtime** blade, copy the IP address of the SHIR node so it can be added to the firewall of your Azure SQL Server.
+
+    ![The IP address of the SHIR node is highlighted under node details on the Integration runtime page.](media/azure-dms-integration-runtime-ip-address.png)
+
+15. To get to your SQL server resource, enter "sql" in the Azure search bar and select your SQL server under **Resources** in the search results.
+
+    ![In the Azure search bar, "sql" is entered and the SQL server resource is highlighted in the results.](media/azure-search-sql.png)
+
+16. On the SQL server blade, expand **Security** in the left menu, select **Networking**, then select **Add a firewall rule**.
+
+    ![The Networking blade of the SQL server resources is displayed, with the Add a firewall rule button highlighted.](media/azure-sql-server-networking.png)
+
+17. In the **Add a firewall rule** dialog, enter `SHIR` for the rule name, then paste the IP address of your SHIR node into both the start and end IP boxes, and select **OK**.
+
+    ![The Add a firewall rule dialog is displayed with SHIR entered in the Rule name file and the IP address of the SHIR node entered for the start and end IP addresses. The steps are labeled 1-3.](media/azure-sql-server-add-firewall-rule.png)
+
+18. Select **Save** on the Network blade to create the firewall rule.
+
 ===
 
-# Task 3: Verify migration readiness
+# Task 3: Verify Migration Readiness
 
 ## Introduction
 
-TODO: Determine if there are any actual steps that must be completed before migration.
+Before migrating a SQL Server workload to Azure SQL Database, it is recommended to perform a thorough readiness check. This typically includes running an Azure Migrate assessment to identify potential compatibility issues, performance considerations, and remediation steps. You peformed the assessment phase in Exercise 1, and will review the results in this task.
+
+In addition to reviewing assessment findings, it’s important to verify that the version of SQL Server running on the source VM is supported by the Azure Database Migration Service (DMS). You should also confirm that a valid SQL login with sufficient privileges is available for the migration process.
+
+Typical readiness checks include:
+
+- Confirming SQL Server version compatibility with DMS  
+- Reviewing Azure Migrate assessment results  
+- Identifying and exporting SQL-specific metadata such as:
+  - Database count  
+  - Table count  
+  - SQL logins and roles  
 
 ## Description
 
-In this task, you will confirm the version of the source SQL Server to ensure it is a supported version.
+In this task, you verify that the source SQL Server version is supported by Azure Database Migration Service and review the Azure Migrate assessment report for any findings that could impact migration.
 
 ## Success criteria
+
+- You verified that the SQL Server version on the VM is supported by DMS  
+- You reviewed the Azure Migrate assessment report and noted any findings relevant to the migration
 
 ## Learning resources
 
@@ -196,14 +230,29 @@ In this task, you will confirm the version of the source SQL Server to ensure it
 
 ## Key tasks
 
-Using SQL Query
-•	Login to SQL Server and run the query
-SELECT @@version
+TODO: Add steps for opening and reviewing the Azure Migrate assessment. Determine if the Azure Migrate assessment covers identifying the SQL server version, and if so, remove the steps below and just have them review the assessment report.
 
-Test the connectivity between Source and the Target	 
-Proper networking setup is essential to ensure successful connectivity between the source and target during migration. It is required for DMS functionality.
-Check for SQL specific information
-Check and export any SQL specific information like (Db Counts, Table Counts, SQL Logins..etc..)
+1. On the Lab VM, open **Hyper-V Manager** and connect to the `SQLPTO2022` VM.
+
+    ![](media/hyper-v-manager-sql-connect.png)
+
+2. Log in with the **Administrator** account, using the password provided on the **Resources** tab of the lab instrutions panel.
+
+3. On the **SQLPTO2022** VM, open SQL Server Management Studio (SSMS) from the desktop or Start menu and log in using **Windows Authentication** and the `SQLPTO\Administrator` account.
+
+    ![](media/ssms-windows-auth-administrator.png)
+
+4. In the SSMS **Object Explorer**, right-click the `SQLPTO` server object and select **New Query** from the context menu.
+
+    ![](media/ssms-object-explorer-server-new-query.png)
+
+5. In the query window, paste the following `SELECT` statement, run the query using the **Execute** button on the toolbar, and review the SQL Server version in the results panel.
+
+    ```sql
+    SELECT @@version
+    ```
+
+    ![](media/ssms-query-version.png)
 
 ===
 
@@ -211,7 +260,11 @@ Check and export any SQL specific information like (Db Counts, Table Counts, SQL
 
 ## Add db_owner role to source user
 
+TODO: Remove this task since we will use the `sa` account. 
+
 Because we want to migrate both the database schema and the data it contains, we need to ensure the user account being used for the migration has the `db_owner` role. If only data is being copied, this account needs only `db_datareader`.
+
+ You will also create a `migrationuser` account in the source database to ensure DMS is able to access the database. This account must be a member of the `db_owner` role to allow both the schema and data to be migrated. For data-only migrations, only `db_datareader` is required.
 
 TODO: Add steps for logging into the SQLPTO2022 VM, opening SSMS, and running the below query to create a migration user. Log into SSMS with Windows Auth for the SQLPTO\Administrator account.
 
@@ -220,7 +273,11 @@ TODO: Explain that a SQL Auth user is being created to use because it is simpler
 ```sql
 USE master;
 CREATE LOGIN migrationuser WITH PASSWORD = 'P@$$w0rd1';
+-- Create user in master database for discovery of databases
+CREATE USER migrationuser FOR LOGIN migrationuser;
+ALTER ROLE db_owner ADD MEMBER migrationuser;
 
+-- Create user in AdventureWorksPTO database for migration
 USE AdventureWorksPTO;
 CREATE USER migrationuser FOR LOGIN migrationuser;
 ALTER ROLE db_owner ADD MEMBER migrationuser;
@@ -238,11 +295,9 @@ You should see `migrationuser` listed as a `SQL_USER`.
 
 ===
 
-# Task 4: Create a migration project
+# Task 5: Create a migration project
 
 ## Introduction
-
-
 
 ### Additional context: Online migration and real-world networking
 
@@ -262,103 +317,92 @@ In this task, you will create a new migration project in the Azure Database Migr
 
 - [Migrate SQL Server to Azure SQL Database (offline)](https://learn.microsoft.com/data-migration/sql-server/database/database-migration-service?toc=%2Fazure%2Fdms%2Ftoc.json&tabs=portal)
 - [Azure Database Migration Service supported scenarios](https://learn.microsoft.com/azure/dms/resource-scenario-status)
-
-## Key tasks
-
-1. [] Return to the Azure Database Migration Service blade in the Azure portal, select the **Overview** item from the left menu, then select **New Migration**.
-
-    ![](./media/azure-dms-new-migration.png)
-
-
-**Connect to source SQL Server**
-
-SQL Credentials:
-Use private IP of SQL VM (can use private because the connection happens from the SHIR.)
-SQL Auth
-Use private IP address of SQLPTO2022 VM
-Username: migrationuser XXX SQLPTO\Administrator
-Password: P@$$w0rd1
-Encrypt connection & Trust server certificate -- Uncheck both of these!
-
-**Select databases for migration**
-
-Select AdventureWorksPTO
-
-**Connect to target Azure SQL Database**
-
-Subscription and resource group: Keep defaults
-Target Azure SQL Database Server: Keey default of the existing Azure SQL Server in the target Azure subscription.
-Target server name: Keep default
-Authentication type: SQL Authentication
-User name: sqladminuser
-Password: !7*sdlkqafh&%$
-
-**Map source and target databases**
-
-Select `mySampleDB` as the Target database.
-
-On the **Select database tables to migrate** tab of the Azure SQL Database Offline Migration Wizard, expand the list of AdventureWorksPTO tables adn review the tables selected for migration.
-
-===
-
-# Task 5: Monitor the migration
-
-## Introduction
-
-## Description
-
-In this task, you monitor the migration from the Azure portal.
-
-## Success criteria
-
-## Learning resources
-
 - [Monitor database migration progress in the Azure portal](https://learn.microsoft.com/azure/dms/migration-using-azure-data-studio?tabs=azure-sql-mi#monitor-database-migration-progress-in-the-azure-portal)
 
 ## Key tasks
 
-===
+1. [] Return to the **Azure Database Migration Service** blade in the Azure portal, select the **Overview** item from the left menu, then select **New Migration**.
 
-TODO: Determine timing to see if a "Monitor the migration" task makes sense, or if it should just be part of the "Run the migration task." If it does make sense, rename "Run the migration" to "Start the migration."
+    ![](./media/azure-dms-new-migration.png)
 
-TODO: Point out possible schema migration errors: 
+2. On the **Select new migration scenario** blade, choose `Azure SQL Database` for the **Target server type** and select **Select**.
+
+    ![](media/azure-dms-select-scenario.png)
+
+3. On the **Source details** of the Azure SQL Database Offline Migration Wizard:
+
+    - **Source Infrastruture Type**: Choose `Virtual Machine`
+    - **Location**: Select the location of your `RG-Techsummit` resource group
+    - **SQL Server Instance Name**: Enter `SQLPTO2022_SQLPTO`
+    - Select **Next: Connect to source SQL Server**
+
+    ![](media/dms-wizard-source-details.png)
+
+4. On the **Connect to source SQL Server** tab:
+
+    - **Source server name**: Paste the private IP address of the `SQLPTO2022` VM, which you can copy from the `VM_IPs.txt` file on the desktop and the Lab VM.
+    - **Authentication type**: Choose `SQL Authentication`
+    - **User name**: `sqladmin`
+    - **Password**: `P@$$w0rd1` TODO: Instruct users to use the same password as the Administrator login for the SQL VM
+    - Ensure both **Encrypt connection** and **Trust server certificate** are checked
+    - Select **Next: Select databases for migration**
+
+    ![](media/dms-wizard-connect-to-source-sql-server.png)
+
+    > If you recieve a **Migration settings validation error**, verify the user name and password, the source server IP address, and that you have added the IP address of the self-hosted integration runtime (SHIR) host to the Azure SQL Server firewall.
+
+5. On the **Select databases for migration** tab, check the box for the **AdventureWorksPTO** database and select **Next: Connect to target Azure SQL Database**.
+
+    ![](media/dms-wizard-select-databases-for-migration.png)
+
+6. On the **Connect to target Azure SQL Database** tab:
+
+    - **Authentication type**: Choose `SQL Authentication`
+    - **User name**: `sqladminuser`
+    - **Password**: `P@$$w0rd1` TODO: Instruct users to use the password from the lab instructions.
+    - Select **Next: Map source and target databases**
+
+    ![](media/dms-wizard-connect-to-target-database.png)
+
+7. On the **Map source and target databases** tab, choose `mySampleDB` as the **Target database** and select **Next: Select database tables to migrate**.
+
+    ![](media/dms-wizard-map-source-and-target-databases.png)
+
+8. On the **Select database tables to migrate** tab, expand the list of AdventureWorksPTO tables to review the tables selected for migration, then select **Next: Database and migration summary**.
+
+    ![](media/dms-wizard-select-tables-to-migrate.png)
+
+9. On the **Database migration summary** tab, review the migration details and select **Start migration**.
+
+    ![](media/dms-wizard-migration-summary.png)
+
+10. On the **Azure Database Migration Service** blade, view the detailed migration report by selecting the IP address in the **Source name** field.
+
+    ![](media/dms-migrations-ip-address.png)
+
+11. The migration will take several minutes to run. Select **Refresh** in the toolbar on the migration details screen until the migration has completed and shows a status of success.
+
+12. TODO: Point out possible schema migration errors:
 
     - Deployed failure: Cannot use a CONTAINS or FREETEXT predicate on table or indexed view 'HumanResources.JobCandidate' because it is not full-text indexed. Object element: [dbo].[uspSearchCandidateResumes].
     - Note this is ok and we will move on. 
     - TODO: This might be something that would be pointed out by doing an Assessment in Azure Migrate first? So, we could correct it before starting the migration?
 
+13. To verify the migration, navigate to the `mySampleDatabase` Azure SQL Database resource in the Azure portal, select the **Query editor (preview)** item in the left naviation menu, enter the password for the `sqladminuser` account in the **SQL server authentication** form, and select **OK**.
+
+    ![](media/azure-sql-database-query-editor.png)
+
+14. Expand the tables folder for `mySampleDB` and observe the `HumanResources` and `Person` tables added by the migration. In the query editor, run the following query and observe the results:
+
+    ```sql
+    SELECT * FROM Person.Person
+    ```
+
+    ![](media/azure-sql-migration-validation.png)
+
 ===
 
-# Task 6: Post-migration (TODO: Rename to Post-migration and combine with the next task?)
-
-## Introduction
-
-TODO: Rewrite this intro to focus only on verifying completeness and data accuracy. The lab doesn't provide enough time to go through all recommended post-migration
-
-After you have successfully completed the migration stage, go through the following post-migration tasks to ensure that everything is functioning smoothly and efficiently.
-
-The post-migration phase is crucial for reconciling any data accuracy issues and verifying completeness, as well as addressing performance issues with the workload.
-
-## Description
-
-## Success criteria
-
-## Learning resources
-
-- [SQL server post-migration steps](https://learn.microsoft.com/data-migration/sql-server/database/guide?toc=%2Fazure%2Fazure-sql%2Ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json&view=azuresql#post-migration)
-
-## Key tasks
-
-1. [] Update statistics? - Run a full scan after the migration is complete.
-
-2. [] TODO: Preform tests: Add steps to use the Query Editor in the Azure portal to log in as `sqladminuser` and look at tables and run a few queries.
-
-3. Enable advanced features
-   1. Defender (already enabled?)
-   2. Enable threat detection in Defender.
-===
-
-# Task 7: Enable Defender for Cloud for Databases
+# Task 6: Enable Defender for Cloud for Databases
 
 ## Introduction
 
@@ -376,13 +420,15 @@ In this task, you will enable Defender for Cloud for Databases on your newly mig
 
 ## Learning resources
 
+- [SQL server post-migration steps](https://learn.microsoft.com/data-migration/sql-server/database/guide?toc=%2Fazure%2Fazure-sql%2Ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json&view=azuresql#post-migration)
 - [Overview of Microsoft Defender for Databases](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-databases-overview)
 - [Overview of Microsoft Defender for Azure SQL Databases](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-sql-introduction)
 - [SQL Advanced Threat Protection](https://learn.microsoft.com/azure/azure-sql/database/threat-detection-overview)
 
 ## Key tasks
 
-1. Enable Defender
-2. Run a vulnerability assessment?
+1. Enable advanced features
 
-
+   1. Defender (already enabled?)
+   2. Enable threat detection in Defender.
+   3. Run a vulnerability assessment?
