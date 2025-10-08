@@ -414,7 +414,7 @@ When you enable Defender for Azure SQL Databases, all supported resources within
 
 ## Description
 
-In this task, you will enable Defender for Cloud for Databases on your newly migrated SQL database.
+In this task, you will enable SQL vulnerability assessments in Microsoft Defender for Cloud on your newly migrated SQL database.
 
 ## Success criteria
 
@@ -427,8 +427,22 @@ In this task, you will enable Defender for Cloud for Databases on your newly mig
 
 ## Key tasks
 
-1. Enable advanced features
+1. Navigate to the `mySampleDB` Azure SQL Database resource in the Azure portal and select **Microsoft Defender for Cloud** under Security in the left navigation menu.
 
-   1. Defender (already enabled?)
-   2. Enable threat detection in Defender.
-   3. Run a vulnerability assessment?
+2. Select **Enable SQL vulnerability ...** under **Enablement Status**.
+
+    ![](media/azure-sql-defender-enable-vulnerability-assessments.png)
+
+3. After vulnerability assessments are enabled, scroll down on the page and select the **View additional findings in Vulnerability Assessment** link.
+
+    ![](media/azure-sql-defender-additional-findings.png)
+
+4. On the **Vulnerability Assessment** page, select **Scan** on the toolbar, then select **Refresh** when you get a notification that the scan has completed.
+
+    ![](media/azure-sql-defender-vulnerability-assessment-scan.png)
+
+5. Review the assessment by selecting the **Findings** and **Passed** tabs and reviewing the items listed.
+
+    ![](media/azure-sql-defender-vulnerability-assessment-findings.png)
+
+    ![](media/azure-sql-defender-vulnerability-assessment-passed.png)
