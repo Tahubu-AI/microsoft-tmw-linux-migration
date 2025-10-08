@@ -449,23 +449,41 @@ In this task, you will connect to the target Azure database and run few a simple
 
 ===
 
-# Task 5: Post-migration updates
+# Task 5: Post-migration Updates
 
 ## Introduction
 
-TODO: Write a short introduction about enabling Azure-only features to improve preformance and security, such as Defender for Open-Source Relational Databases (PostgreSQL), enabling high-availability, and other features that become usable once the database is running in Azure. Talk about the features of Defender for Databases, such as advanced threat detection.
+Once your PostgreSQL database has been migrated to Azure, you can take advantage of Azure-native features to enhance performance, security, and availability. These capabilities are not available in on-premises environments and are designed to help you operate more securely and efficiently in the cloud.
+
+One of the most impactful features is **Microsoft Defender for Open-Source Relational Databases**, which provides advanced threat protection for Azure Database for PostgreSQL. Defender continuously monitors for suspicious activity, potential vulnerabilities, and anomalous access patterns. It also integrates with Microsoft Defender for Cloud to provide centralized security recommendations and alerts.
+
+Other post-migration enhancements include enabling high availability, configuring automated backups, and applying performance tuning recommendations, all of which help ensure your database is resilient, secure, and optimized for production workloads.
 
 ## Description
 
-In this task, you will improve the security of your Azure Database for PostgreSQL flexible server database by enabling Microsoft Defender for Open-Source Relational Databases.
+In this task, you review the Microsoft Defender for Open-Source Relational Databases configuration and how it can help to improve the security posture of your Azure Database for PostgreSQL flexible server.
 
 ## Success criteria
 
-
+- You have reviewed the Microsoft Defender for Open-Source Relational Databases configuration in the Azure portal.
 
 ## Learning resources
 
 - [What is Microsoft Defender for Cloud?](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-cloud-introduction)
 - [Overview of Microsoft Defender for Open-Source Relational Databases](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-databases-introduction)
 
-## Key tasks
+## Key Tasks
+
+1. Navigate to the Azure Database for PostgreSQL resource in the Azure portal and select **Microsoft Defender for Cloud** under **Security** in the left navigation menu.
+
+    > Microsoft Defender for Cloud provides advanced threat protection for Azure Database for PostgreSQL. When enabled, it continuously monitors for unusual activity, potential vulnerabilities, and known attack patterns. Defender for Open-Source Relational Databases helps secure your PostgreSQL environment by integrating with Microsoft Defender for Cloud to surface alerts, recommendations, and remediation guidance.
+
+2. On the **Microsoft Defender for Cloud** blade, select **Check for alerts on this resource in Microsoft Defender for Cloud**.
+
+    ![](media/azure-postgresql-defender.png)
+
+3. Review the **Security alerts** page for your PostgreSQL resource.
+
+    > The security alerts page displays any detected threats or suspicious activity, such as brute-force login attempts, SQL injection patterns, or anomalous access behavior. You can view alert severity, affected resources, and recommended actions. This page helps you quickly assess and respond to potential risks in your PostgreSQL environment.
+
+    ![](media/azure-postgresql-defender-security-alerts.png)
