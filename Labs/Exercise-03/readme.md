@@ -1,4 +1,4 @@
-# Exercise 2: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
+# Exercise 3: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
 
 Contoso Inc. is modernizing its infrastructure to improve scalability, security, and operational efficiency. As part of this initiative, the company plans to migrate its legacy [INSERT_NAME] application to Azure. This application relies on a PostgreSQL database named `dvdrental`, which currently resides on an on-premises Linux VM. To ensure a smooth transition, Contoso will use the built-in migration service in Azure Database for PostgreSQL - Flexible Server to move the database to a managed Azure environment.
 

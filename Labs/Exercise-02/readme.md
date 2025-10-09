@@ -1,4 +1,4 @@
-# Exercise 4: SQL Server migration to Azure SQL Database
+# Exercise 2: SQL Server migration to Azure SQL Database
 
 Contoso Inc. is continuing its infrastructure modernization journey by migrating legacy workloads to Azure in order to improve scalability, security, and operational efficiency. As part of this initiative, the company plans to move its on-premises SQL Server databases to Azure SQL Database to take advantage of the fully managed platform that offers built-in high availability, automated updates, and elastic scalability.
 

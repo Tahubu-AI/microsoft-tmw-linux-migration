@@ -1,4 +1,4 @@
-# Exercise 3: Enable replication of Linux VM to App Service Plan
+# Exercise 4: Enable replication of Linux VM to App Service Plan
 
 In this exercise, you will deploy an App Service Plan in Azure and migrate a web application to the App Service Plan. You will then configure the web application to connect to the migrated PostgreSQL database.
 
