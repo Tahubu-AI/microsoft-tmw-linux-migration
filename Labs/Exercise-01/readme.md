@@ -428,6 +428,7 @@ In this task, you configure discovery credentials and host details in the Azure 
 
 - [Discover servers running on Hyper-V with Azure Migrate: Discovery and assessment](https://learn.microsoft.com/azure/migrate/tutorial-discover-hyper-v?view=migrate-classic)
 - [Discover installed software inventory, web apps, and SQL Server instances and databases](https://learn.microsoft.com/azure/migrate/how-to-discover-applications?view=migrate-classic)
+- [Provide server credentials to discover software inventory, dependencies, web apps, and SQL Server instances and databases](https://learn.microsoft.com/azure/migrate/add-server-credentials?view=migrate-classic)
 
 ## Key tasks
 
@@ -536,29 +537,30 @@ In this task, you configure discovery credentials and host details in the Azure 
 
 ===
 
-# Task 6: Perform Assessments of discovered resources XXX and Replicate the Linux Ubuntu VM
-
-TODO: Split this into two tasks: Assessments, and Replicate the Linux Ubuntu VM
+# Task 6: Perform Assessments of discovered resources
 
 ## Introduction
 
-TODO: Need to update this one to just be the assessemnts, and add mention that the Linux-Ubuntu VM and both databases (PostgreSQL and SQL) will be assessed.
+With discovery complete, Contoso’s migration team is ready to assess the readiness of key workloads for migration to Azure. This includes the Linux-based personnel system running on `LinuxLabVM-Ubuntu`, as well as SQL Server and PostgreSQL database instances discovered through guest-level inspection.
 
-With discovery complete, Contoso’s migration team is ready to assess, replicate, and migrate its Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You’ll begin by creating an assessment to validate sizing and compatibility, and then configure replication using the Azure Site Recovery provider.
+Azure Migrate assessments help estimate sizing, identify compatibility issues, and surface remediation guidance. By assessing both infrastructure and workload-level details, Contoso can make informed decisions about migration tooling, target platforms, and performance expectations.
 
 ## Description
 
-In this task, you create an assessment for the Linux VM in your Azure Migrate project and configure replication using the Azure Site Recovery provider and registration key.
+In this task, you create assessments for the Linux VM, SQL Server, and PostgreSQL workloads discovered by the Azure Migrate appliance. These assessments will help validate sizing, compatibility, and migration readiness for each resource.
 
-## Success criteria
+## Success Criteria
 
-- You created the assessment successfully in the Azure portal  
-- You downloaded the Azure Site Recovery provider and registration key  
-- You completed the replication process successfully  
+- You created assessments for the Linux VM, SQL Server, and PostgreSQL workloads in the Azure portal  
+- You reviewed the assessment results for sizing and compatibility recommendations
 
 ## Learning resources
 
-- [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic)
+- [Azure Migrate Assessment overview](https://learn.microsoft.com/azure/migrate/concepts-overview?view=migrate)
+- [Azure Migrate application and code assessment](https://learn.microsoft.com/azure/migrate/appcat/overview?view=migrate-classic)
+- [Create an Azure VM assessment](https://learn.microsoft.com/azure/migrate/how-to-create-assessment?view=migrate)
+- [Assess SQL instances for migration to Azure SQL](https://learn.microsoft.com/azure/migrate/tutorial-assess-sql?view=migrate)
+- [Assess PostgreSQL workloads for migration using Azure Migrate](https://learn.microsoft.com/azure/migrate/tutorial-assess-postgresql?view=migrate)
 
 ## Key tasks
 
@@ -570,28 +572,63 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
     ![On the Create assessment Basic's tab, the assessment name and Add workloads button are highlighted.](media/create-assessment-basics.png)
 
-3. [] On the **Select workloads** page:
+3. [] On the **Select workloads** page, check the boxes next to the following items:
 
-    - Expand the `LinuxLabVM-CentOS-PostgreSQL` VM to see the discovered databases, and check the boxes next to the `localhost:5432` (PostgreSQL) database
-    - Check the box next to the `LinuxLabVM-Ubuntu` VM
-    - Expand the `SQLPTO2022` VM to see the discovered databases, and check the box next to the `MSSQLSERVER` database
+    - `LinuxLabVM-CentOS-PostgreSQL` (this will automatically check the box next to the `localhost:5432` (PostgreSQL) database installed on that server)
+    - `LinuxLabVM-Ubuntu`
+    - `SQLPTO2022` (this will automatically check the box next to the `MSSQLSERVER` database installed on that server)
     - Select **Add**
 
     ![On the Select workloads page, the boxes next to LinuxLabVM-Ubuntu, localhost:5432 (PostgreSQL), and MSSQLSERVER are checked and highlighted and Add button is highlighted.](./media/azure-migrate-assessment-workloads.png)
 
 4. [] Select **Next** and verify that **Sizing criteria** is set to `Performance-based`.
 
-5. [] Select **Review + Create assessment**, then select **Create** on the review tab.
+5. [] Select **Next** to go to the **Advanced** tab.
 
-6. [] On the **Assessments** blade, select **Refresh** after receiving the notification that the assessment was created.
+6. [] On the **Advanced** tab, select **Edit default** next to **SQL Server**.
+
+    ![Edit default SQL Server settings](./media/azure-migrate-edit-sql-default.png)
+
+7. [] On the **SQL Server settings** page, update the **Target services** by unchecking **Azure SQL MI (Managed Instance)** and checking **Azure SQL Database**, and then select **Save**.
+
+    ![The SQL Server settings are populated with the values specified above.](./media/sql-server-settings.png)
+
+8. [] Select **Review + Create assessment**, then select **Create** on the review tab.
+
+9. [] On the **Assessments** blade, select **Refresh** after receiving the notification that the assessment was created.
 
     ![The newly created assessment is displayed on the Assessments blade.](./media/41-AssessmentReady.png)
 
-7. [] Expand **Execute** in the left menu, select **Migrations**, and on the Migration blade, select **Discover more**.
+===
+
+# Task 7: Replicate the Linux Ubuntu VM to Azure
+
+## Introduction
+
+With the assessment complete, Contoso’s migration team is ready to replicate the Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You’ll configure replication using the Azure Site Recovery provider and registration key.
+
+## Description
+
+In this task, you will download the Azure Site Recovery provider and registration key, install the provider on the Hyper-V host, and configure replication for the `LinuxLabVM-Ubuntu` VM.
+
+## Success criteria
+
+- You downloaded and installed the Azure Site Recovery provider on the Hyper-V host
+- You configured replication for the `LinuxLabVM-Ubuntu` VM
+- You completed the replication process successfully
+
+## Learning resources
+
+- [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic)
+- [Migrate Hyper-V VMs to Azure](https://learn.microsoft.com/azure/migrate/tutorial-migrate-hyper-v?view=migrate-classic)
+
+## Key tasks
+
+1. [] On the Azure Migrate Project page, expand **Execute** in the left menu, select **Migrations**, and on the Migration blade, select **Discover more**.
 
     ![The Discover more button is highlighted on the Migrations blade.](./media/42-Migration-dicover.png)
 
-8. [] On the **Discover** blade:
+2. [] On the **Discover** blade:
 
    - **Where to you want to migrate to?**: Choose `Azure VM`
    - **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
@@ -601,50 +638,50 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
     ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
 
-9.  [] When the deployment completes, under **1. Prepare Hyper-V host servers**:
+3. [] When the deployment completes, under **1. Prepare Hyper-V host servers**:
 
    1. Select the **Download** link to download the Hyper-V replication provider software installer.
    2. Select the **Download** button to download the registration key in step 2 in the screenshot.
 
-    ![The Download link and button are highlighted and numbers 1 and 2 under Prepaer Hyper-V host servers.](./media/44-Download.png)
+    ![The Download link and button are highlighted and numbers 1 and 2 under Prepare Hyper-V host servers.](./media/44-Download.png)
 
     > **IMPORTANT**: You must be on the Lab VM when you download the software and the key above so that your Hyper-V host is configured correctly.
 
-10. [] Run the `AzureSiteRecoveryProvider.exe` that you just downloaded.
+4. [] Run the `AzureSiteRecoveryProvider.exe` that you just downloaded.
 
-11. [] Select **On (recommended)** and **Next**.
+5. [] Select **On (recommended)** and **Next**.
 
-12. [] Install into the default location and select **Install**.
+6. [] Install into the default location and select **Install**.
 
     > **IMPORTANT**: Do NOT select **Finish** yet.
 
-13. [] After the installation is complete, select **Register**.
+7. [] After the installation is complete, select **Register**.
 
-14. [] Browse to the registration key file you downloaded and select **Next**.
+8. [] Browse to the registration key file you downloaded and select **Next**.
 
     ![Screenshot of the downloaded registration key file.](./media/45-Keyfile.png)
 
-15. [] Select **Connect directly to Azure Site Recovery without a proxy server** and select **Next**.
+9. [] Select **Connect directly to Azure Site Recovery without a proxy server** and select **Next**.
 
-16. [] After about 60 seconds the configuration will complete.
+10. [] After about 60 seconds the configuration will complete.
 
-17. [] Select **Finish**.
+11. [] Select **Finish**.
 
-18. [] Close the blade and return to the **Discover more** page on the Migrations blade.
+12. [] Close the blade and return to the **Discover more** page on the Migrations blade.
 
     > You should see that you have one connected registration.
 
     ![The connected registrations are highlighted on the Discover more page.](./media/46-connected-registration.png)
 
-19. [] Select **Finalize registration**.
+13. [] Select **Finalize registration**.
 
     > This step may take up to 3 minutes.
 
-20. [] Return to the Migration Project blade, expand **Execute** in the left menu, select **Migrations**, and select the **Replicate** button.
+14. [] Return to the Migration Project blade, expand **Execute** in the left menu, select **Migrations**, and select the **Replicate** button.
 
     ![The Replicate button is highlighted on the Migrations blade.](./media/47-Replicate.png)
 
-21. [] On the **Specify intent** page:
+15. [] On the **Specify intent** page:
 
     - **What do you want to migrate?**: Choose `Servers or virtual machines (VM)`
     - **Where do you want to migrate to?**: Select `Azure VM`
@@ -653,7 +690,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
     ![The Specify intent page is populated as specified above.](./media/48-SpecifyIntent.png)
 
-22. [] On the **Replicate** Virtual machines tab:
+16. [] On the **Replicate** Virtual machines tab:
 
     - **Target VM security type**: Choose `Standard or Trusted Launch Virtual machines`
     - **Import migration settings from an assessment**: Select `Yes, apply migration settings from an Azure Migrate assessment`
@@ -663,7 +700,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
     ![The Replicate Virutal machines tab is populated with the values specified above and the steps are numbered 1-4.](./media/49-ReplicateVM.png)
 
-23. [] On the **Target settings** tab:
+17. [] On the **Target settings** tab:
 
     - **Resource group**: Select `rg-AzMigrateLab`
     - **Replication storage account**: Select the storage account that was created for you
@@ -680,7 +717,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
     >
     > The above steps should remove the error on the `Replicate` blade's Target settings tab and enable you to move to the next step. (You will need to redo the replicate steps after the IAM has been fixed).
 
-24. [] On the **Compute** tab:
+18. [] On the **Compute** tab:
 
     - Select `Linux` in the **OS Type** drop down
     - Select any availability
@@ -689,7 +726,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
     ![Screenshot of the Compute tab, with the OS Type and its value of Linux highlighted.](./media/52-OSType.png)
 
-25. [] Accept the default values on the remaining tabs, then select **Start** on the **Review + start replication** tab.
+19. [] Accept the default values on the remaining tabs, then select **Start** on the **Review + start replication** tab.
 
     > **NOTE**: The replication step can take 25 minutes or more. You can monitor the progress by opening the **Replications Summary** and selecting **Jobs** in the left menu under **Migration**.
     >
@@ -697,7 +734,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 ===
 
-# Task 7: Migrate the Linux Ubuntu VM
+# Task 8: Migrate the Linux Ubuntu VM
 
 ## Introduction
 
