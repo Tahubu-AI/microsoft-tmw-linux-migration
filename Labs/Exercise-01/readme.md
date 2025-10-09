@@ -46,23 +46,19 @@ In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and tes
 
 2. [] Confirm that all five virtual machines are listed and show a status of **Running** in the **Virtual Machines** panel of Hyper-V Manager.
 
-    ![In Hyper-V Manager, the five virtual vachines with a running status are highlighted.](./media/02-five-VMs-Running.png)
-
-    > For this exercise, you will use the `LinuxLabVM-Ubuntu` and `AzMigrateAppliance-Test` virtual machines.
+    ![In Hyper-V Manager, the five virtual machines with a running status are highlighted.](./media/02-five-VMs-Running.png)
 
 3. [] Select the `LinuxLabVM-Ubuntu` in the list and choose **Connect** in the right-hand menu.
 
-    ![In Hyper-V Manager, the LinuxLabVM-Ubuntu VM is highlighted in the Virtual Machines list and the Connect action is highlighted in the Actions panel.](./media/03-Connect.png)
+    ![In Hyper-V Manager, the LinuxLabVM-Ubuntu VM is highlighted in the Virtual Machines list and the Connect action is highlighted in the Actions panel.](./media/hyper-v-managed-connect-ubuntu.png)
 
 4. [] At the Ubuntu login screen:
 
-   - Select the `administrator` account  
-   - Enter the password provided on the **Resource** tab of the lab instructions  
-   - Press **Enter** to log in to the Ubuntu machine  
+   - Select the `administrator` account
+   - Enter `Pa$$w0rd` for the password
+   - Select **Enter** to log in to the Ubuntu machine
 
-    > Passwords are provided in the **lab instructions** tab. You can enter it manually, or select the **[T]** icon in the instructions to auto-type the password.
-
-5. [] Select the **Show Applications** button at the top left of the Ubuntu VM window, enter `"visual studio"` into the search box, and select **Visual Studio Code** from the search results.
+5. [] Select the **Show Applications** button at the top left of the Ubuntu VM window, enter "visual studio" into the search box, and select **Visual Studio Code** from the search results.
 
     ![The Ubuntu desktop is displayed, with the Show Applications button highlighted. "Visual studio" is entered in the search box and Visual Studio Code is highlighted in the search results. The steps are numbers 1 - 3 to specify the order of operations.](./media/04-VSCode-Ubuntu.png)
 
@@ -150,7 +146,7 @@ In this task, you will run the Azure Migrate preparation script using PowerShell
 
     ![In the PowerShell terminal, the NetworkCategory setting of Private is highlighted.](./media/11-Network-Private.png)
 
-5. [] Open a browser on the Lab VM and navigate to `https://aka.ms/migrate/hyperv/script` to download the `MicrosoftAzureMigrate-Hyper-V.ps1` script.
+5. [] Open a browser on the Lab VM and navigate to <https://aka.ms/migrate/hyperv/script> to download the `MicrosoftAzureMigrate-Hyper-V.ps1` script.
 
     ![Screenshot of the script download URL entered into the address bar in Microsoft Edge.](./media/09-download.png)
 
@@ -170,13 +166,13 @@ In this task, you will run the Azure Migrate preparation script using PowerShell
 
 8. [] Respond to the script prompts as follows:
 
-    - **Do you want to run software from this untrusted publisher?** → `[A] Always run`  
-    - **Enable Remote Management (WinRM)?** → `Y`  
-    - **Make these changes?** → `y`  
-    - **Enable PowerShell Remoting?** → `Y`  
-    - **Configure firewall to open required ports?** → `Y`  
-    - **Use SMB share(s) to store VHDs?** → `Y`  
-    - **Create non-administrator local user for Azure Migrate?** → `Y`  
+    - Do you want to run software from this untrusted publisher?: `[A] Always run`
+    - Enable Remote Management (WinRM)?: `Y`
+    - Make these changes?: `y`
+    - Enable PowerShell Remoting?: `Y`
+    - Configure firewall to open required ports?: `Y`
+    - Use SMB share(s) to store VHDs?: `Y`
+    - Create non-administrator local user for Azure Migrate?: `Y`
     - When prompted for credentials:
       - **Username**: `MigrateLocal`  
       - **Password**: `Pa$$w0rd`
@@ -194,6 +190,8 @@ In this task, you will run the Azure Migrate preparation script using PowerShell
     ```
 
     ![In the PowerShell terminal, the NetworkCategory setting of Public is highlighted.](./media/13-Network-Public.png)
+
+11. [] Close the PowerShell window.
 
 ===
 
@@ -361,30 +359,34 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 
     ![The Discover blade in the Azure portal is displayed, with the settings above highlighted.](./media/22-Discover-steps.png)
 
-    > **IMPORTANT**: Do not download the Azure Migrate appliance VHD or ZIP file.
-
-4. [] After a minute or two, a **Project key** field will appear on the Discover screen.
+4. [] After a minute or two, a **Project key** field will appear on the Discover screen. Copy the project key, then open the `project_key.txt` file on the desktop of the Lab VM and paste the key into the file.
 
     ![The Project Key section of the Discover screen is highlighted.](./media/23-ProjectKey.png)
 
-5. [] Copy the project key, then open the `project_key.txt` file on the desktop of the Lab VM and paste the key into the file.
+    > **IMPORTANT**: Do not download the Azure Migrate appliance VHD or ZIP file.
 
-6. [] Save the updated `project_key.txt` file.
+5. [] Save the updated `project_key.txt` file.
 
-7. [] On the Lab VM, open **Hyper-V Manager** and connect to the `AzMigrateAppliance-Test` VM.
+6. [] On the Lab VM, open **Hyper-V Manager** and connect to the `AzMigrateAppliance-Test` VM.
 
     ![In Hyper-V Manager, the AzMigrateAppliance-Test VM is highlighted in the Virtual Machines list and the Connect action is highlighted in the Actions panel.](./media/24-MigrateVM-Connect.png)
 
-8. [] Log in to the VM using the credentials provided in the lab instructions.
+7. [] Log in to the VM using the follwoing credentials:
 
-9. [] On the `AzMigrateAppliance-Test` VM desktop, open the **Azure Migrate Appliance Configuration Manager**.
+    - **Username**: `Administrator`
+    - **Password**: `Pa$$w0rd`
+
+8. [] On the `AzMigrateAppliance-Test` VM desktop, open the **Azure Migrate Appliance Configuration Manager**.
 
     ![Screenshot of the Azure Migrate Appliance Configuration Manager, with the desktop shortcut highlighted.](./media/25-ApplianceConfigManager.png)
 
-10. [] Under **Verification of Azure Migrate project key**, paste the key from `project_key.txt`, select **Verify**, and confirm the message:  
-    > **Azure Migrate project key has been verified**
+9. [] Under **Verification of Azure Migrate project key**, paste the project key into the **Project key** field and select **Verify**.
 
     ![The Verify button for the Azure Migrate project key is highlighted.](./media/26-KeyVerify.png)
+
+10. It may take a few minutes after selecting verify for the Appliance prerequisites to be installed. If you receive a **New updated installed** notification, select **Refresh** and then you will need to select **Verify** again to proceed.
+
+    ![A New update installed dialog is displayed, with the Refresh button highlighted.](media/appliance-prerequisites-new-update-installed.png)
 
 11. [] Scroll to the **Azure user login and appliance registration status** section and select **Login**.
 
@@ -398,41 +400,44 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 
 14. [] Close the sign-in window and return to the **Appliance Configuration Manager** browser tab.
 
-    > **Note**: It may take up to 10 minutes for the appliance registration to complete.  
-    > You may see an error about Azure artifacts for MySQL discovery not being deployed. This can be safely ignored.
-    >
-    > ![The MySQL error mentioned above is highlighted.](./media/29-ErrorMySQL.png)
+15. [] After successful login, you will see a message that the appliance has been successfully registered.
+
+    ![The Appliance registered successfully message is displayed.](./media/appliance-registered.png)
 
 ===
 
-# Task 5: Discover virtual machines on the Hyper-V Host
+# Task 5: Discover virtual machines and workloads on the Hyper-V host
 
 ## Introduction
 
-Once the Azure Migrate appliance has been registered, it can begin discovering virtual machines hosted on your Hyper-V environment. This discovery process collects metadata about VM configurations, operating systems, and resource usage, which helps Contoso’s IT team assess readiness and plan migration strategies.
+Once the Azure Migrate appliance has been registered, you can begin the discovery process for virtual machines hosted on your Hyper-V environment. The discovery process collects metadata about VM configurations, operating systems, and resource usage, which helps assess readiness and plan migration strategies.
+
+By enabling guest discovery, you can also identify workloads running inside the virtual machines—such as SQL Server, PostgreSQL, and other database platforms. This deeper insight allows you to plan workload-specific migrations and apply appropriate tooling and remediation steps. Guest discovery requires valid credentials and access to the VMs to collect software inventory, dependencies, and workload metadata.
 
 ## Description
 
-In this task, you will configure discovery credentials and sources, then initiate the discovery process. You will use the Azure Migrate Appliance Configuration Manager to provide credentials and host details for your Hyper-V environment. Once configured, the appliance will begin discovering virtual machines and report results to your Azure Migrate project.
+In this task, you configure discovery credentials and host details in the Azure Migrate Appliance Configuration Manager, then initiate the discovery process. With guest discovery enabled, the appliance will identify both virtual machines and the workloads running inside them, including database platforms and installed software. Discovery results are sent to your Azure Migrate project for review.
 
-## Success criteria
+## Success Criteria
 
-- You have started a discovery in the Azure Migrate project  
-- You have reviewed the discovery results in the Azure portal  
+- You started a discovery in the Azure Migrate project  
+- You identified virtual machines and their associated workloads using guest discovery  
+- You reviewed the discovery results in the Azure portal
 
 ## Learning resources
 
 - [Discover servers running on Hyper-V with Azure Migrate: Discovery and assessment](https://learn.microsoft.com/azure/migrate/tutorial-discover-hyper-v?view=migrate-classic)
+- [Discover installed software inventory, web apps, and SQL Server instances and databases](https://learn.microsoft.com/azure/migrate/how-to-discover-applications?view=migrate-classic)
 
 ## Key tasks
 
-1. [] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and continue with Section 2: **Manage credentials and discovery sources**. Select **Add credentials** under **Step 1: Provide Hyper-V host credentials for discovery of Hyper-V VMs**.
+1. [] Return to the **Appliance Configuration Manager** on the `AzMigrateAppliance-Test` VM and continue with Section 2, **Manage credentials and discovery sources**. Select **Add credentials** under **Step 1: Provide Hyper-V host credentials for discovery of Hyper-V VMs**.
 
     ![The Add credentials button is highlighted in the Manage credentials and discovery sources section.](./media/30-Add-Credentials.png)
 
 2. [] In the **Add credentials** popup, enter the following:
 
-    - **Friendly name**: `Lab Credentials`  
+    - **Friendly name**: `LabCredentials`  
     - **Username**: `MigrateLocal`  
     - **Password**: `Pa$$w0rd`  
     - Select **Save**
@@ -464,21 +469,80 @@ In this task, you will configure discovery credentials and sources, then initiat
 
     ![The values above are entered into the Add discovery source dialog.](./media/34-IPAddress.png)
 
-8. [] After validation completes, toggle off **Guest discovery is enabled by default** under **Step 3: Provide server credentials to perform guest discovery of installed software, dependencies, and workloads**.
+8. [] You should receive a **Validation successful** message with a minute or so.
 
-9. [] Scroll down and select the **Start Discovery** button.
+    ![The Validation successful message is highlighted for the added credentials.](media/appliance-add-credentials-successful.png)
+
+9. [] After validation completes, ensure **Guest discovery is enabled by default** under **Step 3: Provide server credentials to perform guest discovery of installed software, dependencies, and workloads** is enabled.
+
+    ![The Guest discovery is enabled by default toggle is highlighted.](./media/appliance-guest-discovery-enabled.png)
+
+10. Scroll down and select **Add credentials**.
+
+    ![The Add credentials button is highlighted under Step 3.](./media/guest-discovery-add-credentials.png)
+
+11. [] In the **Add credentials** popup, enter the following:
+
+    - **Credentials type**: `Windows (Non-domain)`  
+    - **Friendly name**: `SqlWindows`
+    - **Username**: `Administrator`  
+    - **Password**: `P@$$w0rd1`
+
+    ![The Add Credentials dialog with the above settings is displayed.](./media/guest-add-credentials-sql-windows.png)
+
+12. [] Select **Add more** and add a second set of credentials:
+
+    - **Credentials type**: `Linux (Non-domain)`  
+    - **Friendly name**: `Ubuntu`
+    - **Username**: `administrator`  
+    - **Password**: `Pa$$w0rd`
+
+13. [] Select **Add more** and add a third set of credentials:
+
+    - **Credentials type**: `Linux (Non-domain)`  
+    - **Friendly name**: `CentOS`
+    - **Username**: `root`  
+    - **Password**: `Pa$$w0rd`
+
+14. [] Select **Add more** and add a fourth set of credentials:
+
+    - **Credentials type**: `SQL Server Authentication`  
+    - **Friendly name**: `SqlServer`
+    - **Username**: `sqladmin`
+    - **Password**: `Microsoft123`
+
+15. [] Select **Add more** and add a fifth set of credentials:
+
+    - **Credentials type**: `PostgreSQL Server (Password based)`  
+    - **Friendly name**: `PostgreSQL`
+    - **Username**: `pgadmin`
+    - **Password**: `pgadmin123`
+
+16. [] Select **Save** to close the **Add credentials** dialog.
+
+17. [] Verify that all five sets of credentials appear under **Step 3**.
+
+    ![The five sets of credentials are displayed under Step 3 in the Appliance Configuration Manager.](./media/guest-discovery-credentials.png)
+
+18. [] Scroll down and select the **Start Discovery** button.
+
+    ![The Start Discovery button is highlighted at the bottom of the Appliance Configuration Manager.](./media/start-discovery.png)
 
     > **Note**: This step can take up to 15 minutes to complete.
 
-10. [] When discovery finishes, return to the Azure portal. Expand **Explore Inventory** → **All Inventory** and confirm that your VM appears in the list.
+19. [] When discovery finishes, navigate to the Azure Migrate **Linux-VM-Migration** project in the Azure portal, expand **Explore Inventory** in the left navigation menu, then select **All Inventory** and confirm that your Hyper-V VMs appear in the list and that you see the PostgreSQL and SQL Server databases.
 
     ![The discovered VMs are highlighted on the All inventory blade in the Azure portal.](./media/38-validation.png)
 
 ===
 
-# Task 6: Assess and Replicate the Linux Ubuntu VM
+# Task 6: Perform Assessments of discovered resources XXX and Replicate the Linux Ubuntu VM
+
+TODO: Split this into two tasks: Assessments, and Replicate the Linux Ubuntu VM
 
 ## Introduction
+
+TODO: Need to update this one to just be the assessemnts, and add mention that the Linux-Ubuntu VM and both databases (PostgreSQL and SQL) will be assessed.
 
 With discovery complete, Contoso’s migration team is ready to assess, replicate, and migrate its Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You’ll begin by creating an assessment to validate sizing and compatibility, and then configure replication using the Azure Site Recovery provider.
 
@@ -498,17 +562,22 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
 ## Key tasks
 
-1. [] On the Azure Migrate Project blade in the Azure portal, expand the **Decide and Plan** section in the left menu, select **Assessments**, and create a new assessment by selecting **Create assessment**.
+1. [] On the Azure Migrate Project blade in the Azure portal, expand the **Decide and Plan** in the left menu, select **Assessments**, and then select **Create assessment**.
 
     ![The assessments blade is displayed with Create Assessment highlighted.](./media/39-Assessments.png)
 
-2. [] Give the assessment a name, such as `LabAssessment`, and select **Add workloads**.
+2. [] Give enter `LabAssessment` for the **Assessment name** and then select **Add workloads**.
 
     ![On the Create assessment Basic's tab, the assessment name and Add workloads button are highlighted.](media/create-assessment-basics.png)
 
-3. [] On the **Select workloads** page, check the box next to the `LinuxLabVM-Ubuntu` VM and select **Add**.
+3. [] On the **Select workloads** page:
 
-    ![On the Select workloads page, the box next to LinuxLabVM-Ubuntu is checked and the checkbox and Add button are highlighted.](./media/40-Workload.png)
+    - Expand the `LinuxLabVM-CentOS-PostgreSQL` VM to see the discovered databases, and check the boxes next to the `localhost:5432` (PostgreSQL) database
+    - Check the box next to the `LinuxLabVM-Ubuntu` VM
+    - Expand the `SQLPTO2022` VM to see the discovered databases, and check the box next to the `MSSQLSERVER` database
+    - Select **Add**
+
+    ![On the Select workloads page, the boxes next to LinuxLabVM-Ubuntu, localhost:5432 (PostgreSQL), and MSSQLSERVER are checked and highlighted and Add button is highlighted.](./media/azure-migrate-assessment-workloads.png)
 
 4. [] Select **Next** and verify that **Sizing criteria** is set to `Performance-based`.
 
@@ -532,7 +601,7 @@ In this task, you create an assessment for the Linux VM in your Azure Migrate pr
 
     ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
 
-9. [] When the deployment completes, under **1. Prepare Hyper-V host servers**:
+9.  [] When the deployment completes, under **1. Prepare Hyper-V host servers**:
 
    1. Select the **Download** link to download the Hyper-V replication provider software installer.
    2. Select the **Download** button to download the registration key in step 2 in the screenshot.
