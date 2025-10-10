@@ -1,5 +1,7 @@
 # Exercise 4: Enable replication of Linux VM to App Service Plan
 
+With the PostgreSQL database migrated to Azure, Contoso Inc. is ready to modernize the underlying PHP application. The goal is to replicate the existing PHP-based DVD rental application, currently hosted on a Linux VM, to an Azure App Service Plan. This migration will allow Contoso to leverage platform-as-a-service (PaaS) benefits such as autoscaling, integrated monitoring, and simplified deployment, while maintaining the application's functionality and performance.
+
 In this exercise, you will deploy an App Service Plan in Azure and migrate a web application to the App Service Plan. You will then configure the web application to connect to the migrated PostgreSQL database.
 
 ## Objectives
@@ -93,6 +95,8 @@ In this task, you will use the Azure CLI in the Cloud Shell to deploy a web appl
 
     ![Screenshot of the Azure portal showing the newly created App Service Plan and Web App in the RG-Techsummit resource group.](media/azure-portal-resource-group-webapp.png)
 
+===
+
 # Task 2: Configure web application to connect to PostgreSQL database
 
 ## Introduction
@@ -107,6 +111,10 @@ In this task, you will update the web application's configuration file to connec
 
 - The web application is configured to connect to the PostgreSQL database in Azure Database for PostgreSQL - Flexible Server.
 - The web application is functioning correctly and can retrieve data from the database.
+
+## Learning resources
+
+- [Quickstart: Use PHP to connect and query data in Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/flexible-server/connect-php)
 
 ## Key tasks
 

@@ -1,6 +1,6 @@
 # Exercise 3: PostgreSQL migration to Azure Database for PostgreSQL Flexible Server
 
-Contoso Inc. is modernizing its infrastructure to improve scalability, security, and operational efficiency. As part of this initiative, the company plans to migrate its legacy [INSERT_NAME] application to Azure. This application relies on a PostgreSQL database named `dvdrental`, which currently resides on an on-premises Linux VM. To ensure a smooth transition, Contoso will use the built-in migration service in Azure Database for PostgreSQL - Flexible Server to move the database to a managed Azure environment.
+Contoso Inc. is modernizing its infrastructure to improve scalability, security, and operational efficiency. As part of this initiative, the company plans to migrate its legacy DVD rental application to Azure. This application relies on a PostgreSQL database named `dvdrental`, which currently resides on an on-premises Linux VM. To ensure a smooth transition, Contoso will use the built-in migration service in Azure Database for PostgreSQL - Flexible Server to move the database to a managed Azure environment.
 
 In this exercise, you will use the [migration service in Azure Database for PostgreSQL](https://learn.microsoft.com/azure/postgresql/migrate/migration-service/overview-migration-service-postgresql) to validate the source database and perform a full migration to Azure. This approach allows Contoso to benefit from Azure’s built-in high availability, automated backups, and performance tuning features while minimizing downtime and manual effort.
 
@@ -513,7 +513,7 @@ In this task, you review the Microsoft Defender for Open-Source Relational Datab
 - [What is Microsoft Defender for Cloud?](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-cloud-introduction)
 - [Overview of Microsoft Defender for Open-Source Relational Databases](https://learn.microsoft.com/azure/defender-for-cloud/defender-for-databases-introduction)
 
-## Key Tasks
+## Key tasks
 
 1. [] Navigate to the Azure Database for PostgreSQL resource in the Azure portal and select **Microsoft Defender for Cloud** under **Security** in the left navigation menu.
 
