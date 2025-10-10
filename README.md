@@ -1,4 +1,4 @@
-# Microsoft TMW Migration Lab
+# Microsoft TechSummit Migration Lab
 
 Contoso Inc., a global manufacturing and retail company, is embarking on a strategic initiative to modernize its aging on-premises infrastructure and embrace the scalability, resilience, and innovation offered by Microsoft Azure. Over the years, Contoso has accumulated a diverse set of workloads, including legacy virtual machines, custom web applications, and mission-critical databases, spread across multiple physical servers and data centers.
 
