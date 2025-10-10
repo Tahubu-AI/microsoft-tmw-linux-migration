@@ -18,7 +18,63 @@ After completing this exercise, you will be able to:
 
 ===
 
-# Task 1: Create an Azure Database Migration Service
+# Task 1: Review Azure Migrate SQL Server assessment
+
+## Introduction
+
+Before migrating a SQL Server database to Azure SQL Database, it is important to assess the source environment to identify any potential compatibility issues, performance considerations, and remediation steps. Azure Migrate provides a comprehensive assessment tool that can analyze your on-premises SQL Server instances and generate a detailed report.
+
+## Description
+
+In this task, you will review the Azure Migrate assessment report for the SQL Server instance running on the `SQLPTO2022` VM. This report will help you understand any potential issues that may impact the migration process and ensure that the database is ready for migration to Azure SQL Database.
+
+## Success criteria
+
+- You have accessed the Azure Migrate project and reviewed the SQL Server assessment report.
+- You have identified any potential issues or recommendations provided in the assessment report.
+- You understand the readiness of the SQL Server instance for migration to Azure SQL Database.
+- You have documented any necessary remediation steps to address identified issues.
+- You have verified that the SQL Server version is supported by Azure Database Migration Service.
+
+## Learning resources
+
+- [Assess SQL instances for migration to Azure SQL Database](https://learn.microsoft.com/azure/migrate/tutorial-assess-sql?view=migrate)
+
+## Key tasks
+
+## Key tasks
+
+1. [] Open a web browser on the Lab VM and go to the [Azure portal](https://portal.azure.com/).
+
+2. [] Navigate to the Azure Migrate **All projects** blade and select the **Linux-VM-Migration** project.
+
+    ![The Azure Migration All project blade is displayed with the newly created project highlighted.](./media/azure-migrate-all-projects.png)
+
+3. [] On the **Linux-VM-Migration** project blade, select **Assessments** under **Decide and plan** in the left menu, and then select the assessment named `LabAssessment`.
+
+    ![The Assessments option is highlighted in the Overview section of the Linux-VM-Migration project blade.](./media/azure-migrate-project-assessments.png)
+
+4. [] The overview blade should show **3 servers** and **2 DB instances** as part of the assessed workloads. If not, select **Recalculate** in the toolbar.
+
+    ![The LabAssessment overview blade is displayed, showing 3 servers and 2 DB instances.](./media/azure-migrate-assessment-overview.png)
+
+5. [] On the **Assessment** blade, select the **PaaS preferred (Recommended)** tab, then select the **Databases to Azure SQL Database** item.
+
+    ![The PaaS preferred (Recommended) tab is selected on the Assessment blade, with the Databases to Azure SQL Database item highlighted.](./media/azure-migrate-assessment-paas-preferred.png)
+
+6. [] On the **Databases to Azure SQL Database** blade, select the **AdventureWorksPTO** database to view the detailed assessment report. We will not be migrating the `WideWorldImporters` or `WideWorldImportersDW` databases in this lab.
+
+    ![The AdventureWorksPTO database is highlighted on the Databases to Azure SQL Database blade.](./media/azure-migrate-assessment-databases-to-azure-sql-database.png)
+
+    > **NOTE**: The **AdventureWorksPTO** page in the assessment report includes tabs that provide a summary of the assessment, readiness details, source properties, and target recommendations with estimated monthly total cost of ownership (TCO). Review each tab to understand the assessment findings and any recommendations for migration.
+
+7. [] Select the **Readiness** tab and review any issues or warnings that may impact the migration by selecting the number specified for **Migration warnings**.
+
+    ![The Readiness tab is selected on the AdventureWorksPTO assessment page, showing a list of readiness issues.](./media/azure-migrate-assessment-readiness.png)
+
+    > **NOTE**: The readiness details will highlight any unsupported features, extensions, or configurations that may require remediation before proceeding with the migration. Review the migration issues and warnings to understand any potential blockers. The final section of the **Migration issues/warnings** dialog provides details about if any databases on the source server have migration blockers.
+
+# Task 2: Create an Azure Database Migration Service
 
 ## Introduction
 
@@ -104,7 +160,7 @@ In this task, you will provision a new Azure Database Migration Service using th
 
 ===
 
-# Task 2: Configure a self-hosted integration runtime
+# Task 3: Configure a self-hosted integration runtime
 
 ## Introduction
 
@@ -189,7 +245,7 @@ In this task, you will download and configure the self-hosted integration runtim
 
 ===
 
-# Task 3: Verify Migration Readiness
+# Task 4: Verify Migration Readiness
 
 ## Introduction
 
@@ -248,7 +304,7 @@ TODO: Add steps for opening and reviewing the Azure Migrate assessment. Determin
 
 ===
 
-# Task 4: Prepare the source server for migration
+# Task 5: Prepare the source server for migration
 
 ## Add db_owner role to source user
 
@@ -287,7 +343,7 @@ You should see `migrationuser` listed as a `SQL_USER`.
 
 ===
 
-# Task 5: Create a migration project
+# Task 6: Create a migration project
 
 ## Introduction
 
@@ -394,7 +450,7 @@ In this task, you will create a new migration project in the Azure Database Migr
 
 ===
 
-# Task 6: Enable Defender for Cloud for Databases
+# Task 7: Enable Defender for Cloud for Databases
 
 ## Introduction
 
