@@ -1,26 +1,16 @@
 # Lab flow
 
-1. Exercise 1
-   1. Tasks 1 - 4 (Create Azure Migrate project and register appliance)
-      1. Registering appliance can take up to 10 minutes, so jump to Exercise 2 (SQL migration), task 1
-2. Exercise 2 (SQL migration) (currently exercise 4)
-   1. Task 1 (provision DMS)
-3. Exercise 1
-   1. Task 5
-      1. discovery will take up to 15 minutes, so jump to Exercise 2 (SQL migration), task 2
-4. Exercise 2
-   1. Task 2 (Install and configure self-hosted integration runtime)
-      1. Add SHIR node IP address to SQL Server firewall rules
-5. Exercise 1 (complete the remaining tasks)
-   1. Task 6 (Assess and replicate Linux Ubuntu VM)
-   2. Task 7 (Migrate Linux Ubuntu VM)
-6. Exercise 2
-   1. Task 3 (Migrate SQL Server to Azure SQL Database)
-
-
-
-
-
-LinuxLabVM-Ubuntu
-username: administrator
-password: Pa$$w0rd
+1. Exercise 1 tasks 1-4
+   1. Registering appliance can take up to 10 minutes
+2. Jump to Exercise 2 (SQL migration) and complete Task 1 (provision DMS)
+3. Return to Exercise 1, wait for appliance registration to finish and then start Task 5
+   1. Once started, discovery can take up to 15 minutes
+4. Jump back to Exercise 2 and complete Task 2 (install and configure SHIR)
+5. Return to Exercise 1, wait for discovery to finish, and complete task 6 (assessments) and start task 7 (VM replication)
+   2. Once started, replication can take around 25 minutes
+6. Return to Exercise 2 and complete the remaining tasks
+7. Return to Exercise 1, wait for migration to finish, and start task 8 (Migrate Linux Ubuntu VM)
+   1. Once started, migration can take over 2 hours
+8. Move on to and complete Exercise 3 (PostgreSQL migration)
+9. Complete Exercise 4 (App Service migration)
+10. Return to Exercise 1 and check the migration status of the Linux VM and monitor as time allows.
