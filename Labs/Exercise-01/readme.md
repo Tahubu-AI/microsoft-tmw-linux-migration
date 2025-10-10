@@ -54,9 +54,9 @@ In this task, you will log in to the `LinuxLabVM-Ubuntu` virtual machine and tes
 
 4. [] At the Ubuntu login screen:
 
-   - Select the `administrator` account
-   - Enter `Pa$$w0rd` for the password
-   - Select **Enter** to log in to the Ubuntu machine
+   - [] Select the `administrator` account
+   - [] Enter `Pa$$w0rd` for the password
+   - [] Select **Enter** to log in to the Ubuntu machine
 
 5. [] Select the **Show Applications** button at the top left of the Ubuntu VM window, enter "visual studio" into the search box, and select **Visual Studio Code** from the search results.
 
@@ -166,16 +166,16 @@ In this task, you will run the Azure Migrate preparation script using PowerShell
 
 8. [] Respond to the script prompts as follows:
 
-    - Do you want to run software from this untrusted publisher?: `[A] Always run`
-    - Enable Remote Management (WinRM)?: `Y`
-    - Make these changes?: `y`
-    - Enable PowerShell Remoting?: `Y`
-    - Configure firewall to open required ports?: `Y`
-    - Use SMB share(s) to store VHDs?: `Y`
-    - Create non-administrator local user for Azure Migrate?: `Y`
-    - When prompted for credentials:
-      - **Username**: `MigrateLocal`  
-      - **Password**: `Pa$$w0rd`
+    - [] Do you want to run software from this untrusted publisher?: `[A] Always run`
+    - [] Enable Remote Management (WinRM)?: `Y`
+    - [] Make these changes?: `y`
+    - [] Enable PowerShell Remoting?: `Y`
+    - [] Configure firewall to open required ports?: `Y`
+    - [] Use SMB share(s) to store VHDs?: `Y`
+    - [] Create non-administrator local user for Azure Migrate?: `Y`
+    - [] When prompted for credentials:
+      - [] **Username**: `MigrateLocal`  
+      - [] **Password**: `Pa$$w0rd`
 
 9. [] After the script completes, reset the network category to **Public**:
 
@@ -240,9 +240,9 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
 
 6. [] In the Cloud Shell setup dialog:
 
-    - Select `No storage account required`
-    - Choose the available subscription from the dropdown
-    - Select **Apply**
+    - [] Select `No storage account required`
+    - [] Choose the available subscription from the dropdown
+    - [] Select **Apply**
 
     ![The Getting started dialog in the Cloud Shell is displayed, with no storage account required, the subscription, and the Apply button all highlighted.](media/azure-cloud-shell-getting-started.png)
 
@@ -298,19 +298,19 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
 
 11. [] On the **Azure Migrate** blade:
 
-    - Select **All projects** in the left menu  
-    - Select **Create Project** in the toolbar
+    - [] Select **All projects** in the left menu  
+    - [] Select **Create Project** in the toolbar
 
     ![On the Azure Migration All projects blade, the Create Project button is highlighted.](./media/18-AzMigrate_Project.png)
 
 12. [] On the **Create Project** blade, enter the following:
 
-    - **Subscription**: Accept the default  
-    - **Resource group**: Select `rg-AzMigrateLab`  
-    - **Project name**: `Linux-VM-Migration`  
-    - **Geography**: `United States`  
-    - Expand **Advanced** and verify **Connectivity method** is set to `Public Endpoint`  
-    - Select **Create**
+    - [] **Subscription**: Accept the default  
+    - [] **Resource group**: Select `rg-AzMigrateLab`  
+    - [] **Project name**: `Linux-VM-Migration`  
+    - [] **Geography**: `United States`  
+    - [] Expand **Advanced** and verify **Connectivity method** is set to `Public Endpoint`  
+    - [] Select **Create**
 
     ![The Create Project form is filled out with the information above and the steps are numbers 1-6.](media/azure-migrate-create-project.png)
 
@@ -353,9 +353,10 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
     ![On the Project blade, Start Discovery--> Using Appliance--> For Azure is highlighted.](./media/21-StartDiscovery.png)
 
 3. [] On the **Discovery** blade:
-    - **Are your servers virtualized?** → `Yes, with Hyper-V`  
-    - **Name your appliance** → `LabAppliance`  
-    - Select **Generate Key**
+
+    - [] **Are your servers virtualized?** → `Yes, with Hyper-V`  
+    - [] **Name your appliance** → `LabAppliance`  
+    - [] Select **Generate Key**
 
     ![The Discover blade in the Azure portal is displayed, with the settings above highlighted.](./media/22-Discover-steps.png)
 
@@ -371,10 +372,10 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 
     ![In Hyper-V Manager, the AzMigrateAppliance-Test VM is highlighted in the Virtual Machines list and the Connect action is highlighted in the Actions panel.](./media/24-MigrateVM-Connect.png)
 
-7. [] Log in to the VM using the follwoing credentials:
+7. [] Log in to the VM using the following credentials:
 
-    - **Username**: `Administrator`
-    - **Password**: `Pa$$w0rd`
+    - [] **Username**: `Administrator`
+    - [] **Password**: `Pa$$w0rd`
 
 8. [] On the `AzMigrateAppliance-Test` VM desktop, open the **Azure Migrate Appliance Configuration Manager**.
 
@@ -384,7 +385,7 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 
     ![The Verify button for the Azure Migrate project key is highlighted.](./media/26-KeyVerify.png)
 
-10. It may take a few minutes after selecting verify for the Appliance prerequisites to be installed. If you receive a **New updated installed** notification, select **Refresh** and then you will need to select **Verify** again to proceed.
+10. [] It may take a few minutes after selecting verify for the Appliance prerequisites to be installed. If you receive a **New updated installed** notification, select **Refresh** and then you will need to select **Verify** again to proceed.
 
     ![A New update installed dialog is displayed, with the Refresh button highlighted.](media/appliance-prerequisites-new-update-installed.png)
 
@@ -438,10 +439,10 @@ In this task, you configure discovery credentials and host details in the Azure 
 
 2. [] In the **Add credentials** popup, enter the following:
 
-    - **Friendly name**: `LabCredentials`  
-    - **Username**: `MigrateLocal`  
-    - **Password**: `Pa$$w0rd`  
-    - Select **Save**
+    - [] **Friendly name**: `LabCredentials`  
+    - [] **Username**: `MigrateLocal`  
+    - [] **Password**: `Pa$$w0rd`  
+    - [] Select **Save**
 
     ![The Add Credentials dialog with the above settings is displayed.](./media/31-add-creds.png)
 
@@ -453,7 +454,7 @@ In this task, you configure discovery credentials and host details in the Azure 
 
     ![Add single item is highlighted on the Add discovery source dialog.](media/add-discovery-source-single-item.png)
 
-5. [] To complete the form, you’ll need the IP address of your Lab VM (which acts as the Hyper-V host). On the Lab VM, open **Command Prompt** (`cmd.exe`) and run:
+5. [] To complete the form, you'll need the IP address of your Lab VM (which acts as the Hyper-V host). On the Lab VM, open **Command Prompt** (`cmd.exe`) and run:
 
     ```bash
     ipconfig
@@ -463,10 +464,10 @@ In this task, you configure discovery credentials and host details in the Azure 
 
 7. [] Return to the **Appliance Configuration Manager** and complete the **Add discovery source** form:
 
-    - **Discovery source**: Leave `Hyper-V Host/Cluster` selected  
-    - **IP Address/FQDN**: Paste the IP address of your Lab VM  
-    - **Map credentials**: Select `Lab Credentials`  
-    - Select **Save**
+    - [] **Discovery source**: Leave `Hyper-V Host/Cluster` selected  
+    - [] **IP Address/FQDN**: Paste the IP address of your Lab VM  
+    - [] **Map credentials**: Select `Lab Credentials`  
+    - [] Select **Save**
 
     ![The values above are entered into the Add discovery source dialog.](./media/34-IPAddress.png)
 
@@ -478,46 +479,46 @@ In this task, you configure discovery credentials and host details in the Azure 
 
     ![The Guest discovery is enabled by default toggle is highlighted.](./media/appliance-guest-discovery-enabled.png)
 
-10. Scroll down and select **Add credentials**.
+10. [] Scroll down and select **Add credentials**.
 
     ![The Add credentials button is highlighted under Step 3.](./media/guest-discovery-add-credentials.png)
 
 11. [] In the **Add credentials** popup, enter the following:
 
-    - **Credentials type**: `Windows (Non-domain)`  
-    - **Friendly name**: `SqlWindows`
-    - **Username**: `Administrator`  
-    - **Password**: `P@$$w0rd1`
+    - [] **Credentials type**: `Windows (Non-domain)`  
+    - [] **Friendly name**: `SqlWindows`
+    - [] **Username**: `Administrator`  
+    - [] **Password**: `P@$$w0rd1`
 
     ![The Add Credentials dialog with the above settings is displayed.](./media/guest-add-credentials-sql-windows.png)
 
 12. [] Select **Add more** and add a second set of credentials:
 
-    - **Credentials type**: `Linux (Non-domain)`  
-    - **Friendly name**: `Ubuntu`
-    - **Username**: `administrator`  
-    - **Password**: `Pa$$w0rd`
+    - [] **Credentials type**: `Linux (Non-domain)`  
+    - [] **Friendly name**: `Ubuntu`
+    - [] **Username**: `administrator`  
+    - [] **Password**: `Pa$$w0rd`
 
 13. [] Select **Add more** and add a third set of credentials:
 
-    - **Credentials type**: `Linux (Non-domain)`  
-    - **Friendly name**: `CentOS`
-    - **Username**: `root`  
-    - **Password**: `Pa$$w0rd`
+    - [] **Credentials type**: `Linux (Non-domain)`  
+    - [] **Friendly name**: `CentOS`
+    - [] **Username**: `root`  
+    - [] **Password**: `Pa$$w0rd`
 
 14. [] Select **Add more** and add a fourth set of credentials:
 
-    - **Credentials type**: `SQL Server Authentication`  
-    - **Friendly name**: `SqlServer`
-    - **Username**: `sqladmin`
-    - **Password**: `Microsoft123`
+    - [] **Credentials type**: `SQL Server Authentication`  
+    - [] **Friendly name**: `SqlServer`
+    - [] **Username**: `sqladmin`
+    - [] **Password**: `Microsoft123`
 
 15. [] Select **Add more** and add a fifth set of credentials:
 
-    - **Credentials type**: `PostgreSQL Server (Password based)`  
-    - **Friendly name**: `PostgreSQL`
-    - **Username**: `pgadmin`
-    - **Password**: `pgadmin123`
+    - [] **Credentials type**: `PostgreSQL Server (Password based)`  
+    - [] **Friendly name**: `PostgreSQL`
+    - [] **Username**: `pgadmin`
+    - [] **Password**: `pgadmin123`
 
 16. [] Select **Save** to close the **Add credentials** dialog.
 
@@ -574,10 +575,10 @@ In this task, you create assessments for the Linux VM, SQL Server, and PostgreSQ
 
 3. [] On the **Select workloads** page, check the boxes next to the following items:
 
-    - `LinuxLabVM-CentOS-PostgreSQL` (this will automatically check the box next to the `localhost:5432` (PostgreSQL) database installed on that server)
-    - `LinuxLabVM-Ubuntu`
-    - `SQLPTO2022` (this will automatically check the box next to the `MSSQLSERVER` database installed on that server)
-    - Select **Add**
+    - [] `LinuxLabVM-CentOS-PostgreSQL` (this will automatically check the box next to the `localhost:5432` (PostgreSQL) database installed on that server)
+    - [] `LinuxLabVM-Ubuntu`
+    - [] `SQLPTO2022` (this will automatically check the box next to the `MSSQLSERVER` database installed on that server)
+    - [] Select **Add**
 
     ![On the Select workloads page, the boxes next to LinuxLabVM-Ubuntu, localhost:5432 (PostgreSQL), and MSSQLSERVER are checked and highlighted and Add button is highlighted.](./media/azure-migrate-assessment-workloads.png)
 
@@ -630,18 +631,18 @@ In this task, you will download the Azure Site Recovery provider and registratio
 
 2. [] On the **Discover** blade:
 
-   - **Where to you want to migrate to?**: Choose `Azure VM`
-   - **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
-   - **Target region**: Accept the default value already selected
-   - Check the box for **Confirm that the target region for migration is "[YOUR_SELECTED_REGION]"**
-   - Select **Create resources**
+   - [] **Where to you want to migrate to?**: Choose `Azure VM`
+   - [] **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
+   - [] **Target region**: Accept the default value already selected
+   - [] Check the box for **Confirm that the target region for migration is "[YOUR_SELECTED_REGION]"**
+   - [] Select **Create resources**
 
     ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
 
 3. [] When the deployment completes, under **1. Prepare Hyper-V host servers**:
 
-   1. Select the **Download** link to download the Hyper-V replication provider software installer.
-   2. Select the **Download** button to download the registration key in step 2 in the screenshot.
+   1. [] Select the **Download** link to download the Hyper-V replication provider software installer.
+   2. [] Select the **Download** button to download the registration key in step 2 in the screenshot.
 
     ![The Download link and button are highlighted and numbers 1 and 2 under Prepare Hyper-V host servers.](./media/44-Download.png)
 
@@ -683,29 +684,29 @@ In this task, you will download the Azure Site Recovery provider and registratio
 
 15. [] On the **Specify intent** page:
 
-    - **What do you want to migrate?**: Choose `Servers or virtual machines (VM)`
-    - **Where do you want to migrate to?**: Select `Azure VM`
-    - **Are your machines virtualized?**: Select `Yes, with Hyper-V`
-    - Select **Continue**
+    - [] **What do you want to migrate?**: Choose `Servers or virtual machines (VM)`
+    - [] **Where do you want to migrate to?**: Select `Azure VM`
+    - [] **Are your machines virtualized?**: Select `Yes, with Hyper-V`
+    - [] Select **Continue**
 
     ![The Specify intent page is populated as specified above.](./media/48-SpecifyIntent.png)
 
 16. [] On the **Replicate** Virtual machines tab:
 
-    - **Target VM security type**: Choose `Standard or Trusted Launch Virtual machines`
-    - **Import migration settings from an assessment**: Select `Yes, apply migration settings from an Azure Migrate assessment`
-    - **Select assessment**: Select the `LabAssessment` you created earlier
-    - Check the box next to `LinuxLabVM-Ubuntu`
-    - Select **Next**
+    - [] **Target VM security type**: Choose `Standard or Trusted Launch Virtual machines`
+    - [] **Import migration settings from an assessment**: Select `Yes, apply migration settings from an Azure Migrate assessment`
+    - [] **Select assessment**: Select the `LabAssessment` you created earlier
+    - [] Check the box next to `LinuxLabVM-Ubuntu`
+    - [] Select **Next**
 
     ![The Replicate Virutal machines tab is populated with the values specified above and the steps are numbered 1-4.](./media/49-ReplicateVM.png)
 
 17. [] On the **Target settings** tab:
 
-    - **Resource group**: Select `rg-AzMigrateLab`
-    - **Replication storage account**: Select the storage account that was created for you
-    - **Virtual network**: Choose `vnet-AzMigrateLab`
-    - Select **Next**
+    - [] **Resource group**: Select `rg-AzMigrateLab`
+    - [] **Replication storage account**: Select the storage account that was created for you
+    - [] **Virtual network**: Choose `vnet-AzMigrateLab`
+    - [] Select **Next**
 
     ![The settings above are entered into the Target settings tab. An error message is highlighted.](./media/50-ErrorIAM.png)
 
@@ -719,10 +720,10 @@ In this task, you will download the Azure Site Recovery provider and registratio
 
 18. [] On the **Compute** tab:
 
-    - Select `Linux` in the **OS Type** drop down
-    - Select any availability
-    - Accept the default values for all other fields
-    - Select **Next**
+    - [] Select `Linux` in the **OS Type** drop down
+    - [] Select any availability
+    - [] Accept the default values for all other fields
+    - [] Select **Next**
 
     ![Screenshot of the Compute tab, with the OS Type and its value of Linux highlighted.](./media/52-OSType.png)
 
