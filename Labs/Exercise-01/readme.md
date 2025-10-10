@@ -385,6 +385,9 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 
     ![The Verify button for the Azure Migrate project key is highlighted.](./media/26-KeyVerify.png)
 
+    > [!NOTE]
+    > If you receive an internal server error while verifying the project key, periodically try again until it succeeds.
+
 10. [] It may take a few minutes after selecting verify for the Appliance prerequisites to be installed. If you receive a **New updated installed** notification, select **Refresh** and then you will need to select **Verify** again to proceed.
 
     ![A New update installed dialog is displayed, with the Refresh button highlighted.](media/appliance-prerequisites-new-update-installed.png)
@@ -471,7 +474,7 @@ In this task, you configure discovery credentials and host details in the Azure 
 
     ![The values above are entered into the Add discovery source dialog.](./media/34-IPAddress.png)
 
-8. [] You should receive a **Validation successful** message with a minute or so.
+8. [] You should receive a **Validation successful** message within a minute or so.
 
     ![The Validation successful message is highlighted for the added credentials.](media/appliance-add-credentials-successful.png)
 
@@ -586,7 +589,7 @@ In this task, you create assessments for the Linux VM, SQL Server, and PostgreSQ
 
 5. [] Select **Next** to go to the **Advanced** tab.
 
-6. [] On the **Advanced** tab, select **Edit default** next to **SQL Server**.
+6. [] On the **Advanced** tab, select **Edit defaults** next to **SQL Server**.
 
     ![Edit default SQL Server settings](./media/azure-migrate-edit-sql-default.png)
 
