@@ -110,17 +110,17 @@ Azure Migrate requires some preparation of the Hyper-V host before beginning a m
 
 In this task, you will run the Azure Migrate preparation script using PowerShell on the Hyper-V host (your Lab VM).
 
-## Success Criteria
+## Success criteria
 
 - You have downloaded the Azure Migrate Hyper-V preparation script  
 - You have executed the `MicrosoftAzureMigrate-Hyper-V.ps1` script on the Hyper-V host without errors  
 - You have reset the network connectivity category to **Public**
 
-## Learning Resources
+## Learning resources
 
 - [Preparing for migrating Linux Virtual Machine to Azure](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic)
 
-## Key Tasks
+## Key tasks
 
 1. [] On the Lab VM, open the **Search Bar** and enter `"powershell"`.
 
@@ -422,7 +422,7 @@ By enabling guest discovery, you can also identify workloads running inside the 
 
 In this task, you configure discovery credentials and host details in the Azure Migrate Appliance Configuration Manager, then initiate the discovery process. With guest discovery enabled, the appliance will identify both virtual machines and the workloads running inside them, including database platforms and installed software. Discovery results are sent to your Azure Migrate project for review.
 
-## Success Criteria
+## Success criteria
 
 - You started a discovery in the Azure Migrate project  
 - You identified virtual machines and their associated workloads using guest discovery  
@@ -553,7 +553,7 @@ Azure Migrate assessments help estimate sizing, identify compatibility issues, a
 
 In this task, you create assessments for the Linux VM, SQL Server, and PostgreSQL workloads discovered by the Azure Migrate appliance. These assessments will help validate sizing, compatibility, and migration readiness for each resource.
 
-## Success Criteria
+## Success criteria
 
 - You created assessments for the Linux VM, SQL Server, and PostgreSQL workloads in the Azure portal  
 - You reviewed the assessment results for sizing and compatibility recommendations
