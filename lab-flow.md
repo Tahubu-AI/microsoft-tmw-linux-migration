@@ -8,7 +8,10 @@
 4. Jump back to Exercise 2 and complete Task 2 (install and configure SHIR)
 5. Return to Exercise 1, wait for discovery to finish, and complete task 6 (assessments) and start task 7 (VM replication)
    2. Once started, replication can take around 25 minutes
-6. Return to Exercise 2 and complete the remaining tasks
+6. Return to Exercise 2 and complete the remaining tasks up through the migration of the SQL database
+   1. Once started, migration can take around 15 minutes
+   2. Return to exercise 1 and check on the migration. If complete, you can finalize the migration and start the VM in Azure.
+   3. Otherwise, come back to Exercise 2 and wait for the migration to finish, and complete the remaining tasks.
 7. Return to Exercise 1, wait for migration to finish, and start task 8 (Migrate Linux Ubuntu VM)
    1. Once started, migration can take over 2 hours
 8. Move on to and complete Exercise 3 (PostgreSQL migration)
