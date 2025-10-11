@@ -2,7 +2,7 @@
 
 Contoso Inc. is in the early stages of its infrastructure modernization journey, aiming to reduce datacenter overhead and improve operational agility by migrating key workloads to Azure. Among its legacy systems is a Linux-based personnel management application running on a Hyper-V virtual machine. While the application remains critical to daily operations, its underlying infrastructure is aging and difficult to scale. To preserve compatibility while gaining cloud-based resilience and manageability, Contoso has chosen a lift-and-shift migration strategy for this workload.
 
-In this exercise, you will use the [Azure Migrate Service](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic) to assess, replicate, and migrate a Hyper-V–based Ubuntu VM to Azure. This process simulates the real-world steps Contoso’s IT team would follow to transition legacy infrastructure into a cloud-first model.
+In this exercise, you will use the [Azure Migrate Service](https://learn.microsoft.com/azure/migrate/prepare-for-migration?view=migrate-classic) to assess, replicate, and migrate a Hyper-V–based Ubuntu VM to Azure. This process simulates the real-world steps Contoso's IT team would follow to transition legacy infrastructure into a cloud-first model.
 
 ## Objectives
 
@@ -545,7 +545,7 @@ In this task, you configure discovery credentials and host details in the Azure 
 
 ## Introduction
 
-With discovery complete, Contoso’s migration team is ready to assess the readiness of key workloads for migration to Azure. This includes the Linux-based personnel system running on `LinuxLabVM-Ubuntu`, as well as SQL Server and PostgreSQL database instances discovered through guest-level inspection.
+With discovery complete, Contoso's migration team is ready to assess the readiness of key workloads for migration to Azure. This includes the Linux-based personnel system running on `LinuxLabVM-Ubuntu`, as well as SQL Server and PostgreSQL database instances discovered through guest-level inspection.
 
 Azure Migrate assessments help estimate sizing, identify compatibility issues, and surface remediation guidance. By assessing both infrastructure and workload-level details, Contoso can make informed decisions about migration tooling, target platforms, and performance expectations.
 
@@ -609,7 +609,7 @@ In this task, you create assessments for the Linux VM, SQL Server, and PostgreSQ
 
 ## Introduction
 
-With the assessment complete, Contoso’s migration team is ready to replicate the Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You’ll configure replication using the Azure Site Recovery provider and registration key.
+With the assessment complete, Contoso's migration team is ready to replicate the Linux-based personnel system to Azure. This task simulates the final stages of a lift-and-shift migration using Azure Migrate. You'll configure replication using the Azure Site Recovery provider and registration key.
 
 ## Description
 
@@ -637,7 +637,7 @@ In this task, you will download the Azure Site Recovery provider and registratio
    - [] **Where to you want to migrate to?**: Choose `Azure VM`
    - [] **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
    - [] **Target region**: Accept the default value already selected
-   - [] Check the box for **Confirm that the target region for migration is "[YOUR_SELECTED_REGION]"**
+   - [] Check the box for **Confirm that the target region for migration is "centralus"**
    - [] Select **Create resources**
 
     ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
