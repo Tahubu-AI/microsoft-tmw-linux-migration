@@ -47,6 +47,12 @@ In this task, you monitor the status on the active Linux VM migration using the 
 
     ![Screenshot of the Planned failover job details.](./media/56-PlannedFailover.png)
 
-2. When the migration completes (if time allows), stop the replication by right-clicking the VM and selecting **Stop replication**.
+2. When the migration completes (if time allows), stop the replication by right-clicking the VM and selecting **Stop replication**. This action:
+
+    - Stops replication for the on-premises machine.
+    - Removes the machine from the Replicated servers count in the Migration and modernization tool.
+    - Cleans up replication state information for the VM.
+
+3. To review additional steps to take after the migration has finished, review the [Complete the migration](https://learn.microsoft.com/azure/migrate/tutorial-migrate-hyper-v?view=migrate-classic&tabs=UI#complete-the-migration) documentation, along with the post-migration best practices found in the same document.
 
 Great work! You have successfully completed the TechSummit Migration Workshop!
