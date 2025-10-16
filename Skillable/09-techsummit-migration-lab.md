@@ -145,7 +145,7 @@ In this task, you will create a new migration project in the Azure Database Migr
 
     - **Authentication type**: Choose `SQL Authentication`
     - **User name**: `sqladminuser`
-    - **Password**: Use the Azure portal password provided on the **Resources** tab of the lab instructions.
+    - **Password**: Use the `sqladminuser` password provided on the **Resources** tab of the lab instructions.
     - Select **Next: Map source and target databases**
 
     ![Screenshot of the Connect to target database tab in the Azure Database Migration Service blade](media/dms-wizard-connect-to-target-database.png)
