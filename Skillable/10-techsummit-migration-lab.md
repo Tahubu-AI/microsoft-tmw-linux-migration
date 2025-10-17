@@ -95,7 +95,7 @@ In this task, you will update the web application's configuration file to connec
     $dbPassword = "<Your Password from the Resources tab in the lab instructions>";
     ```
 
-    When you are done, press `CTRL + X`, then `Y`, then `ENTER` to save and exit the `nano` editor. Your compledted section should look similar to the following:
+    When you are done, press `CTRL + X`, then `Y`, then `ENTER` to save and exit the `nano` editor. Your completed section should look similar to the following:
 
     ![Screenshot of the updated database connection parameters in the index.php file.](media/kudu-nano-index-php-updated.png)
 
