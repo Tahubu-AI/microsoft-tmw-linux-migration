@@ -72,7 +72,7 @@ In this task, you configure discovery credentials and host details in the Azure 
 
     - [] **Discovery source**: Leave `Hyper-V Host/Cluster` selected  
     - [] **IP Address/FQDN**: Paste the IP address of your Lab VM  
-    - [] **Map credentials**: Select `Lab Credentials`  
+    - [] **Map credentials**: Choose `LabCredentials`  
     - [] Select **Save**
 
     ![The values above are entered into the Add discovery source dialog.](./media/34-IPAddress.png)

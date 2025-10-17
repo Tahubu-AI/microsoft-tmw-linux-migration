@@ -101,8 +101,9 @@ In this task, you will prepare for the replication of a Linux VM by downloading 
 
    - [] **Where to you want to migrate to?**: Choose `Azure VM`
    - [] **Are your machines virtualized?**: Choose `Yes, with Hyper-V`
-   - [] **Target region**: Accept the default value already selected
-   - [] Check the box for **Confirm that the target region for migration is "centralus**
+   - [] **Target region**: Select the location that matches the `RG-Techsummit` resource group's region
+     - **CRITICAL**: The region must be the same as the `RG-Techsummit` resource group and the VNet within it, or you will not see the resources you are migrating.
+   - [] Check the box for **Confirm that the target region for migration is "[YOUR_RESOURCE_GROUP_REGION]"**, where `[YOUR_RESOURCE_GROUP_REGION]` is the region of the `RG-Techsummit` resource group.
    - [] Select **Create resources**
 
     ![The Discover blade is populated with the values specified above.](./media/43-CreateResources.png)
@@ -120,7 +121,7 @@ In this task, you will prepare for the replication of a Linux VM by downloading 
 
    1. [] Select **On (recommended)** and **Next**.
 
-   2. [] Select **Install**, accepting the default install location.
+   2. [] Select **Install**, accepting the default installation location.
 
    3. [] Select **Register** and on the **Vault Settings...** screen, browse to the **key file** you downloaded earlier and select **Next**.
 
@@ -130,7 +131,7 @@ In this task, you will prepare for the replication of a Linux VM by downloading 
 
    4. [] Select **Connect directly to Azure Site Recovery without a proxy server** and select **Next**.
 
-   5. [] Configuration Azure Site Recovery for registration will take one or two minutes to complete. When it finishes, select **Finish**.
+   5. [] Configuration Azure Site Recovery for registration will take one or two minutes to install. When it completes, select **Finish**.
 
 5. [] Go back to the **Discover** blade in the Azure portal and refresh the browser page.
 
@@ -172,7 +173,7 @@ In this task, you start replication of a Linux VM.
 
 ## Key tasks
 
-1. [] On the **Migrations** blade in the Azure portal, select the **Replicate** button.
+1. [] Return to the Azure Migrate **Migrations** blade in the Azure portal by going to Azure Migrate, selecting All projects in the left menu, selecting the **Linux-VM-Migration** project, selecting **Migrations** under Execute in the left menu, and then selecting the **Replicate** button.
 
     ![The Replicate button is highlighted on the Migrations blade.](./media/47-Replicate.png)
 
@@ -195,16 +196,19 @@ In this task, you start replication of a Linux VM.
 
     ![The Replicate Virutal machines tab is populated with the values specified above and the steps are numbered 1-4.](./media/49-ReplicateVM.png)
 
+    > **NOTE**: If you see an orange exclamation mark under **Azure VM Readiness** from the `LinuxLabVM-Ubuntu` VM, create a new assessment with a different name before proceeding.
+
 4. [] On the **Target settings** tab:
 
     - [] **Resource group**: Select `RG-Techsummit`
-    - [] **Cache storage account**: Select the storage account that was created for you
+    - [] **Cache storage account**: Select the storage account whose name begins with "storazmig"
     - [] **Virtual network**: Choose `vnet-AzMigrateLab`
+    - [] **Availability options**: Choose `No infrastructure redundancy required`
     - [] Select **Next**
 
     ![The settings above are entered into the Target settings tab. An error message is highlighted.](./media/50-ErrorIAM.png)
 
-    > **NOTE**: You may see an error that the Azure Migrate service cannot access the replication storage account. This error is because the storage account does not have the proper access privilege to the Recovery Service vault. To resolve this issue, first open the Recovery Service Vault resource in another browser page and under `Settings | Identity` turn ON the status on the `System assigned` and select **Save**.
+    > **NOTE**: If you see an error that the Azure Migrate service cannot access the replication storage account. This error is because the storage account does not have the proper access privilege to the Recovery Service vault. To resolve this issue, open the Recovery Service Vault resource in another browser page and under `Settings | Identity` turn ON the status on the `System assigned` and select **Save**.
     >
     > ![Screenshot of the steps to turn on the System Assigned identity for the recovery services vault.](./media/51-IAM-RecoveryVault.png)
     >
@@ -215,13 +219,14 @@ In this task, you start replication of a Linux VM.
 5. [] On the **Compute** tab:
 
     - [] Select `Linux` in the **OS Type** drop down
-    - [] Select any availability
     - [] Accept the default values for all other fields
     - [] Select **Next**
 
     ![Screenshot of the Compute tab, with the OS Type and its value of Linux highlighted.](./media/52-OSType.png)
 
-6. [] Accept the default values on the remaining tabs, then select **Start** on the **Review + start replication** tab.
+6. [] Accept the default values on the remaining tabs, then select **Replicate** on the **Review + start replication** tab.
+
+    ![The Review + start replication tab is displayed with the Replicate button highlighted.](media/review-start-replication.png)
 
 > **IMPORTANT**:
 >

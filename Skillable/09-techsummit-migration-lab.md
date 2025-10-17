@@ -118,6 +118,7 @@ In this task, you will create a new migration project in the Azure Database Migr
 3. [] On the **Source details** of the Azure SQL Database Offline Migration Wizard:
 
     - **Source Infrastruture Type**: Choose `Hyper V`
+    - **Resource group**: Select `RG-Techsummit`
     - **Location**: Select the location of your `RG-Techsummit` resource group
     - **SQL Server Instance Name**: Enter `SQLPTO2022_SQLPTO`
     - Select **Next: Connect to source SQL Server**
@@ -145,8 +146,10 @@ In this task, you will create a new migration project in the Azure Database Migr
 
     - **Authentication type**: Choose `SQL Authentication`
     - **User name**: `sqladminuser`
-    - **Password**: Use the `sqladminuser` password provided on the **Resources** tab of the lab instructions.
+    - **Password**: Use the `Sql Admin Password` password provided on the **Resources** tab of the lab instructions.
     - Select **Next: Map source and target databases**
+
+    ![The Sql Admin Password is highlighted on the lab instructions Resources tab.](media/lab-instructions-resources-sql-admin-password.png)
 
     ![Screenshot of the Connect to target database tab in the Azure Database Migration Service blade](media/dms-wizard-connect-to-target-database.png)
 

@@ -176,7 +176,7 @@ In this task, you will download and configure the self-hosted integration runtim
 
     ![The IP address of the SHIR node is highlighted under node details on the Integration runtime page.](media/azure-dms-integration-runtime-ip-address.png)
 
-12. [] To get to your SQL server resource, enter "sql" in the Azure search bar and select your SQL server under **Resources** in the search results.
+12. [] To get to your SQL server resource, enter "sql" in the Azure search bar and select your Azure SQL Database Logical Server under **Resources** in the search results.
 
     ![In the Azure search bar, "sql" is entered and the SQL server resource is highlighted in the results.](media/azure-search-sql.png)
 

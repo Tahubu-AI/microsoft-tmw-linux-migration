@@ -40,7 +40,9 @@ In this task, you will download and run the Azure Migrate preparation script usi
 
 ## Key tasks
 
-1. [] On the Lab VM, open the **Search Bar** and enter `"powershell"`.
+1. [] On the Lab VM, open the **Search Bar** and enter "powershell".
+
+    > **Note**: Your Lab VM also serves as the Hyper-V host machine throughout this workshop.
 
     ![The Windows Search Bar is highlighted on the Task Bar with powershell entered into the search box.](media/lab-vm-search-bar-powershell.png)
 
@@ -67,8 +69,6 @@ In this task, you will download and run the Azure Migrate preparation script usi
 5. [] Open a browser on the Lab VM and navigate to <https://aka.ms/migrate/hyperv/script> to download the `MicrosoftAzureMigrate-Hyper-V.ps1` script.
 
     ![Screenshot of the script download URL entered into the address bar in Microsoft Edge.](./media/09-download.png)
-
-    > **Note**: Your Lab VM also serves as the Hyper-V host for this workshop.
 
 6. [] Return to PowerShell and change to the **Downloads** directory:
 
@@ -160,34 +160,38 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
     - [] Select `No storage account required`
     - [] Choose the available subscription from the dropdown
     - [] Select **Apply**
+    - [] Ensure **Use an existing private virtual network** is **NOT** checked
 
     ![The Getting started dialog in the Cloud Shell is displayed, with no storage account required, the subscription, and the Apply button all highlighted.](media/azure-cloud-shell-getting-started.png)
 
-7. [] At the Cloud Shell prompt, run the following script to create the required resources:
+7. [] At the Cloud Shell prompt, run the following script to create the required resources in the `RG-Techsummit` resource group:
 
     > **TIP**:
     > You may need to press `ENTER` during the `New-AzVirtualNetwork` command to complete execution.
 
     ```powershell
-    $location = "centralus"
-    $resourceGroupName = "rg-AzMigrateLab"
+    # Get the precreated resource group
+    $resourceGroupName = "RG-Techsummit"
+    $resourceGroup = Get-AzResourceGroup -Name $resourceGroupName
+    # Retrieve the location of the resource group
+    $location = $resourceGroup.Location
+
     $storagePrefix = "storazmig"
     $vnetName = "vnet-AzMigrateLab"
-
-    # Create Resource Group
-    Write-Host "Creating resource group '$resourceGroupName' in location '$location'..."
-    New-AzResourceGroup -Name $resourceGroupName -Location $location
 
     # Generate unique storage account name
     $randomSuffix = -join ((48..57) + (97..122) | Get-Random -Count 8 | % {[char]$_})
     $storageAccountName = "$storagePrefix$randomSuffix"
 
+    # Create storage account
     Write-Host "Creating storage account '$storageAccountName'..."
     New-AzStorageAccount -ResourceGroupName $resourceGroupName `
-       -Name $storageAccountName `
-       -Location $location `
-       -SkuName Standard_GRS `
-       -Kind StorageV2
+        -Name $storageAccountName `
+        -Location $location `
+        -SkuName Standard_GRS `
+        -Kind StorageV2 `
+        -AllowBlobPublicAccess $false `
+        -PublicNetworkAccess "Enabled"
 
     # Create Virtual Network and Subnet
     Write-Host "Creating virtual network '$vnetName' with subnet 'default'..."
@@ -199,15 +203,25 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
         -Subnet $subnetConfig
     ```
 
-8. [] When the script finishes, verify output similar to:
+8. [] When the script finishes, verify storage account and virtual network outputs look similar to:
+
+    ```powershell
+    StorageAccountName ResourceGroupName PrimaryLocation SkuName      Kind      AccessTier CreationTime          ProvisioningState EnableHttpsTrafficOnly
+    ------------------ ----------------- --------------- -------      ----      ---------- ------------          ----------------- ----------------------
+    storazmigxbmezwi7  RG-Techsummit     westus2         Standard_GRS StorageV2 Hot        10/17/2025 9:53:25 PM Succeeded         True
+    ```
 
     ```powershell
     ResourceGroupName Name              Location  ProvisioningState EnableDdosProtection DefaultPublicNatGateway
     ----------------- ----              --------  ----------------- -------------------- -----------------------
-    rg-AzMigrateLab   vnet-AzMigrateLab centralus Succeeded         False
+    RG-Techsummit     vnet-AzMigrateLab westus2   Succeeded         False
     ```
 
 9. [] Close the Cloud Shell pane.
+
+10. [] In the Azure portal, navigate to the `RG-Techsummit` resource group and verify you see the newly created storage account and Virtual network resources.
+
+    ![The newly created storage account and virtual network resources are highlighted on the RG-Techsummit blade.](media/azure-rg-techsummit-new-resources.png)
 
 ===
 
@@ -245,7 +259,7 @@ In this task, you will create a new Azure Migrate project in the Azure portal.
 3. [] On the **Create Project** blade, enter the following:
 
     - [] **Subscription**: Accept the default  
-    - [] **Resource group**: Select `rg-AzMigrateLab`  
+    - [] **Resource group**: Select `RG-Techsummit`  
     - [] **Project name**: `Linux-VM-Migration`  
     - [] **Geography**: `United States`  
     - [] Expand **Advanced** and verify **Connectivity method** is set to `Public Endpoint`  
