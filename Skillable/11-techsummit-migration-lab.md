@@ -77,7 +77,7 @@ In this task, you will connect to the database using the Azure portal's Query Ed
 
 1. [] To verify the migration, navigate to the `mySampleDatabase` Azure SQL Database resource in the Azure portal.
 
-2. [] On the SQL database blade, select the **Query editor (preview)** item in the left naviation menu, enter the password for the `sqladminuser` account in the **SQL server authentication** form, and select **OK**.
+2. [] On the SQL database blade, select the **Query editor (preview)** item in the left navigation menu, enter the password for the `sqladminuser` account in the **SQL server authentication** form, and select **OK**.
 
     ![Screenshot of the Query editor (preview) item in the Azure portal](media/azure-sql-database-query-editor.png)
 
