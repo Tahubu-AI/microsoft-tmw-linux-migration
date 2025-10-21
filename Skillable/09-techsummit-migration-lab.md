@@ -64,6 +64,8 @@ In this task, you will review the Azure Migrate assessment report for the SQL Se
 
     ![The PaaS preferred (Recommended) tab is selected on the Assessment blade, with the Databases to Azure SQL Database item highlighted.](./media/azure-migrate-assessment-paas-preferred-sql.png)
 
+    > **NOTE**: If you don't see **Databases to Azure SQL Database** in the list, you may need to select **Recalculate** on the toolbar and wait a few minutes for the assessment to update.
+
 5. [] On the **Databases to Azure SQL Database** blade, select the **AdventureWorksPTO** database to view the detailed assessment report. We will not be migrating the `WideWorldImporters` or `WideWorldImportersDW` databases in this lab.
 
     ![The AdventureWorksPTO database is highlighted on the Databases to Azure SQL Database blade.](./media/azure-migrate-assessment-databases-to-azure-sql-database.png)

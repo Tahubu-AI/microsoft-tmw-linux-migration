@@ -79,22 +79,28 @@ In this task, you will use the Azure CLI in the Cloud Shell to deploy a web appl
     >
     > If after a few attempts the status is still `Registering`, proceed to the next step, and if it fails due to the provider not being registered, wait a bit longer and try again.
 
-8. [] Execute the following `az webapp up` command to deploy the web application to an App Service in Azure. This will provision a new App Service Plan and a new Web App in your existing Resource Group named `RG-Techsummit`. The web application will be deployed using the PHP 8.2 runtime on Linux and be provided a generated name. You can customize the name by using the `--name` parameter.
+8. [] Run the following command to set a variable named `location` to the region of the **RG-Techsummit` resource group:
+
+    ```bash
+    location=$(az group list --query "[?name=='RG-Techsummit'].location" -o tsv)
+    ```
+
+9. [] Execute the following `az webapp up` command to deploy the web application to an App Service in Azure. This will provision a new App Service Plan and a new Web App in your existing Resource Group named `RG-Techsummit`. The web application will be deployed using the PHP 8.2 runtime on Linux and be provided a generated name. You can customize the name by using the `--name` parameter.
 
      > **Note**: The first time you run the `az webapp up` command, it may take several minutes to complete as it provisions the necessary resources in Azure.
 
     ```bash
-    az webapp up --resource-group "RG-Techsummit" --runtime "PHP:8.2" --os-type=linux
+    az webapp up --resource-group "RG-Techsummit" --runtime "PHP:8.2" --os-type=linux --location $location
     ```
 
     After the command completes, you will see output similar to the following, indicating that the web application has been successfully deployed:
 
     ![Screenshot of the Cloud Shell with the az webapp up command executed.](media/azure-portal-cloud-shell-az-webapp-up.png)
 
-9. [] After the deployment is complete, navigate to the **RG-Techsummit** resource group in the Azure portal. You should see a new App Service Plan and a new Web App created.
+10. [] After the deployment is complete, navigate to the **RG-Techsummit** resource group in the Azure portal. You should see a new App Service Plan and a new Web App created.
 
     ![Screenshot of the Azure portal showing the newly created App Service Plan and Web App in the RG-Techsummit resource group.](media/azure-portal-resource-group-webapp.png)
 
-10. [] Close the Cloud Shell pane.
+11. [] Close the Cloud Shell pane.
 
 Success! You can finished provision an Azure App Service Plan and deploying the web app. Next, you will return to the Azure Migration Appliance Configuration Manager, ensure the discovery has been successfully initiated, and then use Azure Migrate to perform assessments of Contoso's VM and database workloads.

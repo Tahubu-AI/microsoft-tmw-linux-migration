@@ -310,6 +310,8 @@ In this task, you will configure and launch the migration and monitor its progre
     - [] **Migration mode**: **Offline**
     - [] Select **Next: Runtime server >**
 
+    > **NOTE**: If the **Next: Runtime server** button is disabled, try deleting the last letter of the **Migration name** and then adding it back in. This should revalidate the field and enable the next button.
+
     ![Screenshot of the Migrate PostgreSQL to Azure Database for PostgreSQL flexible server Setup tab, with the specified values entered into the form.](./media/azure-postgresql-migrate-setup.png)
 
     > **NOTE**: The best practice is to first run a validation-only migration to identify and resolve any issues before performing the actual migration. However, to save time in this lab, you are performing both validation and migration in a single step.
@@ -320,7 +322,7 @@ In this task, you will configure and launch the migration and monitor its progre
 
 4. [] On the **Source server** tab, enter the following values:
 
-    - [] **Server name**: Public IP address of the `LinuxLabVM-CentOS-7-PostGreSQL` VM
+    - [] **Server name**: Enter the public IP address of the **LinuxLabVM-CentOS-7-PostGreSQL** VM
 
         ![Screenshot of the contents of the VM_IPs.txt file, with the public IP address of the LinuxLabVM-CentOS-7-PostGreSQL VM highlighted with a red box.](./media/vm-ips-txt-postgresql-public.png)
 

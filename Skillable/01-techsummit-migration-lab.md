@@ -31,7 +31,7 @@ In this task, you will download and run the Azure Migrate preparation script usi
 ## Success criteria
 
 - You have downloaded the Azure Migrate Hyper-V preparation script  
-- You have executed the `MicrosoftAzureMigrate-Hyper-V.ps1` script on the Hyper-V host without errors  
+- You have executed the **MicrosoftAzureMigrate-Hyper-V.ps1** script on the Hyper-V host without errors  
 - You have reset the network connectivity category to **Public**
 
 ## Learning resources
@@ -40,25 +40,27 @@ In this task, you will download and run the Azure Migrate preparation script usi
 
 ## Key tasks
 
-1. [] On the Lab VM, open the **Search Bar** and enter "powershell".
+1. Sign into the Lab VM using `Passw0rd!` as the password.
 
     > **Note**: Your Lab VM also serves as the Hyper-V host machine throughout this workshop.
 
+2. [] On the Lab VM, open the **Search Bar** and enter `powershell`.
+
     ![The Windows Search Bar is highlighted on the Task Bar with powershell entered into the search box.](media/lab-vm-search-bar-powershell.png)
 
-2. [] In the search results, select **Windows PowerShell** under **Apps** and select **Run as administrator**.
+3. [] In the search results, select **Windows PowerShell** under **Apps** and select **Run as administrator**.
 
     > **Important**: Do not select **Windows PowerShell ISE**.
 
     ![In the Windows Search window, PowerShell is highlighted and selected under Apps and Run as administrator is highlighted.](./media/10-ps-admin.png)
 
-3. [] In the PowerShell terminal, set the network category to **Private** by running:
+4. [] In the PowerShell terminal, set the network category to **Private** by running:
 
     ```powershell
     Set-NetConnectionProfile -NetworkCategory Private
     ```
 
-4. [] Verify the change by running:
+5. [] Verify the change by running:
 
     ```powershell
     Get-NetConnectionProfile
@@ -66,23 +68,23 @@ In this task, you will download and run the Azure Migrate preparation script usi
 
     ![In the PowerShell terminal, the NetworkCategory setting of Private is highlighted.](./media/11-Network-Private.png)
 
-5. [] Open a browser on the Lab VM and navigate to <https://aka.ms/migrate/hyperv/script> to download the `MicrosoftAzureMigrate-Hyper-V.ps1` script.
+6. [] Open a browser on the Lab VM and navigate to <https://aka.ms/migrate/hyperv/script> to download the **MicrosoftAzureMigrate-Hyper-V.ps1** script.
 
     ![Screenshot of the script download URL entered into the address bar in Microsoft Edge.](./media/09-download.png)
 
-6. [] Return to PowerShell and change to the **Downloads** directory:
+7. [] Return to PowerShell and change to the **Downloads** directory:
 
     ```powershell
     cd Downloads
     ```
 
-7. [] Execute the downloaded script:
+8. [] Execute the downloaded script:
 
     ```powershell
     .\MicrosoftAzureMigrate-Hyper-V.ps1
     ```
 
-8. [] Respond to the script prompts as follows:
+9. [] Respond to the script prompts as follows:
 
     - [] Do you want to run software from this untrusted publisher?: `[A] Always run`
     - [] Enable Remote Management (WinRM)?: `Y`
@@ -95,13 +97,13 @@ In this task, you will download and run the Azure Migrate preparation script usi
       - [] **Username**: `MigrateLocal`  
       - [] **Password**: `Pa$$w0rd`
 
-9. [] After the script completes, reset the network category to **Public**:
+10. [] After the script completes, reset the network category to **Public**:
 
     ```powershell
     Set-NetConnectionProfile -NetworkCategory Public
     ```
 
-10. [] Confirm the reset by running:
+11. [] Confirm the reset by running:
 
     ```powershell
     Get-NetConnectionProfile
@@ -109,7 +111,7 @@ In this task, you will download and run the Azure Migrate preparation script usi
 
     ![In the PowerShell terminal, the NetworkCategory setting of Public is highlighted.](./media/13-Network-Public.png)
 
-11. [] Close the PowerShell window.
+12. [] Close the PowerShell window.
 
 ===
 
@@ -159,8 +161,8 @@ In this task, you will use Azure Cloud Shell to run a PowerShell script that pro
 
     - [] Select `No storage account required`
     - [] Choose the available subscription from the dropdown
-    - [] Select **Apply**
     - [] Ensure **Use an existing private virtual network** is **NOT** checked
+    - [] Select **Apply**
 
     ![The Getting started dialog in the Cloud Shell is displayed, with no storage account required, the subscription, and the Apply button all highlighted.](media/azure-cloud-shell-getting-started.png)
 
@@ -346,6 +348,10 @@ In this task, you will register the pre-provisioned Azure Migrate appliance usin
 10. [] Scroll to the **Azure user login and appliance registration status** section and select **Login**.
 
     ![In the Azure user login and appliance registration status section, the Login button is highlighted.](./media/27-Login.png)
+
+    > **Note** You can safely ignore errors about not being able to deploy the required Azure artifacts for discovery of MySQL and PostgreSQL Server instances and databases, if you receive them.
+    >
+    > ![Errors are highlighted on the application registration page.](media/appliance-deploy-artifacts-errors.png)
 
 11. [] In the pop-up window, select **Copy code & Login**.
 

@@ -133,6 +133,8 @@ In this task, you will prepare for the replication of a Linux VM by downloading 
 
    5. [] Configuration Azure Site Recovery for registration will take one or two minutes to install. When it completes, select **Finish**.
 
+        > **Note**: If you receive an error that "Registration to site recovery failed," rerun the Azure Site Recover installer (`AzureSiteRecoveryProvider.exe`) and it should resolve the error.
+
 5. [] Go back to the **Discover** blade in the Azure portal and refresh the browser page.
 
 6. [] Select **Azure VM** under **Where do you want to migrate to?** and **Yes, with Hyper-V** under **Are your machines virtualized?** to reload the previous discover page.
@@ -149,7 +151,7 @@ In this task, you will prepare for the replication of a Linux VM by downloading 
 
     ![The registration finalized message is highlighted.](./media/discover-registration-finalized.png)
 
-9. [] Select **Close** on the **Discover** page to return to the Migrations blade.
+9.  [] Select **Close** on the **Discover** page to return to the Migrations blade.
 
 ===
 
