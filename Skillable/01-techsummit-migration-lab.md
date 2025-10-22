@@ -40,7 +40,7 @@ In this task, you will download and run the Azure Migrate preparation script usi
 
 ## Key tasks
 
-1. Sign into the Lab VM using `Passw0rd!` as the password.
+1. [] Sign into the Lab VM using `Passw0rd!` as the password.
 
     > **Note**: Your Lab VM also serves as the Hyper-V host machine throughout this workshop.
 
