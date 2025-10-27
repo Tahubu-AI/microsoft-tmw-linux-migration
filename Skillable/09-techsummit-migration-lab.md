@@ -113,6 +113,8 @@ In this task, you will create a new migration project in the Azure Database Migr
 
     ![Screenshot of the New Migration button in the Azure Database Migration Service blade](./media/azure-dms-new-migration.png)
 
+    > **IMPORTANT**: If you receive an error that Azure Database Migration Service (DMS) does not exist, you may be experiencing a known issue with Azure, where the resource is randomly deleted from the resource group. If this occurs, you should skip the remaining steps in this exercise, move on to the next exercise, and inform your lab proctor or instructor. You will also need to skip Exercise 11, and Task 1 of exercise 12, which both deal with completing the SQL DB migration. Unfortunately, there is no workaround to recreate the DMS resource and register it with your SHIR during the lab due to time constraints.
+
 2. [] On the **Select new migration scenario** blade, choose `Azure SQL Database` for the **Target server type** and select **Select**.
 
     ![Screenshot of the select new migration scenario screen.](media/azure-dms-select-scenario.png)
